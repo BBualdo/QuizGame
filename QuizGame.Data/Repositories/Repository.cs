@@ -13,6 +13,12 @@ public class Repository<T>(QuizGameContext context) : IRepository<T> where T : c
     await _context.SaveChangesAsync();
   }
 
+  public async Task DeleteAllAsync(IEnumerable<T> entities)
+  {
+    _dbSet.RemoveRange(entities);
+    await _context.SaveChangesAsync();
+  }
+
   public async Task DeleteAsync(T entity)
   {
     _dbSet.Remove(entity);

@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using QuizGame.Data;
+using QuizGame.Data.Models;
+using QuizGame.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,10 @@ builder.Services.AddDbContext<QuizGameContext>(options =>
 {
   options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
 });
+builder.Services.AddScoped<IRepository<Quiz>, Repository<Quiz>>();
+builder.Services.AddScoped<IRepository<Question>, Repository<Question>>();
+builder.Services.AddScoped<IRepository<Answer>, Repository<Answer>>();
+builder.Services.AddScoped<IRepository<Game>, Repository<Game>>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
