@@ -1,29 +1,37 @@
-﻿namespace QuizGame.Data.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
 
-public class Repository<T>() : IRepository<T> where T : class
+namespace QuizGame.Data.Repositories;
+
+public class Repository<T>(QuizGameContext context) : IRepository<T> where T : class
 {
-  public Task AddAsync(T entity)
+  private readonly QuizGameContext _context = context;
+  private readonly DbSet<T> _dbSet = context.Set<T>();
+
+  public async Task AddAsync(T entity)
   {
-    throw new NotImplementedException();
+    await _dbSet.AddAsync(entity);
+    await _context.SaveChangesAsync();
   }
 
-  public Task DeleteAsync(T entity)
+  public async Task DeleteAsync(T entity)
   {
-    throw new NotImplementedException();
+    _dbSet.Remove(entity);
+    await _context.SaveChangesAsync();
   }
 
-  public Task<IEnumerable<T>> GetAllAsync()
+  public async Task<IEnumerable<T>> GetAllAsync()
   {
-    throw new NotImplementedException();
+    return await _dbSet.ToListAsync();
   }
 
   public async Task<T?> GetByIdAsync(int id)
   {
-    throw new NotImplementedException();
+    return await _dbSet.FindAsync(id);
   }
 
-  public Task UpdateAsync(T entity)
+  public async Task UpdateAsync(T entity)
   {
-    throw new NotImplementedException();
+    _dbSet.Entry(entity).State = EntityState.Modified;
+    await _context.SaveChangesAsync();
   }
 }
