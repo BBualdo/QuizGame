@@ -1,5 +1,4 @@
-﻿using QuizGame.Data.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuizGame.Data.Models;
@@ -14,7 +13,7 @@ public class Question
   public string? Name { get; set; }
 
   [Required]
-  public DifficultyLevels Difficulty { get; set; }
+  public string? Difficulty { get; set; }
 
   public IEnumerable<Answer>? Answers { get; set; }
 
