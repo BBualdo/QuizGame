@@ -10,4 +10,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QuizGame.Data\QuizGame.Data.csproj" />
+  </ItemGroup>
+
 </Project>
