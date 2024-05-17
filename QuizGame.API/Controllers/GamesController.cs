@@ -16,9 +16,9 @@ public class GamesController : ControllerBase
   }
 
   [HttpGet]
-  public async Task<ActionResult<IEnumerable<GameDTO>>> GetAllGames()
+  public async Task<ActionResult<IEnumerable<GameDTO>>> GetGames()
   {
-    IEnumerable<GameDTO> games = await _gamesService.GetAllGamesAsync();
+    IEnumerable<GameDTO> games = await _gamesService.GetGamesAsync();
     return Ok(games);
   }
 

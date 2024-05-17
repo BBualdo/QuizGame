@@ -20,7 +20,7 @@ public class GamesService : IGamesService
 
   public async Task<bool> DeleteAllGamesAsync()
   {
-    IEnumerable<Game> games = await _gamesRepository.GetAllAsync();
+    IEnumerable<Game> games = await _gamesRepository.GetAsync();
     if (!games.Any()) return false;
     await _gamesRepository.DeleteAllAsync(games);
     return true;
@@ -34,9 +34,9 @@ public class GamesService : IGamesService
     return true;
   }
 
-  public async Task<IEnumerable<GameDTO>> GetAllGamesAsync()
+  public async Task<IEnumerable<GameDTO>> GetGamesAsync()
   {
-    IEnumerable<Game> games = await _gamesRepository.GetAllAsync();
+    IEnumerable<Game> games = await _gamesRepository.GetAsync();
     return games.Select(game => game.ToDTO());
   }
 }

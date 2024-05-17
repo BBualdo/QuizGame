@@ -18,7 +18,7 @@ public class AnswersController : ControllerBase
   [HttpGet]
   public async Task<ActionResult<IEnumerable<Answer>>> GetAllAnswers()
   {
-    IEnumerable<Answer> answers = await _answersRepository.GetAllAsync();
+    IEnumerable<Answer> answers = await _answersRepository.GetAsync();
     return Ok(answers);
   }
 

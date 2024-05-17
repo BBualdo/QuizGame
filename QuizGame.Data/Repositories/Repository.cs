@@ -25,7 +25,7 @@ public class Repository<T>(QuizGameContext context) : IRepository<T> where T : c
     await _context.SaveChangesAsync();
   }
 
-  public async Task<IEnumerable<T>> GetAllAsync()
+  public async Task<IEnumerable<T>> GetAsync()
   {
     return await _dbSet.ToListAsync();
   }
