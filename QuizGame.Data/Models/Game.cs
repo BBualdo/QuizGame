@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using QuizGame.Data.Models.DTO;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuizGame.Data.Models;
@@ -22,4 +23,16 @@ public class Game
 
   [ForeignKey(nameof(QuizId))]
   public Quiz? Quiz { get; set; }
+
+
+  public GameDTO ToDTO()
+  {
+    return new()
+    {
+      Username = this.Username,
+      Date = this.Date,
+      Score = this.Score,
+      QuizId = this.QuizId,
+    };
+  }
 }

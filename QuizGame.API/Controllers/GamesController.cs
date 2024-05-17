@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using QuizGame.Data.Models;
-using QuizGame.Data.Repositories;
+using QuizGame.API.Services;
+using QuizGame.Data.Models.DTO;
 
 namespace QuizGame.API.Controllers;
 
@@ -8,44 +8,41 @@ namespace QuizGame.API.Controllers;
 [ApiController]
 public class GamesController : ControllerBase
 {
-  private readonly IRepository<Game> _gamesRepository;
+  private readonly IGamesService _gamesService;
 
-  public GamesController(IRepository<Game> gamesRepository)
+  public GamesController(IGamesService gamesService)
   {
-    _gamesRepository = gamesRepository;
+    _gamesService = gamesService;
   }
 
   [HttpGet]
-  public async Task<ActionResult<IEnumerable<Game>>> GetAllGames()
+  public async Task<ActionResult<IEnumerable<GameDTO>>> GetAllGames()
   {
-    IEnumerable<Game> games = await _gamesRepository.GetAllAsync();
+    IEnumerable<GameDTO> games = await _gamesService.GetAllGamesAsync();
     return Ok(games);
   }
 
   [HttpPost]
-  public async Task<ActionResult> AddGame(Game game)
+  public async Task<ActionResult> AddGame(GameDTO gameDTO)
   {
-    if (game == null) return BadRequest();
-
-    await _gamesRepository.AddAsync(game);
-    return CreatedAtAction(nameof(AddGame), game);
+    if (gameDTO == null) return BadRequest("No game to add.");
+    await _gamesService.AddGameAsync(gameDTO);
+    return CreatedAtAction(nameof(AddGame), gameDTO);
   }
 
   [HttpDelete("{id}")]
   public async Task<ActionResult> DeleteGame(int id)
   {
-    Game? game = await _gamesRepository.GetByIdAsync(id);
-    if (game == null) return NotFound();
-
-    await _gamesRepository.DeleteAsync(game);
+    bool isDeleted = await _gamesService.DeleteGameAsync(id);
+    if (!isDeleted) return NotFound("No game to delete.");
     return NoContent();
   }
 
   [HttpDelete]
   public async Task<ActionResult> DeleteAllGames()
   {
-    IEnumerable<Game> games = await _gamesRepository.GetAllAsync();
-    await _gamesRepository.DeleteAllAsync(games);
+    bool areDeleted = await _gamesService.DeleteAllGamesAsync();
+    if (!areDeleted) return NotFound("No games to delete.");
     return NoContent();
   }
 }
