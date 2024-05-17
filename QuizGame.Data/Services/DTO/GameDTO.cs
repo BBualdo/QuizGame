@@ -1,4 +1,6 @@
-﻿namespace QuizGame.Data.Models.DTO;
+﻿using QuizGame.Data.Models;
+
+namespace QuizGame.Data.Services.DTO;
 
 public class GameDTO
 {

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using QuizGame.API.Services;
 using QuizGame.Data;
 using QuizGame.Data.Models;
 using QuizGame.Data.Repositories;
+using QuizGame.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using QuizGame.API.Services;
-using QuizGame.Data.Models.DTO;
+using QuizGame.Data.Services;
+using QuizGame.Data.Services.DTO;
 
 namespace QuizGame.API.Controllers;
 

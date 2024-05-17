@@ -1,5 +1,4 @@
-﻿using QuizGame.Data.Models.DTO;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuizGame.Data.Models;

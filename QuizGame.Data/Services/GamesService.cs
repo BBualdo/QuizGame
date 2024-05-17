@@ -1,8 +1,8 @@
 ﻿using QuizGame.Data.Models;
-using QuizGame.Data.Models.DTO;
 using QuizGame.Data.Repositories;
+using QuizGame.Data.Services.DTO;
 
-namespace QuizGame.API.Services;
+namespace QuizGame.Data.Services;
 
 public class GamesService : IGamesService
 {
