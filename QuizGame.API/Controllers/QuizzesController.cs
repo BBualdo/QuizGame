@@ -26,7 +26,6 @@ public class QuizzesController : ControllerBase
   public async Task<ActionResult<Quiz>> GetQuizById(int id)
   {
     Quiz? quiz = await _quizzesRepository.GetByIdAsync(id);
-
     if (quiz == null) return NotFound();
     return Ok(quiz);
   }
@@ -35,7 +34,6 @@ public class QuizzesController : ControllerBase
   public async Task<ActionResult> AddQuiz(Quiz quiz)
   {
     if (quiz == null) return BadRequest();
-
     await _quizzesRepository.AddAsync(quiz);
     return CreatedAtAction(nameof(AddQuiz), quiz);
   }
@@ -45,7 +43,6 @@ public class QuizzesController : ControllerBase
   {
     if (quiz.QuizId != id) return NotFound();
     if (quiz == null) return BadRequest();
-
     await _quizzesRepository.UpdateAsync(quiz);
     return NoContent();
   }
@@ -55,7 +52,6 @@ public class QuizzesController : ControllerBase
   {
     Quiz? quiz = await _quizzesRepository.GetByIdAsync(id);
     if (quiz == null) return NotFound();
-
     await _quizzesRepository.DeleteAsync(quiz);
     return NoContent();
   }
