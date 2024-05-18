@@ -7,7 +7,7 @@ public class QuizRequest
 {
     public int QuizId { get; set; }
     public string? Name { get; set; }
-    public IEnumerable<QuestionRequest>? Questions { get; set; }
+    public ICollection<QuestionRequest> Questions { get; set; } = new List<QuestionRequest>();
 
     public Quiz ToQuiz()
     {
@@ -15,7 +15,7 @@ public class QuizRequest
         {
             QuizId = QuizId,
             Name = Name,
-            Questions = Questions?.Select(question => question.ToQuestion())
+            Questions = Questions.Select(question => question.ToQuestion()).ToList()
         };
     }
 }

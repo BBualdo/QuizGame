@@ -54,7 +54,7 @@ namespace QuizGame.Data.Migrations
                     QuestionId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Difficulty = table.Column<string>(type: "text", nullable: false),
+                    Difficulty = table.Column<string>(type: "character varying(6)", maxLength: 6, nullable: false),
                     QuizId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

@@ -12,7 +12,7 @@ using QuizGame.Data;
 namespace QuizGame.Data.Migrations
 {
     [DbContext(typeof(QuizGameContext))]
-    [Migration("20240517001354_Initial")]
+    [Migration("20240518143741_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -90,7 +90,8 @@ namespace QuizGame.Data.Migrations
 
                     b.Property<string>("Difficulty")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(6)
+                        .HasColumnType("character varying(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()

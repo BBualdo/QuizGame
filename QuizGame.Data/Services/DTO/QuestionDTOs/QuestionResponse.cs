@@ -7,7 +7,7 @@ public class QuestionResponse
 {
     public string? Name { get; set; }
     public string? Difficulty { get; set; }
-    public IEnumerable<AnswerResponse>? Answers { get; set; }
+    public ICollection<AnswerResponse> Answers { get; set; } = new List<AnswerResponse>();
 }
 
 public static class QuestionExtensions
@@ -18,7 +18,7 @@ public static class QuestionExtensions
         {
             Name = question.Name,
             Difficulty = question.Difficulty,
-            Answers = question.Answers?.Select(answer => answer.ToAnswerResponse())
+            Answers = question.Answers.Select(answer => answer.ToAnswerResponse()).ToList()
         };
     }
 }
