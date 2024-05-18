@@ -4,14 +4,9 @@ using QuizGame.Data.Services.DTO.GameDTOs;
 
 namespace QuizGame.Data.Services;
 
-public class GamesService : IGamesService
+public class GamesService(IGamesRepository gamesRepository) : IGamesService
 {
-  private readonly IGamesRepository _gamesRepository;
-
-  public GamesService(IGamesRepository gamesRepository)
-  {
-    _gamesRepository = gamesRepository;
-  }
+  private readonly IGamesRepository _gamesRepository = gamesRepository;
 
   public async Task AddGameAsync(GameRequest gameRequest)
   {
