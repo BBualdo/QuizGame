@@ -15,18 +15,21 @@ public class QuizzesService(IRepository<Quiz> quizzesRepository) : IQuizzesServi
         return quizzes.Select(quiz => quiz.ToQuizResponse());
     }
 
-    public Task AddQuizAsync()
+    public async Task AddQuizAsync(QuizRequest quizRequest)
     {
-        throw new NotImplementedException();
+        await _quizzesRepository.AddAsync(quizRequest.ToQuiz());
     }
 
-    public Task UpdateQuizAsync()
+    public async Task UpdateQuizAsync(QuizRequest quizRequest)
     {
-        throw new NotImplementedException();
+        await _quizzesRepository.UpdateAsync(quizRequest.ToQuiz());
     }
 
-    public Task DeleteQuizAsync()
+    public async Task<bool> DeleteQuizAsync(int id)
     {
-        throw new NotImplementedException();
+        Quiz? quiz = await _quizzesRepository.GetByIdAsync(id);
+        if (quiz == null) return false;
+        await _quizzesRepository.DeleteAsync(quiz);
+        return true;
     }
 }

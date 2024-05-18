@@ -5,7 +5,7 @@ namespace QuizGame.Data.Services;
 public interface IQuizzesService
 {
     Task<IEnumerable<QuizResponse>> GetQuizzesAsync();
-    Task AddQuizAsync();
-    Task UpdateQuizAsync();
-    Task DeleteQuizAsync();
+    Task AddQuizAsync(QuizRequest quizRequest);
+    Task UpdateQuizAsync(QuizRequest quizRequest);
+    Task<bool> DeleteQuizAsync(int id);
 }
