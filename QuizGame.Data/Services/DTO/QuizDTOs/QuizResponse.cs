@@ -1,4 +1,4 @@
-﻿using QuizGame.Data.Services.DTO.QuestionDTOs;
+﻿using QuizGame.Data.Models;
 
 namespace QuizGame.Data.Services.DTO.QuizDTOs;
 
@@ -6,5 +6,16 @@ public class QuizResponse
 {
     public int QuizId { get; set; }
     public string? Name { get; set; }
-    public IEnumerable<QuestionResponse>? Questions { get; set; }
+}
+
+public static class QuizExtensions
+{
+    public static QuizResponse ToQuizResponse(this Quiz quiz)
+    {
+        return new QuizResponse
+        {
+            QuizId = quiz.QuizId,
+            Name = quiz.Name
+        };
+    }
 }

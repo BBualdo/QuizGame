@@ -9,19 +9,16 @@ public class GameRequest
     public DateTime Date { get; set; }
     public int Score { get; set; }
     public int QuizId { get; set; }
-}
 
-public static class GameRequestExtensions
-{
-    public static Game ToGame(this GameRequest gameRequest)
+    public Game ToGame()
     {
-        return new ()
+        return new Game
         {
-            GameId = gameRequest.GameId,
-            Username = gameRequest.Username,
-            Date = gameRequest.Date,
-            Score = gameRequest.Score,
-            QuizId = gameRequest.QuizId
+            GameId = GameId,
+            Username = Username,
+            Date = Date,
+            Score = Score,
+            QuizId = QuizId
         };
     }
 }

@@ -1,4 +1,5 @@
-﻿using QuizGame.Data.Services.DTO.QuestionDTOs;
+﻿using QuizGame.Data.Models;
+using QuizGame.Data.Services.DTO.QuestionDTOs;
 
 namespace QuizGame.Data.Services.DTO.QuizDTOs;
 
@@ -7,4 +8,14 @@ public class QuizRequest
     public int QuizId { get; set; }
     public string? Name { get; set; }
     public IEnumerable<QuestionRequest>? Questions { get; set; }
+
+    public Quiz ToQuiz()
+    {
+        return new Quiz
+        {
+            QuizId = QuizId,
+            Name = Name,
+            Questions = Questions?.Select(question => question.ToQuestion())
+        };
+    }
 }
