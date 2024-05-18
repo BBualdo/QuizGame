@@ -12,7 +12,6 @@ public class Answer
   [StringLength(50)]
   public string? Name { get; set; }
   public bool IsCorrect { get; set; }
-
   public int QuestionId { get; set; }
 
   [ForeignKey(nameof(QuestionId))]

@@ -14,9 +14,7 @@ public class Question
 
   [Required]
   public string? Difficulty { get; set; }
-
   public IEnumerable<Answer>? Answers { get; set; }
-
   public int QuizId { get; set; }
 
   [ForeignKey(nameof(QuizId))]

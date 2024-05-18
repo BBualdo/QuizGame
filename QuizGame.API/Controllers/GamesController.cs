@@ -6,14 +6,9 @@ namespace QuizGame.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class GamesController : ControllerBase
+public class GamesController(IGamesService gamesService) : ControllerBase
 {
-    private readonly IGamesService _gamesService;
-
-    public GamesController(IGamesService gamesService)
-    {
-        _gamesService = gamesService;
-    }
+    private readonly IGamesService _gamesService = gamesService;
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GameResponse>>> GetGames()
