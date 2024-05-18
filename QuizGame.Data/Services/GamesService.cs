@@ -1,21 +1,21 @@
 ﻿using QuizGame.Data.Models;
 using QuizGame.Data.Repositories;
-using QuizGame.Data.Services.DTO;
+using QuizGame.Data.Services.DTO.GameDTOs;
 
 namespace QuizGame.Data.Services;
 
 public class GamesService : IGamesService
 {
-  private readonly IRepository<Game> _gamesRepository;
+  private readonly IGamesRepository _gamesRepository;
 
-  public GamesService(IRepository<Game> gamesRepository)
+  public GamesService(IGamesRepository gamesRepository)
   {
     _gamesRepository = gamesRepository;
   }
 
-  public async Task AddGameAsync(GameDTO gameDTO)
+  public async Task AddGameAsync(GameRequest gameRequest)
   {
-    await _gamesRepository.AddAsync(gameDTO.ToGame());
+    await _gamesRepository.AddAsync(gameRequest.ToGame());
   }
 
   public async Task<bool> DeleteAllGamesAsync()
@@ -34,9 +34,9 @@ public class GamesService : IGamesService
     return true;
   }
 
-  public async Task<IEnumerable<GameDTO>> GetGamesAsync()
+  public async Task<IEnumerable<GameResponse>> GetGamesAsync()
   {
-    IEnumerable<Game> games = await _gamesRepository.GetAsync();
-    return games.Select(game => game.ToDTO());
+    IEnumerable<Game> games = await _gamesRepository.GetGamesWithQuizzesAsync();
+    return games.Select(game => game.ToGameResponse());
   }
 }

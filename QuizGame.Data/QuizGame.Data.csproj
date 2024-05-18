@@ -19,8 +19,4 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="Services\DTO\GameDTO.cs~RFbee5cf.TMP" />
-  </ItemGroup>
-
 </Project>

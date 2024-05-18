@@ -15,7 +15,7 @@ builder.Services.AddDbContext<QuizGameContext>(options =>
 builder.Services.AddScoped<IRepository<Quiz>, Repository<Quiz>>();
 builder.Services.AddScoped<IRepository<Question>, Repository<Question>>();
 builder.Services.AddScoped<IRepository<Answer>, Repository<Answer>>();
-builder.Services.AddScoped<IRepository<Game>, Repository<Game>>();
+builder.Services.AddScoped<IGamesRepository, GamesRepository>();
 
 builder.Services.AddScoped<IGamesService, GamesService>();
 

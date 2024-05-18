@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuizGame.Data.Services;
-using QuizGame.Data.Services.DTO;
+using QuizGame.Data.Services.DTO.GameDTOs;
 
 namespace QuizGame.API.Controllers;
 
@@ -8,41 +8,40 @@ namespace QuizGame.API.Controllers;
 [ApiController]
 public class GamesController : ControllerBase
 {
-  private readonly IGamesService _gamesService;
+    private readonly IGamesService _gamesService;
 
-  public GamesController(IGamesService gamesService)
-  {
-    _gamesService = gamesService;
-  }
+    public GamesController(IGamesService gamesService)
+    {
+        _gamesService = gamesService;
+    }
 
-  [HttpGet]
-  public async Task<ActionResult<IEnumerable<GameDTO>>> GetGames()
-  {
-    IEnumerable<GameDTO> games = await _gamesService.GetGamesAsync();
-    return Ok(games);
-  }
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<GameResponse>>> GetGames()
+    {
+        var games = await _gamesService.GetGamesAsync();
+        return Ok(games);
+    }
 
-  [HttpPost]
-  public async Task<ActionResult> AddGame(GameDTO gameDTO)
-  {
-    if (gameDTO == null) return BadRequest("No game to add.");
-    await _gamesService.AddGameAsync(gameDTO);
-    return CreatedAtAction(nameof(AddGame), gameDTO);
-  }
+    [HttpPost]
+    public async Task<ActionResult> AddGame(GameRequest gameRequest)
+    {
+        await _gamesService.AddGameAsync(gameRequest);
+        return CreatedAtAction(nameof(AddGame), gameRequest);
+    }
 
-  [HttpDelete("{id}")]
-  public async Task<ActionResult> DeleteGame(int id)
-  {
-    bool isDeleted = await _gamesService.DeleteGameAsync(id);
-    if (!isDeleted) return NotFound("No game to delete.");
-    return NoContent();
-  }
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> DeleteGame(int id)
+    {
+        var isDeleted = await _gamesService.DeleteGameAsync(id);
+        if (!isDeleted) return NotFound("No game to delete.");
+        return NoContent();
+    }
 
-  [HttpDelete]
-  public async Task<ActionResult> DeleteAllGames()
-  {
-    bool areDeleted = await _gamesService.DeleteAllGamesAsync();
-    if (!areDeleted) return NotFound("No games to delete.");
-    return NoContent();
-  }
+    [HttpDelete]
+    public async Task<ActionResult> DeleteAllGames()
+    {
+        var areDeleted = await _gamesService.DeleteAllGamesAsync();
+        if (!areDeleted) return NotFound("No games to delete.");
+        return NoContent();
+    }
 }

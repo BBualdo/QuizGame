@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using QuizGame.Data.Services.DTO.GameDTOs;
 
 namespace QuizGame.Data.Models;
 
@@ -24,14 +25,14 @@ public class Game
   public Quiz? Quiz { get; set; }
 
 
-  public GameDTO ToDTO()
+  public GameResponse ToGameResponse()
   {
     return new()
     {
-      Username = this.Username,
-      Date = this.Date,
-      Score = this.Score,
-      QuizId = this.QuizId,
+      Username = Username,
+      Date = Date,
+      Score = Score,
+      QuizName = Quiz?.Name,
     };
   }
 }
