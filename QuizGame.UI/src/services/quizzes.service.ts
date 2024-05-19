@@ -1,16 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, finalize, Observable, of } from 'rxjs';
 import { Quiz } from '../models/Quiz';
 import { url } from '../config/config';
+import { ErrorsService } from './errors.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizzesService {
-  constructor(private http: HttpClient) {}
+  isLoading$: Observable<boolean> = of(false);
+
+  constructor(
+    private http: HttpClient,
+    private errorsService: ErrorsService,
+  ) {}
 
   getQuizzes(): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(url + 'Quizzes');
+    this.isLoading$ = of(true);
+    return this.http.get<Quiz[]>(url + 'Quizzes').pipe(
+      catchError((error) => of(this.handleError(error))),
+      finalize(() => (this.isLoading$ = of(false))),
+    );
+  }
+
+  handleError(error: HttpErrorResponse): Quiz[] {
+    if (error.status === 0) {
+      this.errorsService.add("Couldn't connect to Quizzes API.");
+    }
+    return [];
   }
 }

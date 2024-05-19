@@ -1,0 +1,6 @@
+<div>
+  @for (error of errorService.errors; track $index) {
+    <p>{{ error }}</p>
+  }
+  <button (click)="errorService.clear()">Dismiss</button>
+</div>
