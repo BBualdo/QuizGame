@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BackButtonComponent } from '../shared/back-button/back-button.component';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { QuizzesService } from '../../services/quizzes.service';
 import { Quiz } from '../../models/Quiz';
 import { AsyncPipe } from '@angular/common';
@@ -24,6 +24,10 @@ export class QuizManagerComponent {
   quizzes$: Observable<Quiz[]> = this.quizzesService.getQuizzes();
   isLoading$: Observable<boolean> = this.quizzesService.isLoading$;
   isError$: Observable<boolean> = this.errorsService.isError$;
+  isButtonDisabled$: Observable<boolean> = combineLatest<[boolean, boolean]>([
+    this.isLoading$,
+    this.isError$,
+  ]).pipe(map(([isLoading, isError]) => isLoading || isError));
 
   constructor(
     private quizzesService: QuizzesService,

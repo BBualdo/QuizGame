@@ -21,12 +21,16 @@
     @apply cursor-pointer rounded-full px-10 py-2 text-xl font-bold uppercase;
   }
 
+  .btn:disabled {
+    @apply cursor-default opacity-50;
+  }
+
   .primary-btn {
-    @apply gradient-amber hover:gradient-purple-reversed border-2 border-black text-black transition-all duration-200 hover:border-amber-300 hover:text-white;
+    @apply gradient-amber enabled:hover:gradient-purple-reversed border-2 border-black text-black transition-all duration-200 hover:border-amber-300 hover:text-white;
   }
 
   .secondary-btn {
-    @apply gradient-purple hover:opacity-80 transition-all duration-200 text-white
+    @apply gradient-purple enabled:hover:opacity-80 transition-all duration-200 text-white
   }
 
   .container {
