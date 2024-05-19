@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family: "Raleway", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply gradient-purple h-screen;
+  }
+
+  main {
+    @apply h-full;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply cursor-pointer rounded-full px-10 py-2 text-xl font-bold uppercase;
+  }
+
+  .primary-btn {
+    @apply gradient-amber hover:gradient-purple border-2 border-black text-black transition-all duration-200 hover:border-amber-300 hover:text-white;
+  }
+}
+
+@layer utilities {
+  .gradient-purple {
+    @apply bg-gradient-to-br from-blue-600 to-violet-600 to-70%;
+  }
+
+  .gradient-amber {
+    @apply bg-gradient-to-t from-amber-500 to-amber-300;
+  }
+}
