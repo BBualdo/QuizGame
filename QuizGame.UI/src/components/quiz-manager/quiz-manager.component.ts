@@ -4,11 +4,12 @@ import { Observable } from 'rxjs';
 import { QuizzesService } from '../../services/quizzes.service';
 import { Quiz } from '../../models/Quiz';
 import { AsyncPipe } from '@angular/common';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-quiz-manager',
   standalone: true,
-  imports: [BackButtonComponent, AsyncPipe],
+  imports: [BackButtonComponent, AsyncPipe, LoadingSpinnerComponent],
   templateUrl: './quiz-manager.component.html',
   styleUrl: './quiz-manager.component.css',
 })
