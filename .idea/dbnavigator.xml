@@ -24,9 +24,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="991b5595-7456-4d28-bf7c-5ace52491379" object-ref="schemas/public/tables/Quizzes" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="991b5595-7456-4d28-bf7c-5ace52491379" />
