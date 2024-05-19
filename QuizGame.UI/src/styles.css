@@ -22,13 +22,25 @@
   }
 
   .primary-btn {
-    @apply gradient-amber hover:gradient-purple border-2 border-black text-black transition-all duration-200 hover:border-amber-300 hover:text-white;
+    @apply gradient-amber hover:gradient-purple-reversed border-2 border-black text-black transition-all duration-200 hover:border-amber-300 hover:text-white;
+  }
+
+  .secondary-btn {
+    @apply gradient-purple hover:opacity-80 transition-all duration-200 text-white
+  }
+
+  .container {
+    @apply bg-white w-full h-full px-4 py-8 rounded-t-3xl;
   }
 }
 
 @layer utilities {
   .gradient-purple {
     @apply bg-gradient-to-br from-blue-600 to-violet-600 to-70%;
+  }
+
+  .gradient-purple-reversed {
+    @apply bg-gradient-to-tl from-blue-600 to-violet-600 to-70%;
   }
 
   .gradient-amber {
