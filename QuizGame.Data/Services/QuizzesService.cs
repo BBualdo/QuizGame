@@ -4,15 +4,20 @@ using QuizGame.Data.Services.DTO.QuizDTOs;
 
 namespace QuizGame.Data.Services;
 
-public class QuizzesService(IRepository<Quiz> quizzesRepository) : IQuizzesService
+public class QuizzesService(IQuizzesRepository quizzesRepository) : IQuizzesService
 {
-    private readonly IRepository<Quiz> _quizzesRepository = quizzesRepository;
+    private readonly IQuizzesRepository _quizzesRepository = quizzesRepository;
 
 
     public async Task<IEnumerable<QuizResponse>> GetQuizzesAsync()
     {
         var quizzes = await _quizzesRepository.GetAsync();
         return quizzes.Select(quiz => quiz.ToQuizResponse());
+    }
+
+    public async Task<QuizDetailsResponse?> GetQuizByIdAsync(int id)
+    {
+        return await _quizzesRepository.GetQuizDetails(id);
     }
 
     public async Task AddQuizAsync(QuizRequest quizRequest)

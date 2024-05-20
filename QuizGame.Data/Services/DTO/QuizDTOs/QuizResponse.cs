@@ -8,7 +8,7 @@ public class QuizResponse
     public string? Name { get; set; }
 }
 
-public static class QuizExtensions
+public static partial class QuizExtensions
 {
     public static QuizResponse ToQuizResponse(this Quiz quiz)
     {

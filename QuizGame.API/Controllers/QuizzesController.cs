@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using QuizGame.Data.Models;
 using QuizGame.Data.Services;
 using QuizGame.Data.Services.DTO.QuizDTOs;
 
@@ -15,6 +16,14 @@ public class QuizzesController(IQuizzesService quizzesService) : ControllerBase
     {
         IEnumerable<QuizResponse> quizzes = await _quizzesService.GetQuizzesAsync();
         return Ok(quizzes);
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<QuizDetailsResponse>> GetQuizById(int id)
+    {
+        QuizDetailsResponse? quiz = await _quizzesService.GetQuizByIdAsync(id);
+        if (quiz == null) return NotFound("Quiz not found.");
+        return Ok(quiz);
     }
 
     [HttpPost]

@@ -12,7 +12,7 @@ builder.Services.AddDbContext<QuizGameContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
 });
 
-builder.Services.AddScoped<IRepository<Quiz>, Repository<Quiz>>();
+builder.Services.AddScoped<IQuizzesRepository, QuizzesRepository>();
 builder.Services.AddScoped<IRepository<Question>, Repository<Question>>();
 builder.Services.AddScoped<IRepository<Answer>, Repository<Answer>>();
 builder.Services.AddScoped<IGamesRepository, GamesRepository>();
