@@ -26,11 +26,15 @@
   }
 
   .primary-btn {
-    @apply gradient-amber enabled:hover:gradient-purple-reversed border-2 border-black text-black transition-all duration-200 hover:border-amber-300 hover:text-white;
+    @apply gradient-amber hover:gradient-purple-reversed border-2 border-black text-black transition-all duration-200 hover:border-amber-300 hover:text-white;
   }
 
   .secondary-btn {
     @apply gradient-purple enabled:hover:opacity-80 transition-all duration-200 text-white
+  }
+
+  .quiz-btn {
+    @apply gradient-amber py-4 rounded-2xl text-center hover:scale-110 transition-all duration-200;
   }
 
   .container {
