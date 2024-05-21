@@ -1,0 +1,18 @@
+<div class="flex flex-col gap-10 w-full">
+  <back-button class="black" previousPageName="Quiz List" />
+  @if (isLoading$ | async) {
+    <loading-spinner />
+  }
+  @if (isError$ | async) {
+    <app-error (retryEmitter)="retry()" />
+  }
+  @if (quiz$ | async; as quiz) {
+    <p>{{quiz.name}}</p>
+    @for (question of quiz.questions; track $index) {
+      <p>{{question.name}}</p>
+      @for (answer of question.answers; track $index) {
+        <p>{{answer.name}}</p>
+      }
+    }
+  }
+</div>

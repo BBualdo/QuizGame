@@ -8,7 +8,7 @@
 
 @layer base {
   body {
-    @apply gradient-purple h-screen;
+    @apply gradient-purple min-h-screen h-screen;
   }
 
   main {
@@ -38,7 +38,7 @@
   }
 
   .container {
-    @apply bg-white w-full h-full px-4 py-8 rounded-t-3xl;
+    @apply bg-white w-full h-auto px-4 py-8 rounded-t-3xl;
   }
 }
 
@@ -53,5 +53,13 @@
 
   .gradient-amber {
     @apply bg-gradient-to-t from-amber-500 to-amber-300;
+  }
+
+  .white {
+    @apply text-white fill-white;
+  }
+
+  .black {
+    @apply text-black fill-black;
   }
 }

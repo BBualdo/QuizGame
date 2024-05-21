@@ -1,13 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { ErrorComponent } from '../shared/error/error.component';
-import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
-import { BackButtonComponent } from '../shared/back-button/back-button.component';
-import { Quiz } from '../../models/Quiz';
-import { QuizDetails } from '../../models/QuizDetails';
+import { ErrorComponent } from '../../shared/error/error.component';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
+import { BackButtonComponent } from '../../shared/back-button/back-button.component';
+import { QuizDetails } from '../../../models/QuizDetails';
 import { Observable, of } from 'rxjs';
-import { QuizzesService } from '../../services/quizzes.service';
-import { ErrorsService } from '../../services/errors.service';
+import { QuizzesService } from '../../../services/quizzes.service';
+import { ErrorsService } from '../../../services/errors.service';
 
 @Component({
   selector: 'app-quiz-details',

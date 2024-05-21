@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
-import { Quiz } from '../../models/Quiz';
-import { QuizzesService } from '../../services/quizzes.service';
-import { ErrorsService } from '../../services/errors.service';
+import { Quiz } from '../../../models/Quiz';
+import { QuizzesService } from '../../../services/quizzes.service';
+import { ErrorsService } from '../../../services/errors.service';
 import { AsyncPipe } from '@angular/common';
-import { ErrorComponent } from '../shared/error/error.component';
-import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
+import { ErrorComponent } from '../../shared/error/error.component';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { RouterLink } from '@angular/router';
 
 @Component({
