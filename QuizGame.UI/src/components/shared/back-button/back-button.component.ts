@@ -10,4 +10,5 @@ import { RouterLink } from '@angular/router';
 })
 export class BackButtonComponent {
   @Input() previousPageName: string = 'Back';
+  @Input() color: string = 'white';
 }
