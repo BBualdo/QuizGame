@@ -34,7 +34,7 @@
   }
 
   .quiz-btn {
-    @apply gradient-amber py-4 rounded-2xl text-center hover:scale-110 transition-all duration-200;
+    @apply gradient-amber hover:gradient-purple-reversed hover:text-white py-4 rounded-2xl text-center hover:scale-110 transition-transform duration-200;
   }
 
   .container {

@@ -4,9 +4,9 @@ import { combineLatest, map, Observable } from 'rxjs';
 import { QuizzesService } from '../../services/quizzes.service';
 import { Quiz } from '../../models/Quiz';
 import { AsyncPipe } from '@angular/common';
-import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
+import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
 import { ErrorsService } from '../../services/errors.service';
-import { ErrorComponent } from '../error/error.component';
+import { ErrorComponent } from '../shared/error/error.component';
 
 @Component({
   selector: 'app-quiz-manager',
