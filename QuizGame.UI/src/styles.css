@@ -8,11 +8,7 @@
 
 @layer base {
   body {
-    @apply gradient-purple min-h-screen h-screen;
-  }
-
-  main {
-    @apply h-full;
+    @apply gradient-purple min-h-screen;
   }
 }
 
@@ -46,7 +42,7 @@
   }
 
   .container {
-    @apply bg-white w-full h-auto px-4 py-8 rounded-t-3xl;
+    @apply bg-white w-full min-h-[91vh] px-4 py-8 rounded-t-3xl;
   }
 }
 
