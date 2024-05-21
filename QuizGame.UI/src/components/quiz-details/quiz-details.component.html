@@ -1,3 +1,12 @@
 <div class="flex flex-col gap-10 w-full">
   <back-button color="black" previousPageName="Quiz List" />
+  @if (isLoading$ | async) {
+    <loading-spinner />
+  }
+  @if (isError$ | async) {
+    <app-error (retryEmitter)="retry()" />
+  }
+  @if (quiz$ | async; as quiz) {
+    <p>{{quiz.name}}</p>
+  }
 </div>

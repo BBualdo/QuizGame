@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ErrorsService } from '../../../services/errors.service';
-import { QuizzesService } from '../../../services/quizzes.service';
 
 @Component({
   selector: 'app-error',
@@ -10,12 +9,10 @@ import { QuizzesService } from '../../../services/quizzes.service';
   styleUrl: './error.component.css',
 })
 export class ErrorComponent {
-  constructor(
-    private quizzesService: QuizzesService,
-    public errorService: ErrorsService,
-  ) {}
+  @Output() retryEmitter = new EventEmitter<void>();
+  constructor(public errorService: ErrorsService) {}
 
-  retry(): void {
-    this.quizzesService.getQuizzes().subscribe();
+  retry() {
+    this.retryEmitter.emit();
   }
 }

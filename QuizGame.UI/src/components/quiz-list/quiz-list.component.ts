@@ -28,4 +28,8 @@ export class QuizListComponent {
     private quizzesService: QuizzesService,
     private errorsService: ErrorsService,
   ) {}
+
+  retry(): void {
+    this.quizzesService.getQuizzes().subscribe();
+  }
 }

@@ -10,7 +10,7 @@
     </div>
   }
   @if (isError$ | async) {
-    <app-error />
+    <app-error (retryEmitter)="retry()" />
   }
   @if (isLoading$ | async) {
     <loading-spinner />

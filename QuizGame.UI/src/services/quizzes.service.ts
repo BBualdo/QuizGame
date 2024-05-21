@@ -4,6 +4,7 @@ import { BehaviorSubject, catchError, finalize, Observable, of } from 'rxjs';
 import { Quiz } from '../models/Quiz';
 import { url } from '../config/config';
 import { ErrorsService } from './errors.service';
+import { QuizDetails } from '../models/QuizDetails';
 
 @Injectable({
   providedIn: 'root',
@@ -26,10 +27,22 @@ export class QuizzesService {
     );
   }
 
-  handleError(error: HttpErrorResponse): Quiz[] {
+  getQuiz(id: number): Observable<QuizDetails> {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+    return this.http.get<QuizDetails>(url + 'Quizzes/' + id).pipe(
+      catchError((error) => of(this.handleError(error))),
+      finalize(() => this.isLoadingSubject.next(false)),
+    );
+  }
+
+  handleError(error: HttpErrorResponse): any {
     if (error.status === 0) {
       this.errorsService.add("Couldn't connect to Quizzes API.");
     }
-    return [];
+    if (error.status === 500) {
+      this.errorsService.add('Something went wrong. Try again later.');
+    }
+    return;
   }
 }
