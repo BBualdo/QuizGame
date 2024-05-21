@@ -1,5 +1,5 @@
-<div class="flex flex-col gap-10 w-full">
-  <back-button class="black" previousPageName="Quiz List" />
+<back-button class="black" previousPageName="Quiz List" />
+<div class="flex w-full flex-col items-center gap-6">
   @if (isLoading$ | async) {
     <loading-spinner />
   }
@@ -7,12 +7,23 @@
     <app-error (retryEmitter)="retry()" />
   }
   @if (quiz$ | async; as quiz) {
-    <p>{{quiz.name}}</p>
-    @for (question of quiz.questions; track $index) {
-      <p>{{question.name}}</p>
-      @for (answer of question.answers; track $index) {
-        <p>{{answer.name}}</p>
-      }
-    }
+    <p
+      class="w-full gradient-purple-reversed border-b-2 border-black bg-clip-text py-2 text-center text-2xl font-black uppercase tracking-widest text-transparent"
+    >
+      {{ quiz.name }}
+    </p>
+    <div class="flex flex-col gap-4">
+      <p class="text-xl font-bold">Questions:</p>
+      <ul class="flex flex-col gap-2">
+        @for (question of quiz.questions; track $index) {
+          <li class="question-btn">{{ question.name }}</li>
+        }
+      </ul>
+    </div>
+
+    <div class="mt-4 flex flex-col gap-4">
+      <button class="btn secondary-btn">Add Question</button>
+      <button class="btn warning-btn">Delete Quiz</button>
+    </div>
   }
 </div>

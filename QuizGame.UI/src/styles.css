@@ -37,6 +37,14 @@
     @apply gradient-amber hover:gradient-purple-reversed hover:text-white py-4 rounded-2xl text-center hover:scale-110 transition-transform duration-200;
   }
 
+  .question-btn {
+    @apply gradient-purple-reversed font-bold border-2 border-black text-white p-4 rounded-2xl text-center hover:opacity-80 transition-transform duration-200;
+  }
+
+  .warning-btn {
+    @apply border-red-600 text-red-600 border-2 hover:text-white rounded-none hover:gradient-red transition-all duration-200;
+  }
+
   .container {
     @apply bg-white w-full h-auto px-4 py-8 rounded-t-3xl;
   }
@@ -53,6 +61,10 @@
 
   .gradient-amber {
     @apply bg-gradient-to-t from-amber-500 to-amber-300;
+  }
+
+  .gradient-red {
+    @apply bg-gradient-to-b from-red-500 to-red-700;
   }
 
   .white {
