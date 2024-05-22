@@ -45,6 +45,10 @@
     @apply hover:gradient-red rounded-none border-2 border-red-600 text-red-600 transition-all duration-200 hover:text-white;
   }
 
+  .correct-btn {
+    @apply gradient-green text-white;
+  }
+
   .container {
     @apply w-full rounded-3xl bg-white px-4 py-8;
   }
@@ -59,6 +63,14 @@
 
   .input-error {
     @apply border-red-600 bg-red-200 text-red-600 placeholder-red-500;
+  }
+
+  .step-indicator {
+    @apply h-2 flex-1 rounded-full border border-black;
+  }
+
+  .step-active {
+    @apply gradient-purple;
   }
 }
 
@@ -77,6 +89,10 @@
 
   .gradient-red {
     @apply bg-gradient-to-b from-red-500 to-red-700;
+  }
+
+  .gradient-green {
+    @apply bg-gradient-to-t from-green-700 to-green-500;
   }
 
   .white {
