@@ -1,9 +1,10 @@
 <h1 class="text-2xl font-bold text-center">Manage Quizzes</h1>
 <div class="flex flex-col items-center gap-10 mt-10">
-  <button [disabled]="isButtonDisabled$ | async" class="btn secondary-btn">
-    Create Quiz
-  </button>
+
   @if (quizzes$ | async; as quizzes) {
+    <a routerLink="./create" class="btn secondary-btn">
+      Create Quiz
+    </a>
     <div class="flex flex-col gap-4">
       @for (quiz of quizzes; track $index) {
         <a [routerLink]=[quiz.quizId] class="btn quiz-btn">{{ quiz.name }}</a>

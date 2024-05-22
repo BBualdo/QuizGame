@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { combineLatest, map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Quiz } from '../../../models/Quiz';
 import { QuizzesService } from '../../../services/quizzes.service';
 import { ErrorsService } from '../../../services/errors.service';
@@ -19,10 +19,6 @@ export class QuizListComponent {
   quizzes$: Observable<Quiz[]> = this.quizzesService.getQuizzes();
   isLoading$: Observable<boolean> = this.quizzesService.isLoading$;
   isError$: Observable<boolean> = this.errorsService.isError$;
-  isButtonDisabled$: Observable<boolean> = combineLatest<[boolean, boolean]>([
-    this.isLoading$,
-    this.isError$,
-  ]).pipe(map(([isLoading, isError]) => isLoading || isError));
 
   constructor(
     private quizzesService: QuizzesService,
