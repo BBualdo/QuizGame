@@ -44,7 +44,7 @@
         placeholder="5-15"
         type="number"
         [min]="5"
-        [max]="15"
+        [max]="10"
         formControlName="questionsAmount"
         [ngClass]="{
           'input-error':
@@ -58,7 +58,7 @@
           (quizInfoFormGroup.controls["questionsAmount"].errors?.["min"] ||
             quizInfoFormGroup.controls["questionsAmount"].errors?.["max"])
         ) {
-          <p class="text-red-500">Must be between 5 and 15</p>
+          <p class="text-red-500">Must be between 5 and 10</p>
         }
         @if (
           quizInfoFormGroup.controls["questionsAmount"].errors?.["required"]

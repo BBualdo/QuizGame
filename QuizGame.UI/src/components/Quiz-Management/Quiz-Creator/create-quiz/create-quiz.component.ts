@@ -11,6 +11,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { StepperComponent } from '../stepper/stepper.component';
 import { QuizCreatorService } from '../../../../services/quiz-creator.service';
+import { QuestionReqDTO } from '../../../../models/QuestionReqDTO';
 
 @Component({
   selector: 'app-create-quiz',
@@ -36,7 +37,7 @@ export class CreateQuizComponent {
     questionsAmount: new FormControl(5, [
       Validators.required,
       Validators.min(5),
-      Validators.max(15),
+      Validators.max(10),
     ]),
   });
 
@@ -49,9 +50,13 @@ export class CreateQuizComponent {
     this.quizInfoFormGroup.markAllAsTouched();
     const formValues = this.quizInfoFormGroup.value;
     if (this.quizInfoFormGroup.valid) {
+      const questionsArray: QuestionReqDTO[] = Array.from(
+        { length: formValues.questionsAmount! },
+        () => ({ name: '', answers: [] }),
+      );
       this.quizCreatorService.updateQuiz({
         name: formValues.name!,
-        questions: [],
+        questions: questionsArray,
       });
       this.router.navigate(['quiz-management/create/steps']);
     }

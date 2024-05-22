@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { QuizCreatorService } from '../../../../services/quiz-creator.service';
+import { QuizReqDTO } from '../../../../models/QuizReqDTO';
 
 @Component({
   selector: 'stepper',
@@ -8,12 +10,17 @@ import { Component, Input } from '@angular/core';
   styleUrl: './stepper.component.css',
 })
 export class StepperComponent {
-  @Input() stepsAmount: number = 5;
-  @Input() quizName: string = '';
   currentStep: number = 1;
+  quiz: QuizReqDTO | null = null;
+
+  constructor(private quizCreatorService: QuizCreatorService) {}
+
+  ngOnInit(): void {
+    this.quizCreatorService.quiz$.subscribe((quiz) => (this.quiz = quiz));
+  }
 
   next() {
-    if (this.currentStep === this.stepsAmount) {
+    if (this.currentStep === this.quiz?.questions.length) {
       return;
     }
     this.currentStep++;
