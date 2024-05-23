@@ -17,7 +17,6 @@ import { DataService } from '../../../../services/data.service';
   standalone: true,
   imports: [NgClass, ReactiveFormsModule],
   templateUrl: './stepper.component.html',
-  styleUrl: './stepper.component.css',
 })
 export class StepperComponent {
   currentStep: number = 1;

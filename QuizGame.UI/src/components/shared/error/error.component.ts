@@ -6,7 +6,6 @@ import { ErrorsService } from '../../../services/errors.service';
   standalone: true,
   imports: [],
   templateUrl: './error.component.html',
-  styleUrl: './error.component.css',
 })
 export class ErrorComponent {
   @Output() retryEmitter = new EventEmitter<void>();

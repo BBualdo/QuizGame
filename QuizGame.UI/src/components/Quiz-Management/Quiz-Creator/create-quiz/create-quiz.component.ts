@@ -26,7 +26,6 @@ import { AnswerReqDTO } from '../../../../models/AnswerReqDTO';
     StepperComponent,
   ],
   templateUrl: './create-quiz.component.html',
-  styleUrl: './create-quiz.component.css',
 })
 export class CreateQuizComponent {
   quizInfoFormGroup = new FormGroup({

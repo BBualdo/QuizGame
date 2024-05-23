@@ -9,7 +9,6 @@ import { NgClass } from '@angular/common';
   standalone: true,
   imports: [MatIcon, NgClass],
   templateUrl: './answers-list.component.html',
-  styleUrl: './answers-list.component.css',
 })
 export class AnswersListComponent {
   question: Question = this.data.question;

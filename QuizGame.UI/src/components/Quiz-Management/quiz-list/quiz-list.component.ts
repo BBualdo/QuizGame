@@ -14,7 +14,6 @@ import { DataService } from '../../../services/data.service';
   standalone: true,
   imports: [AsyncPipe, ErrorComponent, LoadingSpinnerComponent, RouterLink],
   templateUrl: './quiz-list.component.html',
-  styleUrl: './quiz-list.component.css',
 })
 export class QuizListComponent {
   quizzes$: Observable<Quiz[] | null> = this.dataService.quizzes$;

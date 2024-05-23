@@ -7,7 +7,6 @@ import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
   standalone: true,
   imports: [MatIcon],
   templateUrl: './confirm-dialog.component.html',
-  styleUrl: './confirm-dialog.component.css',
 })
 export class ConfirmDialogComponent {
   title: string = this.data.title;

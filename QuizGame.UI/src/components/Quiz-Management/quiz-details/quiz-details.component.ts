@@ -24,7 +24,6 @@ import { AnswersListComponent } from '../answers-list/answers-list.component';
     BackButtonComponent,
   ],
   templateUrl: './quiz-details.component.html',
-  styleUrl: './quiz-details.component.css',
 })
 export class QuizDetailsComponent {
   @Input() id: string = '';
