@@ -9,6 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { QuizzesService } from '../../../../services/quizzes.service';
 
 @Component({
   selector: 'stepper',
@@ -48,6 +49,7 @@ export class StepperComponent {
   constructor(
     private quizCreatorService: QuizCreatorService,
     private router: Router,
+    private quizzesService: QuizzesService,
   ) {}
 
   ngOnInit(): void {
@@ -69,6 +71,8 @@ export class StepperComponent {
   next() {
     this.qAndAFormGroup.markAllAsTouched();
     if (this.currentStep === this.quiz?.questions.length) {
+      this.saveQuestion();
+      this.submit();
       return;
     }
     if (this.qAndAFormGroup.valid) {
@@ -89,6 +93,13 @@ export class StepperComponent {
     this.qAndAFormGroup.reset();
     this.currentStep--;
     this.loadFormData();
+  }
+
+  submit() {
+    if (this.quiz) {
+      this.quizzesService.addQuiz(this.quiz).subscribe();
+      this.router.navigate(['quiz-management']);
+    }
   }
 
   private loadFormData() {

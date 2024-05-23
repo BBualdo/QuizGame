@@ -5,6 +5,7 @@ import { Quiz } from '../models/Quiz';
 import { url } from '../config/config';
 import { ErrorsService } from './errors.service';
 import { QuizDetails } from '../models/QuizDetails';
+import { QuizReqDTO } from '../models/QuizReqDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,15 @@ export class QuizzesService {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http.get<QuizDetails>(url + 'Quizzes/' + id).pipe(
+      catchError((error) => of(this.handleError(error))),
+      finalize(() => this.isLoadingSubject.next(false)),
+    );
+  }
+
+  addQuiz(quiz: QuizReqDTO): Observable<QuizReqDTO> {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+    return this.http.post<QuizReqDTO>(url + 'Quizzes', quiz).pipe(
       catchError((error) => of(this.handleError(error))),
       finalize(() => this.isLoadingSubject.next(false)),
     );
