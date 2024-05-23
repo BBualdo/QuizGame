@@ -8,6 +8,7 @@ import { StepperComponent } from '../components/Quiz-Management/Quiz-Creator/ste
 import { SelectQuizComponent } from '../components/Game-Session/select-quiz/select-quiz.component';
 import { GameSessionLayout } from '../components/Game-Session/game-session/game-session.component';
 import { SelectDifficultyComponent } from '../components/Game-Session/select-difficulty/select-difficulty.component';
+import { EnterUsernameComponent } from '../components/Game-Session/enter-username/enter-username.component';
 
 export const routes: Routes = [
   { path: '', component: MainMenuComponent },
@@ -15,7 +16,8 @@ export const routes: Routes = [
     path: 'play',
     component: GameSessionLayout,
     children: [
-      { path: '', component: SelectQuizComponent },
+      { path: '', component: EnterUsernameComponent },
+      { path: 'quiz', component: SelectQuizComponent },
       { path: 'difficulty', component: SelectDifficultyComponent },
     ],
   },

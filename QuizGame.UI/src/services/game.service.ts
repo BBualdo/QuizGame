@@ -6,10 +6,66 @@ import { GameReqDTO } from '../models/GameReqDTO';
   providedIn: 'root',
 })
 export class GameService {
-  private newGameSubject = new BehaviorSubject<GameReqDTO | null>(null);
+  private readonly GAME_DATA_KEY = 'newGame';
+
+  newGame: GameReqDTO = {
+    username: '',
+    date: '',
+    difficulty: undefined,
+    score: 0,
+    quizId: 0,
+  };
+
+  private newGameSubject = new BehaviorSubject<GameReqDTO>(this.newGame);
   newGame$ = this.newGameSubject.asObservable();
 
-  updateNewGame(game: GameReqDTO) {
-    this.newGameSubject.next(game);
+  updateUsername(username: string) {
+    this.newGame = { ...this.newGame, username };
+    this.newGameSubject.next(this.newGame);
+    this.saveToLocalStorage(this.newGame);
+  }
+
+  updateQuiz(quizId: number) {
+    this.newGame = { ...this.newGame, quizId };
+    this.newGameSubject.next(this.newGame);
+    this.saveToLocalStorage(this.newGame);
+  }
+
+  updateDifficulty(difficulty: 'Easy' | 'Medium' | 'Hard') {
+    this.newGame = { ...this.newGame, difficulty };
+    this.newGameSubject.next(this.newGame);
+    this.saveToLocalStorage(this.newGame);
+  }
+
+  setDate() {
+    this.newGame = { ...this.newGame, date: new Date().toISOString() };
+    this.newGameSubject.next(this.newGame);
+    this.saveToLocalStorage(this.newGame);
+  }
+
+  setScore(score: number) {
+    this.newGame = { ...this.newGame, score };
+    this.newGameSubject.next(this.newGame);
+    this.saveToLocalStorage(this.newGame);
+  }
+
+  clearGame() {
+    this.newGameSubject.next({
+      username: '',
+      date: '',
+      difficulty: undefined,
+      score: 0,
+      quizId: 0,
+    });
+    localStorage.removeItem(this.GAME_DATA_KEY);
+  }
+
+  private saveToLocalStorage(game: GameReqDTO) {
+    localStorage.setItem(this.GAME_DATA_KEY, JSON.stringify(game));
+  }
+
+  private loadFromLocalStorage(): GameReqDTO | null {
+    const data = localStorage.getItem(this.GAME_DATA_KEY);
+    return data ? JSON.parse(data) : null;
   }
 }
