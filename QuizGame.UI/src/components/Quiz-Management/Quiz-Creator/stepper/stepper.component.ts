@@ -52,7 +52,9 @@ export class StepperComponent {
 
   ngOnInit(): void {
     this.quizCreatorService.quiz$.subscribe((quiz) => (this.quiz = quiz));
-    console.log(this.quiz);
+    if (this.quiz) {
+      this.loadFormData();
+    }
   }
 
   setCorrect(answerIndex: number) {
@@ -62,7 +64,6 @@ export class StepperComponent {
         answer.isCorrect = answerIndex === index;
       });
     }
-    console.log(currentQuestion);
   }
 
   next() {
@@ -71,8 +72,10 @@ export class StepperComponent {
       return;
     }
     if (this.qAndAFormGroup.valid) {
+      this.saveQuestion();
       this.qAndAFormGroup.reset();
       this.currentStep++;
+      this.loadFormData();
     }
   }
 
@@ -80,8 +83,52 @@ export class StepperComponent {
     if (this.currentStep === 1) {
       this.quizCreatorService.clearQuiz();
       this.router.navigate(['quiz-management/create']);
+      return;
     }
+    this.saveQuestion();
     this.qAndAFormGroup.reset();
     this.currentStep--;
+    this.loadFormData();
+  }
+
+  private loadFormData() {
+    const question = this.quiz?.questions[this.currentStep - 1];
+    if (question) {
+      this.qAndAFormGroup.setValue({
+        question: question.name || '',
+        answer1: question.answers[0].name || '',
+        answer2: question.answers[1].name || '',
+        answer3: question.answers[2].name || '',
+        answer4: question.answers[3].name || '',
+      });
+    }
+  }
+
+  private saveQuestion() {
+    const currentQuestion = this.quiz?.questions[this.currentStep - 1];
+    const formValues = this.qAndAFormGroup.value;
+    if (currentQuestion) {
+      currentQuestion.name = formValues.question!;
+      currentQuestion.answers = [
+        {
+          name: formValues.answer1!,
+          isCorrect: currentQuestion.answers[0].isCorrect,
+        },
+        {
+          name: formValues.answer2!,
+          isCorrect: currentQuestion.answers[1].isCorrect,
+        },
+        {
+          name: formValues.answer3!,
+          isCorrect: currentQuestion.answers[2].isCorrect,
+        },
+        {
+          name: formValues.answer4!,
+          isCorrect: currentQuestion.answers[3].isCorrect,
+        },
+      ];
+
+      this.quizCreatorService.updateQuiz(this.quiz!);
+    }
   }
 }
