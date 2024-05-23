@@ -7,6 +7,7 @@ import { AsyncPipe } from '@angular/common';
 import { ErrorComponent } from '../../shared/error/error.component';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { RouterLink } from '@angular/router';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-quiz-list',
@@ -16,16 +17,17 @@ import { RouterLink } from '@angular/router';
   styleUrl: './quiz-list.component.css',
 })
 export class QuizListComponent {
-  quizzes$: Observable<Quiz[]> = this.quizzesService.getQuizzes();
+  quizzes$: Observable<Quiz[] | null> = this.dataService.quizzes$;
   isLoading$: Observable<boolean> = this.quizzesService.isLoading$;
   isError$: Observable<boolean> = this.errorsService.isError$;
 
   constructor(
+    private dataService: DataService,
     private quizzesService: QuizzesService,
     private errorsService: ErrorsService,
   ) {}
 
   retry(): void {
-    this.quizzesService.getQuizzes().subscribe();
+    this.dataService.refreshQuizzes();
   }
 }

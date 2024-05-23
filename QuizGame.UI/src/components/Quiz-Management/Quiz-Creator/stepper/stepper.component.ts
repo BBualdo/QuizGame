@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { QuizzesService } from '../../../../services/quizzes.service';
+import { DataService } from '../../../../services/data.service';
 
 @Component({
   selector: 'stepper',
@@ -50,6 +51,7 @@ export class StepperComponent {
     private quizCreatorService: QuizCreatorService,
     private router: Router,
     private quizzesService: QuizzesService,
+    private dataService: DataService,
   ) {}
 
   ngOnInit(): void {
@@ -97,7 +99,9 @@ export class StepperComponent {
 
   submit() {
     if (this.quiz) {
-      this.quizzesService.addQuiz(this.quiz).subscribe();
+      this.quizzesService.addQuiz(this.quiz).subscribe(() => {
+        this.dataService.refreshQuizzes();
+      });
       this.router.navigate(['quiz-management']);
     }
   }

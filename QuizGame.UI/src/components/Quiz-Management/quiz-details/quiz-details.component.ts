@@ -4,9 +4,10 @@ import { ErrorComponent } from '../../shared/error/error.component';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { BackButtonComponent } from '../../shared/back-button/back-button.component';
 import { QuizDetails } from '../../../models/QuizDetails';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { QuizzesService } from '../../../services/quizzes.service';
 import { ErrorsService } from '../../../services/errors.service';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-quiz-details',
@@ -23,18 +24,19 @@ import { ErrorsService } from '../../../services/errors.service';
 export class QuizDetailsComponent {
   @Input() id: string = '';
 
-  quiz$: Observable<QuizDetails> = of();
+  quiz$: Observable<QuizDetails | null> = this.dataService.quiz$;
   isLoading$: Observable<boolean> = this.quizzesService.isLoading$;
   isError$: Observable<boolean> = this.errorService.isError$;
 
   constructor(
     private quizzesService: QuizzesService,
     private errorService: ErrorsService,
+    private dataService: DataService,
   ) {}
 
   ngOnInit(): void {
     if (this.id) {
-      this.quiz$ = this.quizzesService.getQuiz(Number(this.id));
+      this.dataService.refreshQuiz(Number(this.id));
     }
   }
 
