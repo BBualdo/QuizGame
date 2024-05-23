@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BackButtonComponent } from '../../shared/back-button/back-button.component';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { QuizListComponent } from '../../Quiz-Management/quiz-list/quiz-list.component';
 import { DataService } from '../../../services/data.service';
 import { QuizzesService } from '../../../services/quizzes.service';
@@ -32,7 +32,12 @@ export class SelectQuizComponent {
     private dataService: DataService,
     private quizzesService: QuizzesService,
     private errorsService: ErrorsService,
+    private router: Router,
   ) {}
+
+  selectQuiz(id: number) {
+    this.router.navigate(['play/difficulty'], { skipLocationChange: true });
+  }
 
   retry() {
     this.dataService.refreshQuizzes();

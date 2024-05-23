@@ -8,4 +8,4 @@ import { BackButtonComponent } from '../../shared/back-button/back-button.compon
   imports: [RouterOutlet, BackButtonComponent],
   templateUrl: './quiz-manager.component.html',
 })
-export class QuizManagerComponent {}
+export class QuizManagerLayout {}
