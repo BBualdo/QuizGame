@@ -5,9 +5,11 @@ import { QuizDetailsComponent } from '../components/Quiz-Management/quiz-details
 import { QuizListComponent } from '../components/Quiz-Management/quiz-list/quiz-list.component';
 import { CreateQuizComponent } from '../components/Quiz-Management/Quiz-Creator/create-quiz/create-quiz.component';
 import { StepperComponent } from '../components/Quiz-Management/Quiz-Creator/stepper/stepper.component';
+import { SelectQuizComponent } from '../components/Game-Session/select-quiz/select-quiz.component';
 
 export const routes: Routes = [
   { path: '', component: MainMenuComponent },
+  { path: 'play', component: SelectQuizComponent },
   {
     path: 'quiz-management',
     component: QuizManagerComponent,
@@ -20,7 +22,6 @@ export const routes: Routes = [
           { path: 'steps', component: StepperComponent },
         ],
       },
-
       { path: ':id', component: QuizDetailsComponent },
     ],
   },

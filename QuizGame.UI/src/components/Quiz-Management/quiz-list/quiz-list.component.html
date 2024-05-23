@@ -1,5 +1,5 @@
-<h1 class="text-2xl font-bold text-center">Manage Quizzes</h1>
-<div class="flex flex-col items-center gap-10 mt-10">
+<h1 class="text-center text-2xl font-bold">Manage Quizzes</h1>
+<div class="mt-10 flex flex-col items-center gap-10">
   @if (isError$ | async) {
     <app-error (retryEmitter)="retry()" />
   }
@@ -8,19 +8,21 @@
   }
 
   @if (quizzes$ | async; as quizzes) {
-    <a routerLink="./create" class="btn secondary-btn">
-      Create Quiz
-    </a>
+    <a routerLink="./create" class="btn secondary-btn"> Create Quiz </a>
     @if (quizzes.length > 0) {
       <div class="flex flex-col gap-4">
         @for (quiz of quizzes; track $index) {
-          <a [routerLink]=[quiz.quizId] class="btn quiz-btn">{{ quiz.name }}</a>
+          <a [routerLink]="[quiz.quizId]" class="btn quiz-btn">{{
+            quiz.name
+          }}</a>
         }
       </div>
     } @else {
-      <p class="text-2xl text-center gradient-purple bg-clip-text text-transparent font-black uppercase">There is no quizzes yet.</p>
+      <p
+        class="gradient-purple bg-clip-text text-center text-2xl font-black uppercase text-transparent"
+      >
+        There is no quizzes yet.
+      </p>
     }
-
   }
 </div>
-
