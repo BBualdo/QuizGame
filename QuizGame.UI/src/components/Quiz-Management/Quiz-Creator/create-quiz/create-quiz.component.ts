@@ -12,6 +12,7 @@ import { Router, RouterLink } from '@angular/router';
 import { StepperComponent } from '../stepper/stepper.component';
 import { QuizCreatorService } from '../../../../services/quiz-creator.service';
 import { QuestionReqDTO } from '../../../../models/QuestionReqDTO';
+import { AnswerReqDTO } from '../../../../models/AnswerReqDTO';
 
 @Component({
   selector: 'app-create-quiz',
@@ -50,9 +51,20 @@ export class CreateQuizComponent {
     this.quizInfoFormGroup.markAllAsTouched();
     const formValues = this.quizInfoFormGroup.value;
     if (this.quizInfoFormGroup.valid) {
+      const answersArray: AnswerReqDTO[] = Array.from(
+        { length: 4 },
+        (_, index) => ({
+          name: '',
+          isCorrect: index === 0,
+        }),
+      );
+
       const questionsArray: QuestionReqDTO[] = Array.from(
         { length: formValues.questionsAmount! },
-        () => ({ name: '', answers: [] }),
+        () => ({
+          name: '',
+          answers: answersArray,
+        }),
       );
       this.quizCreatorService.updateQuiz({
         name: formValues.name!,

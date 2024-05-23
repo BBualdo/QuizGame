@@ -3,7 +3,6 @@ import { QuizCreatorService } from '../../../../services/quiz-creator.service';
 import { QuizReqDTO } from '../../../../models/QuizReqDTO';
 import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
-import { AnswerReqDTO } from '../../../../models/AnswerReqDTO';
 import {
   FormControl,
   FormGroup,
@@ -53,10 +52,17 @@ export class StepperComponent {
 
   ngOnInit(): void {
     this.quizCreatorService.quiz$.subscribe((quiz) => (this.quiz = quiz));
+    console.log(this.quiz);
   }
 
-  setCorrect(answer: AnswerReqDTO) {
-    answer.isCorrect = true;
+  setCorrect(answerIndex: number) {
+    const currentQuestion = this.quiz?.questions[this.currentStep - 1];
+    if (currentQuestion) {
+      currentQuestion.answers.forEach((answer, index) => {
+        answer.isCorrect = answerIndex === index;
+      });
+    }
+    console.log(currentQuestion);
   }
 
   next() {
@@ -65,6 +71,7 @@ export class StepperComponent {
       return;
     }
     if (this.qAndAFormGroup.valid) {
+      this.qAndAFormGroup.reset();
       this.currentStep++;
     }
   }
@@ -74,6 +81,7 @@ export class StepperComponent {
       this.quizCreatorService.clearQuiz();
       this.router.navigate(['quiz-management/create']);
     }
+    this.qAndAFormGroup.reset();
     this.currentStep--;
   }
 }

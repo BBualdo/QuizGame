@@ -34,8 +34,9 @@
       }
       @if (
         qAndAFormGroup.controls["question"].touched &&
-        (qAndAFormGroup.controls["question"].errors?.["maxlength"] || qAndAFormGroup.controls['question'].errors?.['minlength'])
-        ) {
+        (qAndAFormGroup.controls["question"].errors?.["maxlength"] ||
+          qAndAFormGroup.controls["question"].errors?.["minlength"])
+      ) {
         <p class="text-red-500">Must be between 6-200 characters long</p>
       }
     </div>
@@ -57,7 +58,15 @@
               qAndAFormGroup.controls['answer1'].errors
           }"
         />
-        <button class="btn correct-btn px-4 text-base">Correct</button>
+        <button
+          (click)="setCorrect(0)"
+          class="btn correct-btn px-4 text-base"
+          [ngClass]="{
+            'opacity-50': !quiz!.questions[currentStep - 1].answers[0].isCorrect
+          }"
+        >
+          Correct
+        </button>
       </div>
       <div class="absolute -bottom-7">
         @if (
@@ -69,7 +78,7 @@
         @if (
           qAndAFormGroup.controls["answer1"].touched &&
           qAndAFormGroup.controls["answer1"].errors?.["maxlength"]
-          ) {
+        ) {
           <p class="text-red-500">Can't be longer than 50 characters</p>
         }
       </div>
@@ -90,7 +99,15 @@
               qAndAFormGroup.controls['answer2'].errors
           }"
         />
-        <button class="btn correct-btn px-4 text-base">Correct</button>
+        <button
+          (click)="setCorrect(1)"
+          class="btn correct-btn px-4 text-base"
+          [ngClass]="{
+            'opacity-50': !quiz!.questions[currentStep - 1].answers[1].isCorrect
+          }"
+        >
+          Correct
+        </button>
       </div>
       <div class="absolute -bottom-7">
         @if (
@@ -102,7 +119,7 @@
         @if (
           qAndAFormGroup.controls["answer2"].touched &&
           qAndAFormGroup.controls["answer2"].errors?.["maxlength"]
-          ) {
+        ) {
           <p class="text-red-500">Can't be longer than 50 characters</p>
         }
       </div>
@@ -123,7 +140,15 @@
               qAndAFormGroup.controls['answer3'].errors
           }"
         />
-        <button class="btn correct-btn px-4 text-base">Correct</button>
+        <button
+          (click)="setCorrect(2)"
+          class="btn correct-btn px-4 text-base"
+          [ngClass]="{
+            'opacity-50': !quiz!.questions[currentStep - 1].answers[2].isCorrect
+          }"
+        >
+          Correct
+        </button>
       </div>
       <div class="absolute -bottom-7">
         @if (
@@ -135,7 +160,7 @@
         @if (
           qAndAFormGroup.controls["answer3"].touched &&
           qAndAFormGroup.controls["answer3"].errors?.["maxlength"]
-          ) {
+        ) {
           <p class="text-red-500">Can't be longer than 50 characters</p>
         }
       </div>
@@ -156,7 +181,15 @@
               qAndAFormGroup.controls['answer4'].errors
           }"
         />
-        <button class="btn correct-btn px-4 text-base">Correct</button>
+        <button
+          (click)="setCorrect(3)"
+          class="btn correct-btn px-4 text-base"
+          [ngClass]="{
+            'opacity-50': !quiz!.questions[currentStep - 1].answers[3].isCorrect
+          }"
+        >
+          Correct
+        </button>
       </div>
       <div class="absolute -bottom-7">
         @if (
@@ -168,7 +201,7 @@
         @if (
           qAndAFormGroup.controls["answer4"].touched &&
           qAndAFormGroup.controls["answer4"].errors?.["maxlength"]
-          ) {
+        ) {
           <p class="text-red-500">Can't be longer than 50 characters</p>
         }
       </div>
