@@ -53,7 +53,7 @@ export class GameService {
     return {
       username: null,
       date: null,
-      difficulty: null,
+      difficulty: 'Medium',
       score: null,
       quizId: null,
     };

@@ -4,12 +4,12 @@ import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { GameService } from '../../../services/game.service';
 
 @Component({
-  selector: 'app-game-session',
+  selector: 'app-create-game-layout',
   standalone: true,
   imports: [BackButtonComponent, RouterOutlet],
   templateUrl: './game-session.component.html',
 })
-export class GameSessionLayout {
+export class CreateGameLayout {
   constructor(
     private router: Router,
     private gameService: GameService,

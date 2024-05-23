@@ -1,1 +1,32 @@
-<p>Select Difficulty</p>
+<h1 class="text-center text-2xl font-bold">Select Difficulty</h1>
+<div class="mt-10 flex flex-col items-center gap-10">
+  <div class="flex flex-col items-center gap-4">
+    <button
+      (click)="selectDifficulty('Easy')"
+      class="btn gradient-green text-white grayscale opacity-50"
+      [ngClass]="{'grayscale-0 opacity-100': selectedDifficulty === 'Easy'}"
+    >
+      Easy
+    </button>
+    <button
+      (click)="selectDifficulty('Medium')"
+      class="btn gradient-amber text-white grayscale"
+      [ngClass]="{'grayscale-0': selectedDifficulty === 'Medium'}"
+    >
+      Medium
+    </button>
+    <button
+      (click)="selectDifficulty('Hard')"
+      class="btn gradient-red text-white grayscale opacity-50"
+      [ngClass]="{'grayscale-0 opacity-100': selectedDifficulty === 'Hard'}"
+    >
+      Hard
+    </button>
+  </div>
+  <div class="mt-4 flex items-center gap-4">
+    <button (click)="back()" class="btn tertiary-btn">Back</button>
+    <button (click)="play()" class="btn secondary-btn disabled:opacity:50">
+      Play
+    </button>
+  </div>
+</div>

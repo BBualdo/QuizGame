@@ -38,7 +38,7 @@
   }
 
   .question-btn {
-    @apply gradient-purple-reversed rounded-2xl border-2 border-black p-4 text-center font-bold text-white transition-transform duration-200 hover:opacity-80;
+    @apply gradient-purple-reversed cursor-pointer rounded-2xl border-2 border-black p-4 text-center font-bold text-white transition-transform duration-200 hover:opacity-80;
   }
 
   .warning-btn {
