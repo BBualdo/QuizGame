@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
 import { QuizzesService } from '../../../services/quizzes.service';
 import { ErrorsService } from '../../../services/errors.service';
 import { DataService } from '../../../services/data.service';
+import { Dialog } from '@angular/cdk/dialog';
+import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-details',
@@ -32,6 +35,8 @@ export class QuizDetailsComponent {
     private quizzesService: QuizzesService,
     private errorService: ErrorsService,
     private dataService: DataService,
+    private dialog: Dialog,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -42,5 +47,23 @@ export class QuizDetailsComponent {
 
   retry() {
     this.quizzesService.getQuiz(Number(this.id)).subscribe();
+  }
+
+  openDeleteDialog(quizName: string) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Delete Quiz',
+        quizName: quizName,
+      },
+    });
+
+    dialogRef.closed.subscribe((value) => {
+      if (value === true) {
+        this.quizzesService.deleteQuiz(Number(this.id)).subscribe(() => {
+          this.dataService.refreshQuizzes();
+        });
+        this.router.navigate(['quiz-management']);
+      }
+    });
   }
 }

@@ -46,6 +46,15 @@ export class QuizzesService {
     );
   }
 
+  deleteQuiz(id: number): Observable<Quiz> {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+    return this.http.delete<Quiz>(url + 'Quizzes/' + id).pipe(
+      catchError((error) => of(this.handleError(error))),
+      finalize(() => this.isLoadingSubject.next(false)),
+    );
+  }
+
   handleError(error: HttpErrorResponse): any {
     if (error.status === 0) {
       this.errorsService.add("Couldn't connect to Quizzes API.");

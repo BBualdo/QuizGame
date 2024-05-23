@@ -22,8 +22,8 @@
     </div>
 
     <div class="mt-4 flex flex-col gap-4">
-      <button class="btn secondary-btn">Add Question</button>
-      <button class="btn warning-btn">Delete Quiz</button>
+      <!--<button class="btn secondary-btn">Add Question</button>-->
+      <button (click)="openDeleteDialog(quiz.name)" class="btn warning-btn">Delete Quiz</button>
     </div>
   }
 </div>
