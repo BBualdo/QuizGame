@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'back-button',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, MatIcon],
   templateUrl: './back-button.component.html',
   styleUrl: './back-button.component.css',
 })
