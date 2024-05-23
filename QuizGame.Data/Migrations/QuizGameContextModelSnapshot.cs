@@ -759,11 +759,6 @@ namespace QuizGame.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("QuestionId"));
 
-                    b.Property<string>("Difficulty")
-                        .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("character varying(6)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -782,175 +777,150 @@ namespace QuizGame.Data.Migrations
                         new
                         {
                             QuestionId = 1,
-                            Difficulty = "Easy",
                             Name = "What is the capital of France?",
                             QuizId = 1
                         },
                         new
                         {
                             QuestionId = 2,
-                            Difficulty = "Medium",
                             Name = "Who wrote 'To Kill a Mockingbird'?",
                             QuizId = 1
                         },
                         new
                         {
                             QuestionId = 3,
-                            Difficulty = "Easy",
                             Name = "Which planet is known as the Red Planet?",
                             QuizId = 1
                         },
                         new
                         {
                             QuestionId = 4,
-                            Difficulty = "Medium",
                             Name = "What is the largest mammal in the world?",
                             QuizId = 1
                         },
                         new
                         {
                             QuestionId = 5,
-                            Difficulty = "Hard",
                             Name = "What is the smallest country in the world?",
                             QuizId = 1
                         },
                         new
                         {
                             QuestionId = 6,
-                            Difficulty = "Easy",
                             Name = "What is the chemical symbol for water?",
                             QuizId = 2
                         },
                         new
                         {
                             QuestionId = 7,
-                            Difficulty = "Medium",
                             Name = "Who developed the theory of relativity?",
                             QuizId = 2
                         },
                         new
                         {
                             QuestionId = 8,
-                            Difficulty = "Easy",
                             Name = "What is the powerhouse of the cell?",
                             QuizId = 2
                         },
                         new
                         {
                             QuestionId = 9,
-                            Difficulty = "Easy",
                             Name = "What planet is known as the Red Planet?",
                             QuizId = 2
                         },
                         new
                         {
                             QuestionId = 10,
-                            Difficulty = "Hard",
                             Name = "What is the speed of light?",
                             QuizId = 2
                         },
                         new
                         {
                             QuestionId = 11,
-                            Difficulty = "Easy",
                             Name = "Who was the first President of the United States?",
                             QuizId = 3
                         },
                         new
                         {
                             QuestionId = 12,
-                            Difficulty = "Medium",
                             Name = "In which year did the Titanic sink?",
                             QuizId = 3
                         },
                         new
                         {
                             QuestionId = 13,
-                            Difficulty = "Easy",
                             Name = "Who discovered America?",
                             QuizId = 3
                         },
                         new
                         {
                             QuestionId = 14,
-                            Difficulty = "Medium",
                             Name = "What was the name of the first man on the moon?",
                             QuizId = 3
                         },
                         new
                         {
                             QuestionId = 15,
-                            Difficulty = "Hard",
                             Name = "Which war was fought between the north and south regions in the United States?",
                             QuizId = 3
                         },
                         new
                         {
                             QuestionId = 16,
-                            Difficulty = "Medium",
                             Name = "What is the longest river in the world?",
                             QuizId = 4
                         },
                         new
                         {
                             QuestionId = 17,
-                            Difficulty = "Easy",
                             Name = "Which continent is the largest?",
                             QuizId = 4
                         },
                         new
                         {
                             QuestionId = 18,
-                            Difficulty = "Medium",
                             Name = "Which country has the most population?",
                             QuizId = 4
                         },
                         new
                         {
                             QuestionId = 19,
-                            Difficulty = "Easy",
                             Name = "What is the smallest continent?",
                             QuizId = 4
                         },
                         new
                         {
                             QuestionId = 20,
-                            Difficulty = "Hard",
                             Name = "Which country has the most number of islands?",
                             QuizId = 4
                         },
                         new
                         {
                             QuestionId = 21,
-                            Difficulty = "Medium",
                             Name = "What is the value of Pi?",
                             QuizId = 5
                         },
                         new
                         {
                             QuestionId = 22,
-                            Difficulty = "Easy",
                             Name = "What is 2+2?",
                             QuizId = 5
                         },
                         new
                         {
                             QuestionId = 23,
-                            Difficulty = "Easy",
                             Name = "What is the square root of 16?",
                             QuizId = 5
                         },
                         new
                         {
                             QuestionId = 24,
-                            Difficulty = "Hard",
                             Name = "What is the value of the gravitational constant?",
                             QuizId = 5
                         },
                         new
                         {
                             QuestionId = 25,
-                            Difficulty = "Medium",
                             Name = "What is the derivative of x^2?",
                             QuizId = 5
                         });

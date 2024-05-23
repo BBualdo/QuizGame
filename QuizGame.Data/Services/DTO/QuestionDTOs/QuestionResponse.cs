@@ -6,7 +6,6 @@ namespace QuizGame.Data.Services.DTO.QuestionDTOs;
 public class QuestionResponse
 {
     public string? Name { get; set; }
-    public string? Difficulty { get; set; }
     public ICollection<AnswerResponse> Answers { get; set; } = new List<AnswerResponse>();
 }
 
@@ -17,7 +16,6 @@ public static class QuestionExtensions
         return new QuestionResponse
         {
             Name = question.Name,
-            Difficulty = question.Difficulty,
             Answers = question.Answers.Select(answer => answer.ToAnswerResponse()).ToList()
         };
     }

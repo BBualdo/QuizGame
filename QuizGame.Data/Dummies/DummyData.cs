@@ -23,72 +23,72 @@ public static class DummyData
         var questions = new List<Question>
         {
             // General Knowledge Questions
-            new Question { QuestionId = 1, Name = "What is the capital of France?", Difficulty = "Easy", QuizId = 1 },
+            new Question { QuestionId = 1, Name = "What is the capital of France?", QuizId = 1 },
             new Question
-                { QuestionId = 2, Name = "Who wrote 'To Kill a Mockingbird'?", Difficulty = "Medium", QuizId = 1 },
+                { QuestionId = 2, Name = "Who wrote 'To Kill a Mockingbird'?", QuizId = 1 },
             new Question
-                { QuestionId = 3, Name = "Which planet is known as the Red Planet?", Difficulty = "Easy", QuizId = 1 },
+                { QuestionId = 3, Name = "Which planet is known as the Red Planet?", QuizId = 1 },
             new Question
             {
-                QuestionId = 4, Name = "What is the largest mammal in the world?", Difficulty = "Medium", QuizId = 1
+                QuestionId = 4, Name = "What is the largest mammal in the world?", QuizId = 1
             },
             new Question
             {
-                QuestionId = 5, Name = "What is the smallest country in the world?", Difficulty = "Hard", QuizId = 1
+                QuestionId = 5, Name = "What is the smallest country in the world?", QuizId = 1
             },
             // Science Questions
             new Question
-                { QuestionId = 6, Name = "What is the chemical symbol for water?", Difficulty = "Easy", QuizId = 2 },
+                { QuestionId = 6, Name = "What is the chemical symbol for water?", QuizId = 2 },
             new Question
-                { QuestionId = 7, Name = "Who developed the theory of relativity?", Difficulty = "Medium", QuizId = 2 },
+                { QuestionId = 7, Name = "Who developed the theory of relativity?", QuizId = 2 },
             new Question
-                { QuestionId = 8, Name = "What is the powerhouse of the cell?", Difficulty = "Easy", QuizId = 2 },
+                { QuestionId = 8, Name = "What is the powerhouse of the cell?", QuizId = 2 },
             new Question
-                { QuestionId = 9, Name = "What planet is known as the Red Planet?", Difficulty = "Easy", QuizId = 2 },
-            new Question { QuestionId = 10, Name = "What is the speed of light?", Difficulty = "Hard", QuizId = 2 },
+                { QuestionId = 9, Name = "What planet is known as the Red Planet?", QuizId = 2 },
+            new Question { QuestionId = 10, Name = "What is the speed of light?", QuizId = 2 },
             // History Questions
             new Question
             {
-                QuestionId = 11, Name = "Who was the first President of the United States?", Difficulty = "Easy",
+                QuestionId = 11, Name = "Who was the first President of the United States?",
                 QuizId = 3
             },
             new Question
-                { QuestionId = 12, Name = "In which year did the Titanic sink?", Difficulty = "Medium", QuizId = 3 },
-            new Question { QuestionId = 13, Name = "Who discovered America?", Difficulty = "Easy", QuizId = 3 },
+                { QuestionId = 12, Name = "In which year did the Titanic sink?", QuizId = 3 },
+            new Question { QuestionId = 13, Name = "Who discovered America?", QuizId = 3 },
             new Question
             {
-                QuestionId = 14, Name = "What was the name of the first man on the moon?", Difficulty = "Medium",
+                QuestionId = 14, Name = "What was the name of the first man on the moon?",
                 QuizId = 3
             },
             new Question
             {
                 QuestionId = 15,
                 Name = "Which war was fought between the north and south regions in the United States?",
-                Difficulty = "Hard", QuizId = 3
+                QuizId = 3
             },
             // Geography Questions
             new Question
             {
-                QuestionId = 16, Name = "What is the longest river in the world?", Difficulty = "Medium", QuizId = 4
+                QuestionId = 16, Name = "What is the longest river in the world?", QuizId = 4
             },
-            new Question { QuestionId = 17, Name = "Which continent is the largest?", Difficulty = "Easy", QuizId = 4 },
+            new Question { QuestionId = 17, Name = "Which continent is the largest?", QuizId = 4 },
             new Question
-                { QuestionId = 18, Name = "Which country has the most population?", Difficulty = "Medium", QuizId = 4 },
-            new Question { QuestionId = 19, Name = "What is the smallest continent?", Difficulty = "Easy", QuizId = 4 },
+                { QuestionId = 18, Name = "Which country has the most population?", QuizId = 4 },
+            new Question { QuestionId = 19, Name = "What is the smallest continent?", QuizId = 4 },
             new Question
             {
-                QuestionId = 20, Name = "Which country has the most number of islands?", Difficulty = "Hard", QuizId = 4
+                QuestionId = 20, Name = "Which country has the most number of islands?", QuizId = 4
             },
             // Math Questions
-            new Question { QuestionId = 21, Name = "What is the value of Pi?", Difficulty = "Medium", QuizId = 5 },
-            new Question { QuestionId = 22, Name = "What is 2+2?", Difficulty = "Easy", QuizId = 5 },
-            new Question { QuestionId = 23, Name = "What is the square root of 16?", Difficulty = "Easy", QuizId = 5 },
+            new Question { QuestionId = 21, Name = "What is the value of Pi?", QuizId = 5 },
+            new Question { QuestionId = 22, Name = "What is 2+2?", QuizId = 5 },
+            new Question { QuestionId = 23, Name = "What is the square root of 16?", QuizId = 5 },
             new Question
             {
-                QuestionId = 24, Name = "What is the value of the gravitational constant?", Difficulty = "Hard",
+                QuestionId = 24, Name = "What is the value of the gravitational constant?",
                 QuizId = 5
             },
-            new Question { QuestionId = 25, Name = "What is the derivative of x^2?", Difficulty = "Medium", QuizId = 5 }
+            new Question { QuestionId = 25, Name = "What is the derivative of x^2?", QuizId = 5 }
         };
 
         return questions;

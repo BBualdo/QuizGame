@@ -56,7 +56,6 @@ namespace QuizGame.Data.Migrations
                     QuestionId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Difficulty = table.Column<string>(type: "character varying(6)", maxLength: 6, nullable: false),
                     QuizId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -105,34 +104,34 @@ namespace QuizGame.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Questions",
-                columns: new[] { "QuestionId", "Difficulty", "Name", "QuizId" },
+                columns: new[] { "QuestionId", "Name", "QuizId" },
                 values: new object[,]
                 {
-                    { 1, "Easy", "What is the capital of France?", 1 },
-                    { 2, "Medium", "Who wrote 'To Kill a Mockingbird'?", 1 },
-                    { 3, "Easy", "Which planet is known as the Red Planet?", 1 },
-                    { 4, "Medium", "What is the largest mammal in the world?", 1 },
-                    { 5, "Hard", "What is the smallest country in the world?", 1 },
-                    { 6, "Easy", "What is the chemical symbol for water?", 2 },
-                    { 7, "Medium", "Who developed the theory of relativity?", 2 },
-                    { 8, "Easy", "What is the powerhouse of the cell?", 2 },
-                    { 9, "Easy", "What planet is known as the Red Planet?", 2 },
-                    { 10, "Hard", "What is the speed of light?", 2 },
-                    { 11, "Easy", "Who was the first President of the United States?", 3 },
-                    { 12, "Medium", "In which year did the Titanic sink?", 3 },
-                    { 13, "Easy", "Who discovered America?", 3 },
-                    { 14, "Medium", "What was the name of the first man on the moon?", 3 },
-                    { 15, "Hard", "Which war was fought between the north and south regions in the United States?", 3 },
-                    { 16, "Medium", "What is the longest river in the world?", 4 },
-                    { 17, "Easy", "Which continent is the largest?", 4 },
-                    { 18, "Medium", "Which country has the most population?", 4 },
-                    { 19, "Easy", "What is the smallest continent?", 4 },
-                    { 20, "Hard", "Which country has the most number of islands?", 4 },
-                    { 21, "Medium", "What is the value of Pi?", 5 },
-                    { 22, "Easy", "What is 2+2?", 5 },
-                    { 23, "Easy", "What is the square root of 16?", 5 },
-                    { 24, "Hard", "What is the value of the gravitational constant?", 5 },
-                    { 25, "Medium", "What is the derivative of x^2?", 5 }
+                    { 1, "What is the capital of France?", 1 },
+                    { 2, "Who wrote 'To Kill a Mockingbird'?", 1 },
+                    { 3, "Which planet is known as the Red Planet?", 1 },
+                    { 4, "What is the largest mammal in the world?", 1 },
+                    { 5, "What is the smallest country in the world?", 1 },
+                    { 6, "What is the chemical symbol for water?", 2 },
+                    { 7, "Who developed the theory of relativity?", 2 },
+                    { 8, "What is the powerhouse of the cell?", 2 },
+                    { 9, "What planet is known as the Red Planet?", 2 },
+                    { 10, "What is the speed of light?", 2 },
+                    { 11, "Who was the first President of the United States?", 3 },
+                    { 12, "In which year did the Titanic sink?", 3 },
+                    { 13, "Who discovered America?", 3 },
+                    { 14, "What was the name of the first man on the moon?", 3 },
+                    { 15, "Which war was fought between the north and south regions in the United States?", 3 },
+                    { 16, "What is the longest river in the world?", 4 },
+                    { 17, "Which continent is the largest?", 4 },
+                    { 18, "Which country has the most population?", 4 },
+                    { 19, "What is the smallest continent?", 4 },
+                    { 20, "Which country has the most number of islands?", 4 },
+                    { 21, "What is the value of Pi?", 5 },
+                    { 22, "What is 2+2?", 5 },
+                    { 23, "What is the square root of 16?", 5 },
+                    { 24, "What is the value of the gravitational constant?", 5 },
+                    { 25, "What is the derivative of x^2?", 5 }
                 });
 
             migrationBuilder.InsertData(

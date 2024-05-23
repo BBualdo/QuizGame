@@ -6,14 +6,9 @@ namespace QuizGame.Data.Models;
 public class Game
 {
     [Key] public int GameId { get; set; }
-
     [Required] [StringLength(50)] public string? Username { get; set; }
-
     [Required] public DateTime Date { get; set; }
-
     [Required] public int Score { get; set; }
-
     public int QuizId { get; set; }
-
     [ForeignKey(nameof(QuizId))] public Quiz? Quiz { get; set; }
 }
