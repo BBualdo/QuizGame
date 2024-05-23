@@ -9,8 +9,10 @@ import { QuizzesService } from '../../../services/quizzes.service';
 import { ErrorsService } from '../../../services/errors.service';
 import { DataService } from '../../../services/data.service';
 import { Dialog } from '@angular/cdk/dialog';
-import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
+import { Question } from '../../../models/Question';
+import { AnswersListComponent } from '../answers-list/answers-list.component';
 
 @Component({
   selector: 'app-quiz-details',
@@ -50,7 +52,7 @@ export class QuizDetailsComponent {
   }
 
   openDeleteDialog(quizName: string) {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Delete Quiz',
         quizName: quizName,
@@ -65,5 +67,9 @@ export class QuizDetailsComponent {
         this.router.navigate(['quiz-management']);
       }
     });
+  }
+
+  showAnswers(question: Question) {
+    this.dialog.open(AnswersListComponent, { data: { question: question } });
   }
 }

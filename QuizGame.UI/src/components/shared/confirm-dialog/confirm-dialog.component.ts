@@ -3,13 +3,13 @@ import { MatIcon } from '@angular/material/icon';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 
 @Component({
-  selector: 'app-dialog',
+  selector: 'app-confirm-dialog',
   standalone: true,
   imports: [MatIcon],
-  templateUrl: './dialog.component.html',
-  styleUrl: './dialog.component.css',
+  templateUrl: './confirm-dialog.component.html',
+  styleUrl: './confirm-dialog.component.css',
 })
-export class DialogComponent {
+export class ConfirmDialogComponent {
   title: string = this.data.title;
   quizName: string = this.data.quizName;
 
