@@ -11,11 +11,16 @@
     <a routerLink="./create" class="btn secondary-btn">
       Create Quiz
     </a>
-    <div class="flex flex-col gap-4">
-      @for (quiz of quizzes; track $index) {
-        <a [routerLink]=[quiz.quizId] class="btn quiz-btn">{{ quiz.name }}</a>
-      }
-    </div>
+    @if (quizzes.length > 0) {
+      <div class="flex flex-col gap-4">
+        @for (quiz of quizzes; track $index) {
+          <a [routerLink]=[quiz.quizId] class="btn quiz-btn">{{ quiz.name }}</a>
+        }
+      </div>
+    } @else {
+      <p class="text-2xl text-center gradient-purple bg-clip-text text-transparent font-black uppercase">There is no quizzes yet.</p>
+    }
+
   }
 </div>
 
