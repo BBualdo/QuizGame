@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BackButtonComponent } from '../../shared/back-button/back-button.component';
-import { RouterOutlet } from '@angular/router';
+import { NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'app-game-session',
@@ -8,4 +9,19 @@ import { RouterOutlet } from '@angular/router';
   imports: [BackButtonComponent, RouterOutlet],
   templateUrl: './game-session.component.html',
 })
-export class GameSessionLayout {}
+export class GameSessionLayout {
+  constructor(
+    private router: Router,
+    private gameService: GameService,
+  ) {}
+
+  ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        if (!event.url.startsWith('/play')) {
+          this.gameService.clearGame();
+        }
+      }
+    });
+  }
+}

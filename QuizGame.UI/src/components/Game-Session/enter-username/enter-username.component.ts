@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { GameService } from '../../../services/game.service';
-import { NavigationStart, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { GameReqDTO } from '../../../models/GameReqDTO';
 
 @Component({
@@ -29,13 +29,6 @@ export class EnterUsernameComponent {
     if (this.game) {
       this.loadUsername();
     }
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        if (!event.url.startsWith('/play')) {
-          this.gameService.clearGame();
-        }
-      }
-    });
   }
 
   proceed() {

@@ -5,10 +5,11 @@ import { QuizListComponent } from '../../Quiz-Management/quiz-list/quiz-list.com
 import { DataService } from '../../../services/data.service';
 import { QuizzesService } from '../../../services/quizzes.service';
 import { ErrorsService } from '../../../services/errors.service';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { ErrorComponent } from '../../shared/error/error.component';
-import { GameReqDTO } from '../../../models/GameReqDTO';
+import { Quiz } from '../../../models/Quiz';
+import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'app-select-quiz',
@@ -21,6 +22,7 @@ import { GameReqDTO } from '../../../models/GameReqDTO';
     LoadingSpinnerComponent,
     ErrorComponent,
     RouterLink,
+    NgClass,
   ],
   templateUrl: './select-quiz.component.html',
 })
@@ -28,16 +30,35 @@ export class SelectQuizComponent {
   quizzes$ = this.dataService.quizzes$;
   isLoading$ = this.quizzesService.isLoading$;
   isError$ = this.errorsService.isError$;
+  selectedQuizId: number | null = null;
 
   constructor(
     private dataService: DataService,
     private quizzesService: QuizzesService,
     private errorsService: ErrorsService,
     private router: Router,
+    private gameService: GameService,
   ) {}
 
-  selectQuiz(id: number) {
-    this.router.navigate(['play/difficulty'], { skipLocationChange: true });
+  ngOnInit() {
+    this.gameService.newGame$.subscribe(
+      (game) => (this.selectedQuizId = game.quizId),
+    );
+  }
+
+  setSelectedQuiz(quiz: Quiz) {
+    this.selectedQuizId = quiz.quizId;
+    this.gameService.updateQuiz(this.selectedQuizId);
+  }
+
+  back() {
+    this.router.navigate(['play']);
+  }
+
+  next() {
+    if (this.selectedQuizId) {
+      this.router.navigate(['play/difficulty'], { skipLocationChange: true });
+    }
   }
 
   retry() {

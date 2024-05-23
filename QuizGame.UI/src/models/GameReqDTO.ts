@@ -1,7 +1,7 @@
 export interface GameReqDTO {
-  username: string;
-  difficulty: 'Easy' | 'Medium' | 'Hard' | undefined;
-  date: string;
-  score: number;
-  quizId: number;
+  username: string | null;
+  difficulty: 'Easy' | 'Medium' | 'Hard' | null;
+  date: string | null;
+  score: number | null;
+  quizId: number | null;
 }

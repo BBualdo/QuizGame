@@ -8,13 +8,7 @@ import { GameReqDTO } from '../models/GameReqDTO';
 export class GameService {
   private readonly GAME_DATA_KEY = 'newGame';
 
-  newGame: GameReqDTO = {
-    username: '',
-    date: '',
-    difficulty: undefined,
-    score: 0,
-    quizId: 0,
-  };
+  newGame: GameReqDTO = this.loadFromLocalStorage() || this.createEmptyGame();
 
   private newGameSubject = new BehaviorSubject<GameReqDTO>(this.newGame);
   newGame$ = this.newGameSubject.asObservable();
@@ -50,14 +44,19 @@ export class GameService {
   }
 
   clearGame() {
-    this.newGameSubject.next({
-      username: '',
-      date: '',
-      difficulty: undefined,
-      score: 0,
-      quizId: 0,
-    });
+    this.newGame = this.createEmptyGame();
+    this.newGameSubject.next(this.newGame);
     localStorage.removeItem(this.GAME_DATA_KEY);
+  }
+
+  private createEmptyGame(): GameReqDTO {
+    return {
+      username: null,
+      date: null,
+      difficulty: null,
+      score: null,
+      quizId: null,
+    };
   }
 
   private saveToLocalStorage(game: GameReqDTO) {
