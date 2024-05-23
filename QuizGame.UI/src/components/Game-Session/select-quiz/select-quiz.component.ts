@@ -8,6 +8,7 @@ import { ErrorsService } from '../../../services/errors.service';
 import { AsyncPipe } from '@angular/common';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { ErrorComponent } from '../../shared/error/error.component';
+import { GameReqDTO } from '../../../models/GameReqDTO';
 
 @Component({
   selector: 'app-select-quiz',

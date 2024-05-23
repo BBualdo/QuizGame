@@ -6,6 +6,7 @@ public class GameRequest
 {
     public int GameId { get; set; }
     public string? Username { get; set; }
+    public string? Difficulty { get; set; }
     public DateTime Date { get; set; }
     public int Score { get; set; }
     public int QuizId { get; set; }
@@ -16,6 +17,7 @@ public class GameRequest
         {
             GameId = GameId,
             Username = Username,
+            Difficulty = Difficulty,
             Date = Date,
             Score = Score,
             QuizId = QuizId
