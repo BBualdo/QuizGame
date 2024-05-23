@@ -12,7 +12,7 @@ using QuizGame.Data;
 namespace QuizGame.Data.Migrations
 {
     [DbContext(typeof(QuizGameContext))]
-    [Migration("20240523093952_Initial")]
+    [Migration("20240523163838_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -735,6 +735,11 @@ namespace QuizGame.Data.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Difficulty")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("character varying(6)");
 
                     b.Property<int>("QuizId")
                         .HasColumnType("integer");

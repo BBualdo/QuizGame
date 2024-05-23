@@ -733,6 +733,11 @@ namespace QuizGame.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Difficulty")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("character varying(6)");
+
                     b.Property<int>("QuizId")
                         .HasColumnType("integer");
 
