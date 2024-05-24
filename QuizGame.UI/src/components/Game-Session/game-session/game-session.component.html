@@ -1,17 +1,35 @@
-<div class="flex flex-col gap-2">
-  <div class="gradient-purple-80 relative flex flex-col justify-center items-center text-white text-center text-xl font-bold text-balance min-h-[200px] w-full rounded-xl">
-    <p class="text-sm absolute top-2">Question 1/10</p>
-    <p>Question will be here</p>
-  </div>
-  <div>
-    <countdown-timer />
-  </div>
-  <div class="flex flex-col items-center gap-2">
-    @for (answer of [1, 2, 3, 4];track $index) {
-      <button class="btn tertiary-btn w-full text-base">Answer {{answer}}</button>
-    }
-  </div>
-  <div class="flex items-center justify-center">
-    <button class="btn secondary-btn">Next Question</button>
-  </div>
+<div class="flex w-full items-center justify-center">
+  @if (isLoading$ | async) {
+    <loading-spinner />
+  }
+
+  @if (isError$ | async) {
+    <app-error (retryEmitter)="retry()" />
+  }
 </div>
+
+@if (quiz$ | async; as quiz) {
+  <div class="flex flex-col gap-2">
+    <div
+      class="gradient-purple-80 relative flex min-h-[200px] w-full flex-col items-center justify-center text-balance rounded-xl text-center text-xl font-bold text-white"
+    >
+      <p class="absolute top-2 text-sm">
+        Question 1/{{ quiz.questions.length }}
+      </p>
+      <p>{{ quiz.questions[0].name }}</p>
+    </div>
+    <div>
+      <countdown-timer />
+    </div>
+    <div class="flex flex-col items-center gap-2">
+      @for (answer of quiz.questions[0].answers; track $index) {
+        <button class="btn tertiary-btn w-full text-base">
+          {{ answer.name }}
+        </button>
+      }
+    </div>
+    <div class="flex items-center justify-center">
+      <button class="btn secondary-btn">Next Question</button>
+    </div>
+  </div>
+}
