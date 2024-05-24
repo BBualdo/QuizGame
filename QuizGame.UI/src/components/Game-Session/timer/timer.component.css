@@ -1,0 +1,13 @@
+.animate-timer {
+  animation-name: timer;
+  animation-timing-function: linear;
+}
+
+@keyframes timer {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}

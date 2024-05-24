@@ -19,7 +19,7 @@
       <p>{{ quiz.questions[currentQuestion - 1].name }}</p>
     </div>
     <div>
-      <countdown-timer />
+      <countdown-timer [time]="time$ | async" />
     </div>
     <div class="flex flex-col items-center gap-2">
       @for (

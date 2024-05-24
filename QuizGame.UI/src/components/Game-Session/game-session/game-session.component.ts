@@ -4,7 +4,7 @@ import { QuizDetails } from '../../../models/QuizDetails';
 import { NewGameService } from '../../../services/new-game.service';
 import { QuizzesService } from '../../../services/quizzes.service';
 import { GameReqDTO } from '../../../models/GameReqDTO';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { ErrorsService } from '../../../services/errors.service';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
@@ -37,6 +37,9 @@ export class GameSessionComponent {
   correctAnswersCount = 0;
   selectedAnswer: Answer | null = null;
 
+  private timeSubject = new BehaviorSubject<number>(0);
+  time$ = this.timeSubject.asObservable();
+
   constructor(
     private newGameService: NewGameService,
     private quizzesService: QuizzesService,
@@ -46,7 +49,10 @@ export class GameSessionComponent {
   ) {}
 
   ngOnInit(): void {
-    this.newGameService.newGame$.subscribe((game) => (this.game = game));
+    this.newGameService.newGame$.subscribe((game) => {
+      this.game = game;
+      this.timeSubject.next(this.getTime());
+    });
     this.validateGameData();
     if (this.game) {
       this.quiz$ = this.quizzesService.getQuiz(this.game.quizId!).pipe(
@@ -108,6 +114,19 @@ export class GameSessionComponent {
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
+  }
+
+  private getTime(): number {
+    switch (this.game?.difficulty) {
+      case 'Easy':
+        return 30;
+      case 'Medium':
+        return 20;
+      case 'Hard':
+        return 10;
+      default:
+        return 0;
+    }
   }
 
   private validateGameData() {
