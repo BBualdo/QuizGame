@@ -79,6 +79,18 @@ export class GameSessionComponent {
     }
   }
 
+  showResults() {
+    this.gameService.setScore(
+      this.calculateScorePercentage(this.correctAnswersCount),
+    );
+    this.gameService.setDate();
+    this.router.navigate(['play/results']);
+  }
+
+  private calculateScorePercentage(score: number): number {
+    return Math.round((score / this.currentQuestion) * 100);
+  }
+
   private shuffleQuestionsAndAnswers(questionsArr: Question[]): Question[] {
     const questions = this.shuffle(questionsArr);
     questions.forEach((question) => {

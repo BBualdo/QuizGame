@@ -48,7 +48,7 @@
         </button>
       }
       @if (selectedAnswer && currentQuestion === quiz.questions.length) {
-        <button class="btn primary-btn">
+        <button (click)="showResults()" class="btn primary-btn">
           Results
         </button>
       }
