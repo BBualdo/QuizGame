@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
 import { QuizDetails } from '../../../models/QuizDetails';
-import { GameService } from '../../../services/game.service';
+import { NewGameService } from '../../../services/new-game.service';
 import { QuizzesService } from '../../../services/quizzes.service';
 import { GameReqDTO } from '../../../models/GameReqDTO';
 import { map, Observable } from 'rxjs';
@@ -12,6 +12,7 @@ import { ErrorComponent } from '../../shared/error/error.component';
 import { Router } from '@angular/router';
 import { Question } from '../../../models/Question';
 import { Answer } from '../../../models/Answer';
+import { GamesService } from '../../../services/games.service';
 
 @Component({
   selector: 'app-game-session',
@@ -37,14 +38,15 @@ export class GameSessionComponent {
   selectedAnswer: Answer | null = null;
 
   constructor(
-    private gameService: GameService,
+    private newGameService: NewGameService,
     private quizzesService: QuizzesService,
     private errorsService: ErrorsService,
     private router: Router,
+    private gamesService: GamesService,
   ) {}
 
   ngOnInit(): void {
-    this.gameService.newGame$.subscribe((game) => (this.game = game));
+    this.newGameService.newGame$.subscribe((game) => (this.game = game));
     this.validateGameData();
     if (this.game) {
       this.quiz$ = this.quizzesService.getQuiz(this.game.quizId!).pipe(
@@ -80,10 +82,11 @@ export class GameSessionComponent {
   }
 
   showResults() {
-    this.gameService.setScore(
+    this.newGameService.setScore(
       this.calculateScorePercentage(this.correctAnswersCount),
     );
-    this.gameService.setDate();
+    this.newGameService.setDate();
+    this.gamesService.addGame(this.game!).subscribe();
     this.router.navigate(['play/results']);
   }
 

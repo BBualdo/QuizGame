@@ -24,7 +24,9 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="991b5595-7456-4d28-bf7c-5ace52491379" object-ref="schemas/public/tables/Games" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="991b5595-7456-4d28-bf7c-5ace52491379" />
@@ -33,7 +35,7 @@
     <filter-actions connection-id="991b5595-7456-4d28-bf7c-5ace52491379" dataset="public.Questions" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="991b5595-7456-4d28-bf7c-5ace52491379" dataset="public.Answers" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="991b5595-7456-4d28-bf7c-5ace52491379" dataset="public.Quizzes" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="991b5595-7456-4d28-bf7c-5ace52491379" dataset="public.Games" active-filter-id="">
+    <filter-actions connection-id="991b5595-7456-4d28-bf7c-5ace52491379" dataset="public.Games" active-filter-id="EMPTY_FILTER">
       <filter id="67487a92-2e51-49d8-b96d-0207ecfc1f09" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="GameId" operator="=" value="" active="true" />
       </filter>

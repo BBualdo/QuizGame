@@ -55,7 +55,7 @@ export class QuizzesService {
     );
   }
 
-  handleError(error: HttpErrorResponse): any {
+  private handleError(error: HttpErrorResponse): any {
     if (error.status === 0) {
       this.errorsService.add("Couldn't connect to Quizzes API.");
     }

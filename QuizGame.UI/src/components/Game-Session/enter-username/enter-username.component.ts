@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { GameService } from '../../../services/game.service';
+import { NewGameService } from '../../../services/new-game.service';
 import { Router } from '@angular/router';
 import { GameReqDTO } from '../../../models/GameReqDTO';
 
@@ -20,12 +20,12 @@ export class EnterUsernameComponent {
   ]);
 
   constructor(
-    private gameService: GameService,
+    private newGameService: NewGameService,
     private router: Router,
   ) {}
 
   ngOnInit() {
-    this.gameService.newGame$.subscribe((game) => (this.game = game));
+    this.newGameService.newGame$.subscribe((game) => (this.game = game));
     if (this.game) {
       this.loadUsername();
     }
@@ -34,7 +34,7 @@ export class EnterUsernameComponent {
   proceed() {
     this.username.markAsTouched();
     if (this.username.valid) {
-      this.gameService.updateUsername(this.username.value!);
+      this.newGameService.updateUsername(this.username.value!);
       this.router.navigate(['play/quiz'], { skipLocationChange: true });
     }
   }

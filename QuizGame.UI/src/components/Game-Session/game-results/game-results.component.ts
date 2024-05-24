@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GameService } from '../../../services/game.service';
+import { NewGameService } from '../../../services/new-game.service';
 import { GameReqDTO } from '../../../models/GameReqDTO';
 import { Router } from '@angular/router';
 
@@ -14,18 +14,18 @@ export class GameResultsComponent {
   summaryText = '';
 
   constructor(
-    private gameService: GameService,
+    private newGameService: NewGameService,
     private router: Router,
   ) {}
 
   ngOnInit() {
-    this.gameService.newGame$.subscribe((game) => (this.game = game));
+    this.newGameService.newGame$.subscribe((game) => (this.game = game));
     this.validateResults();
     this.generateSummaryText();
   }
 
   playAgain() {
-    this.gameService.clearGame();
+    this.newGameService.clearGame();
     this.router.navigate(['play']);
   }
 

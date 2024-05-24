@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BackButtonComponent } from '../../shared/back-button/back-button.component';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
-import { GameService } from '../../../services/game.service';
+import { NewGameService } from '../../../services/new-game.service';
 
 @Component({
   selector: 'app-create-game-layout',
@@ -12,14 +12,14 @@ import { GameService } from '../../../services/game.service';
 export class CreateGameLayout {
   constructor(
     private router: Router,
-    private gameService: GameService,
+    private newGameService: NewGameService,
   ) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         if (!event.url.startsWith('/play')) {
-          this.gameService.clearGame();
+          this.newGameService.clearGame();
         }
       }
     });

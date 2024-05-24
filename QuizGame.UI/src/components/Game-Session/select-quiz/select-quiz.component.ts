@@ -9,7 +9,7 @@ import { AsyncPipe, NgClass } from '@angular/common';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { ErrorComponent } from '../../shared/error/error.component';
 import { Quiz } from '../../../models/Quiz';
-import { GameService } from '../../../services/game.service';
+import { NewGameService } from '../../../services/new-game.service';
 
 @Component({
   selector: 'app-select-quiz',
@@ -37,18 +37,18 @@ export class SelectQuizComponent {
     private quizzesService: QuizzesService,
     private errorsService: ErrorsService,
     private router: Router,
-    private gameService: GameService,
+    private newGameService: NewGameService,
   ) {}
 
   ngOnInit() {
-    this.gameService.newGame$.subscribe(
+    this.newGameService.newGame$.subscribe(
       (game) => (this.selectedQuizId = game.quizId),
     );
   }
 
   setSelectedQuiz(quiz: Quiz) {
     this.selectedQuizId = quiz.quizId;
-    this.gameService.updateQuiz(this.selectedQuizId);
+    this.newGameService.updateQuiz(this.selectedQuizId);
   }
 
   back() {

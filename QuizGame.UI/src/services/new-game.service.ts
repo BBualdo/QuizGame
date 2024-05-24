@@ -5,7 +5,7 @@ import { GameReqDTO } from '../models/GameReqDTO';
 @Injectable({
   providedIn: 'root',
 })
-export class GameService {
+export class NewGameService {
   private readonly GAME_DATA_KEY = 'newGame';
 
   newGame: GameReqDTO = this.loadFromLocalStorage() || this.createEmptyGame();

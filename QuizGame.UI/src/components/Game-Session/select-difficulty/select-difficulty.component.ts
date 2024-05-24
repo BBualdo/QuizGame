@@ -4,7 +4,7 @@ import { ErrorComponent } from '../../shared/error/error.component';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { GameService } from '../../../services/game.service';
+import { NewGameService } from '../../../services/new-game.service';
 
 @Component({
   selector: 'app-select-difficulty',
@@ -24,18 +24,18 @@ export class SelectDifficultyComponent {
 
   constructor(
     private router: Router,
-    private gameService: GameService,
+    private newGameService: NewGameService,
   ) {}
 
   ngOnInit() {
-    this.gameService.newGame$.subscribe(
+    this.newGameService.newGame$.subscribe(
       (game) => (this.selectedDifficulty = game.difficulty),
     );
   }
 
   selectDifficulty(difficulty: 'Easy' | 'Medium' | 'Hard') {
     this.selectedDifficulty = difficulty;
-    this.gameService.updateDifficulty(difficulty);
+    this.newGameService.updateDifficulty(difficulty);
   }
 
   back() {
