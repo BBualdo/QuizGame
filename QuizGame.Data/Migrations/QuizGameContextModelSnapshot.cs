@@ -276,446 +276,474 @@ namespace QuizGame.Data.Migrations
                         {
                             AnswerId = 33,
                             IsCorrect = true,
+                            Name = "Diamond",
+                            QuestionId = 9
+                        },
+                        new
+                        {
+                            AnswerId = 34,
+                            IsCorrect = false,
+                            Name = "Gold",
+                            QuestionId = 9
+                        },
+                        new
+                        {
+                            AnswerId = 35,
+                            IsCorrect = false,
+                            Name = "Iron",
+                            QuestionId = 9
+                        },
+                        new
+                        {
+                            AnswerId = 36,
+                            IsCorrect = false,
+                            Name = "Quartz",
+                            QuestionId = 9
+                        },
+                        new
+                        {
+                            AnswerId = 37,
+                            IsCorrect = true,
                             Name = "299,792,458 m/s",
                             QuestionId = 10
                         },
                         new
                         {
-                            AnswerId = 34,
+                            AnswerId = 38,
                             IsCorrect = false,
                             Name = "150,000,000 m/s",
                             QuestionId = 10
                         },
                         new
                         {
-                            AnswerId = 35,
+                            AnswerId = 39,
                             IsCorrect = false,
                             Name = "1,080,000,000 km/h",
                             QuestionId = 10
                         },
                         new
                         {
-                            AnswerId = 36,
+                            AnswerId = 40,
                             IsCorrect = false,
                             Name = "100,000 km/s",
                             QuestionId = 10
                         },
                         new
                         {
-                            AnswerId = 37,
+                            AnswerId = 41,
                             IsCorrect = true,
                             Name = "George Washington",
                             QuestionId = 11
                         },
                         new
                         {
-                            AnswerId = 38,
+                            AnswerId = 42,
                             IsCorrect = false,
                             Name = "Thomas Jefferson",
                             QuestionId = 11
                         },
                         new
                         {
-                            AnswerId = 39,
+                            AnswerId = 43,
                             IsCorrect = false,
                             Name = "Abraham Lincoln",
                             QuestionId = 11
                         },
                         new
                         {
-                            AnswerId = 40,
+                            AnswerId = 44,
                             IsCorrect = false,
                             Name = "John Adams",
                             QuestionId = 11
                         },
                         new
                         {
-                            AnswerId = 41,
+                            AnswerId = 45,
                             IsCorrect = true,
                             Name = "1912",
                             QuestionId = 12
                         },
                         new
                         {
-                            AnswerId = 42,
+                            AnswerId = 46,
                             IsCorrect = false,
                             Name = "1905",
                             QuestionId = 12
                         },
                         new
                         {
-                            AnswerId = 43,
+                            AnswerId = 47,
                             IsCorrect = false,
                             Name = "1898",
                             QuestionId = 12
                         },
                         new
                         {
-                            AnswerId = 44,
+                            AnswerId = 48,
                             IsCorrect = false,
                             Name = "1920",
                             QuestionId = 12
                         },
                         new
                         {
-                            AnswerId = 45,
+                            AnswerId = 49,
                             IsCorrect = true,
                             Name = "Christopher Columbus",
                             QuestionId = 13
                         },
                         new
                         {
-                            AnswerId = 46,
+                            AnswerId = 50,
                             IsCorrect = false,
                             Name = "Ferdinand Magellan",
                             QuestionId = 13
                         },
                         new
                         {
-                            AnswerId = 47,
+                            AnswerId = 51,
                             IsCorrect = false,
                             Name = "Marco Polo",
                             QuestionId = 13
                         },
                         new
                         {
-                            AnswerId = 48,
+                            AnswerId = 52,
                             IsCorrect = false,
                             Name = "James Cook",
                             QuestionId = 13
                         },
                         new
                         {
-                            AnswerId = 49,
+                            AnswerId = 53,
                             IsCorrect = true,
                             Name = "Neil Armstrong",
                             QuestionId = 14
                         },
                         new
                         {
-                            AnswerId = 50,
+                            AnswerId = 54,
                             IsCorrect = false,
                             Name = "Buzz Aldrin",
                             QuestionId = 14
                         },
                         new
                         {
-                            AnswerId = 51,
+                            AnswerId = 55,
                             IsCorrect = false,
                             Name = "Yuri Gagarin",
                             QuestionId = 14
                         },
                         new
                         {
-                            AnswerId = 52,
+                            AnswerId = 56,
                             IsCorrect = false,
                             Name = "Michael Collins",
                             QuestionId = 14
                         },
                         new
                         {
-                            AnswerId = 53,
+                            AnswerId = 57,
                             IsCorrect = true,
                             Name = "American Civil War",
                             QuestionId = 15
                         },
                         new
                         {
-                            AnswerId = 54,
+                            AnswerId = 58,
                             IsCorrect = false,
                             Name = "World War I",
                             QuestionId = 15
                         },
                         new
                         {
-                            AnswerId = 55,
+                            AnswerId = 59,
                             IsCorrect = false,
                             Name = "World War II",
                             QuestionId = 15
                         },
                         new
                         {
-                            AnswerId = 56,
+                            AnswerId = 60,
                             IsCorrect = false,
                             Name = "Spanish-American War",
                             QuestionId = 15
                         },
                         new
                         {
-                            AnswerId = 57,
+                            AnswerId = 61,
                             IsCorrect = true,
                             Name = "Nile River",
                             QuestionId = 16
                         },
                         new
                         {
-                            AnswerId = 58,
+                            AnswerId = 62,
                             IsCorrect = false,
                             Name = "Amazon River",
                             QuestionId = 16
                         },
                         new
                         {
-                            AnswerId = 59,
+                            AnswerId = 63,
                             IsCorrect = false,
                             Name = "Yangtze River",
                             QuestionId = 16
                         },
                         new
                         {
-                            AnswerId = 60,
+                            AnswerId = 64,
                             IsCorrect = false,
                             Name = "Mississippi River",
                             QuestionId = 16
                         },
                         new
                         {
-                            AnswerId = 61,
+                            AnswerId = 65,
                             IsCorrect = true,
                             Name = "Asia",
                             QuestionId = 17
                         },
                         new
                         {
-                            AnswerId = 62,
+                            AnswerId = 66,
                             IsCorrect = false,
                             Name = "Africa",
                             QuestionId = 17
                         },
                         new
                         {
-                            AnswerId = 63,
+                            AnswerId = 67,
                             IsCorrect = false,
                             Name = "North America",
                             QuestionId = 17
                         },
                         new
                         {
-                            AnswerId = 64,
+                            AnswerId = 68,
                             IsCorrect = false,
                             Name = "Europe",
                             QuestionId = 17
                         },
                         new
                         {
-                            AnswerId = 65,
+                            AnswerId = 69,
                             IsCorrect = true,
                             Name = "China",
                             QuestionId = 18
                         },
                         new
                         {
-                            AnswerId = 66,
+                            AnswerId = 70,
                             IsCorrect = false,
                             Name = "India",
                             QuestionId = 18
                         },
                         new
                         {
-                            AnswerId = 67,
+                            AnswerId = 71,
                             IsCorrect = false,
                             Name = "USA",
                             QuestionId = 18
                         },
                         new
                         {
-                            AnswerId = 68,
+                            AnswerId = 72,
                             IsCorrect = false,
                             Name = "Indonesia",
                             QuestionId = 18
                         },
                         new
                         {
-                            AnswerId = 69,
+                            AnswerId = 73,
                             IsCorrect = true,
                             Name = "Australia",
                             QuestionId = 19
                         },
                         new
                         {
-                            AnswerId = 70,
+                            AnswerId = 74,
                             IsCorrect = false,
                             Name = "Europe",
                             QuestionId = 19
                         },
                         new
                         {
-                            AnswerId = 71,
+                            AnswerId = 75,
                             IsCorrect = false,
                             Name = "South America",
                             QuestionId = 19
                         },
                         new
                         {
-                            AnswerId = 72,
+                            AnswerId = 76,
                             IsCorrect = false,
                             Name = "Antarctica",
                             QuestionId = 19
                         },
                         new
                         {
-                            AnswerId = 73,
+                            AnswerId = 77,
                             IsCorrect = true,
                             Name = "Sweden",
                             QuestionId = 20
                         },
                         new
                         {
-                            AnswerId = 74,
+                            AnswerId = 78,
                             IsCorrect = false,
                             Name = "Finland",
                             QuestionId = 20
                         },
                         new
                         {
-                            AnswerId = 75,
+                            AnswerId = 79,
                             IsCorrect = false,
                             Name = "Norway",
                             QuestionId = 20
                         },
                         new
                         {
-                            AnswerId = 76,
+                            AnswerId = 80,
                             IsCorrect = false,
                             Name = "Canada",
                             QuestionId = 20
                         },
                         new
                         {
-                            AnswerId = 77,
+                            AnswerId = 81,
                             IsCorrect = true,
                             Name = "3.14",
                             QuestionId = 21
                         },
                         new
                         {
-                            AnswerId = 78,
+                            AnswerId = 82,
                             IsCorrect = false,
                             Name = "2.71",
                             QuestionId = 21
                         },
                         new
                         {
-                            AnswerId = 79,
+                            AnswerId = 83,
                             IsCorrect = false,
                             Name = "1.62",
                             QuestionId = 21
                         },
                         new
                         {
-                            AnswerId = 80,
+                            AnswerId = 84,
                             IsCorrect = false,
                             Name = "0",
                             QuestionId = 21
                         },
                         new
                         {
-                            AnswerId = 81,
+                            AnswerId = 85,
                             IsCorrect = true,
                             Name = "4",
                             QuestionId = 22
                         },
                         new
                         {
-                            AnswerId = 82,
+                            AnswerId = 86,
                             IsCorrect = false,
                             Name = "3",
                             QuestionId = 22
                         },
                         new
                         {
-                            AnswerId = 83,
+                            AnswerId = 87,
                             IsCorrect = false,
                             Name = "5",
                             QuestionId = 22
                         },
                         new
                         {
-                            AnswerId = 84,
+                            AnswerId = 88,
                             IsCorrect = false,
                             Name = "6",
                             QuestionId = 22
                         },
                         new
                         {
-                            AnswerId = 85,
+                            AnswerId = 89,
                             IsCorrect = true,
                             Name = "4",
                             QuestionId = 23
                         },
                         new
                         {
-                            AnswerId = 86,
+                            AnswerId = 90,
                             IsCorrect = false,
                             Name = "5",
                             QuestionId = 23
                         },
                         new
                         {
-                            AnswerId = 87,
+                            AnswerId = 91,
                             IsCorrect = false,
                             Name = "6",
                             QuestionId = 23
                         },
                         new
                         {
-                            AnswerId = 88,
+                            AnswerId = 92,
                             IsCorrect = false,
                             Name = "7",
                             QuestionId = 23
                         },
                         new
                         {
-                            AnswerId = 89,
+                            AnswerId = 93,
                             IsCorrect = true,
                             Name = "9.8 m/s^2",
                             QuestionId = 24
                         },
                         new
                         {
-                            AnswerId = 90,
+                            AnswerId = 94,
                             IsCorrect = false,
                             Name = "3.14 m/s^2",
                             QuestionId = 24
                         },
                         new
                         {
-                            AnswerId = 91,
+                            AnswerId = 95,
                             IsCorrect = false,
                             Name = "2.71 m/s^2",
                             QuestionId = 24
                         },
                         new
                         {
-                            AnswerId = 92,
+                            AnswerId = 96,
                             IsCorrect = false,
                             Name = "1.62 m/s^2",
                             QuestionId = 24
                         },
                         new
                         {
-                            AnswerId = 93,
+                            AnswerId = 97,
                             IsCorrect = true,
                             Name = "2x",
                             QuestionId = 25
                         },
                         new
                         {
-                            AnswerId = 94,
+                            AnswerId = 98,
                             IsCorrect = false,
                             Name = "x^2",
                             QuestionId = 25
                         },
                         new
                         {
-                            AnswerId = 95,
+                            AnswerId = 99,
                             IsCorrect = false,
                             Name = "1/x",
                             QuestionId = 25
                         },
                         new
                         {
-                            AnswerId = 96,
+                            AnswerId = 100,
                             IsCorrect = false,
                             Name = "x",
                             QuestionId = 25
@@ -830,7 +858,7 @@ namespace QuizGame.Data.Migrations
                         new
                         {
                             QuestionId = 9,
-                            Name = "What planet is known as the Red Planet?",
+                            Name = "What is the hardest natural substance on Earth?",
                             QuizId = 2
                         },
                         new
