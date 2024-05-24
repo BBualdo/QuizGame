@@ -29,25 +29,29 @@
         <button
           (click)="checkAnswer(answer)"
           class="btn tertiary-btn w-full text-base"
-          [ngClass]="
-          {
-            'gradient-green text-white':
-              answersChecked && answer.isCorrect
-          ,
-
+          [ngClass]="{
+            'gradient-green text-white': answersChecked && answer.isCorrect,
             'gradient-red text-white':
-              answersChecked && selectedAnswer === answer && !selectedAnswer.isCorrect
+              answersChecked &&
+              selectedAnswer === answer &&
+              !selectedAnswer.isCorrect
           }"
         >
           {{ answer.name }}
         </button>
       }
     </div>
-    <div class="flex items-center justify-center">
-      <button (click)="TEMPORARY_PREV()">Previous</button>
-      <button (click)="next(quiz.questions.length)" class="btn secondary-btn">
-        Next Question
-      </button>
+    <div class="flex items-center justify-center mt-2">
+      @if (selectedAnswer && currentQuestion < quiz.questions.length) {
+        <button (click)="next(quiz.questions.length)" class="btn secondary-btn">
+          Next Question
+        </button>
+      }
+      @if (selectedAnswer && currentQuestion === quiz.questions.length) {
+        <button class="btn primary-btn">
+          Results
+        </button>
+      }
     </div>
   </div>
 }

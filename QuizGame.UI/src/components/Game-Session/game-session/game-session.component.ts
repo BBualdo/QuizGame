@@ -33,7 +33,7 @@ export class GameSessionComponent {
 
   currentQuestion = 1;
   answersChecked = false;
-  correctAnswerCount = 0;
+  correctAnswersCount = 0;
   selectedAnswer: Answer | null = null;
 
   constructor(
@@ -63,16 +63,20 @@ export class GameSessionComponent {
   }
 
   checkAnswer(answer: Answer) {
+    if (this.selectedAnswer !== null) return;
     this.selectedAnswer = answer;
     this.answersChecked = true;
-  }
-
-  TEMPORARY_PREV() {
-    if (this.currentQuestion > 1) this.currentQuestion--;
+    if (this.selectedAnswer.isCorrect) {
+      this.correctAnswersCount++;
+    }
   }
 
   next(quizLength: number) {
-    if (this.currentQuestion < quizLength) this.currentQuestion++;
+    if (this.currentQuestion < quizLength) {
+      this.currentQuestion++;
+      this.answersChecked = false;
+      this.selectedAnswer = null;
+    }
   }
 
   private shuffleQuestionsAndAnswers(questionsArr: Question[]): Question[] {
