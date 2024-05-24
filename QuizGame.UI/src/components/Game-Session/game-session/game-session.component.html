@@ -14,22 +14,40 @@
       class="gradient-purple-80 relative flex min-h-[200px] w-full flex-col items-center justify-center text-balance rounded-xl text-center text-xl font-bold text-white"
     >
       <p class="absolute top-2 text-sm">
-        Question 1/{{ quiz.questions.length }}
+        Question {{ currentQuestion }}/{{ quiz.questions.length }}
       </p>
-      <p>{{ quiz.questions[0].name }}</p>
+      <p>{{ quiz.questions[currentQuestion - 1].name }}</p>
     </div>
     <div>
       <countdown-timer />
     </div>
     <div class="flex flex-col items-center gap-2">
-      @for (answer of quiz.questions[0].answers; track $index) {
-        <button class="btn tertiary-btn w-full text-base">
+      @for (
+        answer of quiz.questions[currentQuestion - 1].answers;
+        track $index
+      ) {
+        <button
+          (click)="checkAnswer(answer)"
+          class="btn tertiary-btn w-full text-base"
+          [ngClass]="
+          {
+            'gradient-green text-white':
+              answersChecked && answer.isCorrect
+          ,
+
+            'gradient-red text-white':
+              answersChecked && selectedAnswer === answer && !selectedAnswer.isCorrect
+          }"
+        >
           {{ answer.name }}
         </button>
       }
     </div>
     <div class="flex items-center justify-center">
-      <button class="btn secondary-btn">Next Question</button>
+      <button (click)="TEMPORARY_PREV()">Previous</button>
+      <button (click)="next(quiz.questions.length)" class="btn secondary-btn">
+        Next Question
+      </button>
     </div>
   </div>
 }

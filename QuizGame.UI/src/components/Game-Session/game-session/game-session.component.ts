@@ -6,16 +6,23 @@ import { QuizzesService } from '../../../services/quizzes.service';
 import { GameReqDTO } from '../../../models/GameReqDTO';
 import { map, Observable } from 'rxjs';
 import { ErrorsService } from '../../../services/errors.service';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { ErrorComponent } from '../../shared/error/error.component';
 import { Router } from '@angular/router';
 import { Question } from '../../../models/Question';
+import { Answer } from '../../../models/Answer';
 
 @Component({
   selector: 'app-game-session',
   standalone: true,
-  imports: [TimerComponent, AsyncPipe, LoadingSpinnerComponent, ErrorComponent],
+  imports: [
+    TimerComponent,
+    AsyncPipe,
+    LoadingSpinnerComponent,
+    ErrorComponent,
+    NgClass,
+  ],
   templateUrl: './game-session.component.html',
 })
 export class GameSessionComponent {
@@ -23,6 +30,11 @@ export class GameSessionComponent {
   quiz$: Observable<QuizDetails> | null = null;
   isLoading$: Observable<boolean> = this.quizzesService.isLoading$;
   isError$: Observable<boolean> = this.errorsService.isError$;
+
+  currentQuestion = 1;
+  answersChecked = false;
+  correctAnswerCount = 0;
+  selectedAnswer: Answer | null = null;
 
   constructor(
     private gameService: GameService,
@@ -48,6 +60,19 @@ export class GameSessionComponent {
     if (this.game) {
       this.quizzesService.getQuiz(this.game.quizId!).subscribe();
     }
+  }
+
+  checkAnswer(answer: Answer) {
+    this.selectedAnswer = answer;
+    this.answersChecked = true;
+  }
+
+  TEMPORARY_PREV() {
+    if (this.currentQuestion > 1) this.currentQuestion--;
+  }
+
+  next(quizLength: number) {
+    if (this.currentQuestion < quizLength) this.currentQuestion++;
   }
 
   private shuffleQuestionsAndAnswers(questionsArr: Question[]): Question[] {
