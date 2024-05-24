@@ -3,22 +3,22 @@
   <div class="flex flex-col items-center gap-4">
     <button
       (click)="selectDifficulty('Easy')"
-      class="btn gradient-green text-white grayscale opacity-50"
-      [ngClass]="{'grayscale-0 opacity-100': selectedDifficulty === 'Easy'}"
+      class="btn gradient-green text-white"
+      [ngClass]="{'grayscale opacity-50': selectedDifficulty !== 'Easy'}"
     >
       Easy
     </button>
     <button
       (click)="selectDifficulty('Medium')"
-      class="btn gradient-amber text-white grayscale"
-      [ngClass]="{'grayscale-0': selectedDifficulty === 'Medium'}"
+      class="btn gradient-amber text-white"
+      [ngClass]="{'grayscale': selectedDifficulty !== 'Medium'}"
     >
       Medium
     </button>
     <button
       (click)="selectDifficulty('Hard')"
-      class="btn gradient-red text-white grayscale opacity-50"
-      [ngClass]="{'grayscale-0 opacity-100': selectedDifficulty === 'Hard'}"
+      class="btn gradient-red text-white"
+      [ngClass]="{'grayscale opacity-40': selectedDifficulty !== 'Hard'}"
     >
       Hard
     </button>

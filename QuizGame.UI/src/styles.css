@@ -79,6 +79,10 @@
     @apply bg-gradient-to-br from-blue-600 to-violet-600 to-70%;
   }
 
+  .gradient-purple-80 {
+    @apply bg-gradient-to-br from-blue-600/80 to-violet-600/80 to-70%;
+  }
+
   .gradient-purple-reversed {
     @apply bg-gradient-to-tl from-blue-600 to-violet-600 to-70%;
   }

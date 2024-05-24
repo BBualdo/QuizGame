@@ -43,6 +43,6 @@ export class SelectDifficultyComponent {
   }
 
   play() {
-    console.log(this.gameService.newGame);
+    this.router.navigate(['play/session']);
   }
 }
