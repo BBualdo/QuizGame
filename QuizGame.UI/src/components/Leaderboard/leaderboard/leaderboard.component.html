@@ -1,79 +1,118 @@
-<div class="flex h-full w-full flex-col items-start">
-  <back-button class="white p-2" previousPageName="Main Menu" />
-  <div class="container">
-    <h1 class="text-center text-2xl font-bold">Leaderboard</h1>
+<div class="flex min-h-screen w-full flex-col items-center">
+  <div class="h-15 flex w-full items-start">
+    <back-button class="white p-2" previousPageName="Main Menu" />
+  </div>
+  <div class="flex flex-1 items-center justify-center xs:max-md:w-full">
+    <div class="container">
+      <h1 class="text-center md:text-4xl text-2xl font-bold">Leaderboard</h1>
 
-    <div class="mt-10 flex flex-col gap-10">
-      @if (isLoading$ | async) {
-        <div class="flex w-full justify-center">
-          <loading-spinner />
-        </div>
-      }
-      @if (isError$ | async) {
-        <div class="flex w-full justify-center">
-          <app-error (retryEmitter)="retry()" />
-        </div>
-      }
-
-      @if (games$ | async; as games) {
-        @if (games.games.length > 0) {
-          <div class="overflow-x-auto">
-            <table class="w-max border-2 border-black">
-              <tbody>
-                <tr class="font-bold">
-                  <td class="border-2 border-black p-2 gradient-purple text-white">Username</td>
-                  <td class="border-2 border-black p-2 gradient-purple text-white">Quiz</td>
-                  <td class="border-2 border-black p-2 gradient-purple text-white">Difficulty</td>
-                  <td class="border-2 border-black p-2 gradient-purple text-white">Score</td>
-                  <td class="border-2 border-black p-2 gradient-purple text-white">Date</td>
-                  <td class="p-2"></td>
-                </tr>
-
-                @for (game of games.games; track $index) {
-                  <tr class="text-lg font-semibold">
-                    <td class="border border-black p-4 uppercase">{{ game.username }}</td>
-                    <td class="border border-black p-4">{{ game.quizName }}</td>
-                    <td class="border border-black p-4">{{ game.difficulty }}</td>
-                    <td class="border border-black p-4">{{ game.score }}%</td>
-                    <td class="border border-black p-4">
-                      {{ formatDate(game.date, "dd-MM-yyyy", "en-US") }}
-                    </td>
-                    <td class="border-y border-black">
-                      <button (click)="openDeleteDialog(game)" class="btn warning-btn border-none rounded-full flex items-center justify-center">
-                        <mat-icon fontIcon="delete" />
-                      </button>
-                    </td>
-                  </tr>
-                }
-              </tbody>
-            </table>
+      <div class="mt-10 flex flex-col gap-10">
+        @if (isLoading$ | async) {
+          <div class="flex w-full justify-center">
+            <loading-spinner />
           </div>
-          <div class="flex items-center justify-between">
-            <div>
-              <button (click)="openDeleteAllDialog()" class="btn warning-btn text-base px-2">Clear History</button>
-            </div>
-            <div class="flex items-center gap-2">
-              <button (click)="previousPage()" class="paginator-btn" >
-                <mat-icon fontIcon="arrow_left" />
-              </button>
-              <p class="text-lg font-bold">
-                {{currentPage}}/{{games.total}}
-              </p>
-
-              <button (click)="nextPage(games.total)" class="paginator-btn">
-                <mat-icon fontIcon="arrow_right" />
-              </button>
-            </div>
-          </div>
-
-        } @else {
-          <p
-            class="gradient-purple bg-clip-text text-center text-2xl font-black uppercase text-transparent"
-          >
-            There is no games yet.
-          </p>
         }
-      }
+        @if (isError$ | async) {
+          <div class="flex w-full justify-center">
+            <app-error (retryEmitter)="retry()" />
+          </div>
+        }
+
+        @if (games$ | async; as games) {
+          @if (games.games.length > 0) {
+            <div
+              class="md:items-center: overflow-x-auto md:flex md:justify-center"
+            >
+              <table class="w-max border-2 border-black">
+                <tbody>
+                  <tr class="font-bold md:text-xl">
+                    <td
+                      class="gradient-purple border-2 border-black md:p-4 p-2 text-white"
+                    >
+                      Username
+                    </td>
+                    <td
+                      class="gradient-purple border-2 border-black md:p-4 p-2 text-white"
+                    >
+                      Quiz
+                    </td>
+                    <td
+                      class="gradient-purple border-2 border-black md:p-4 p-2 text-white"
+                    >
+                      Difficulty
+                    </td>
+                    <td
+                      class="gradient-purple border-2 border-black md:p-4 p-2 text-white"
+                    >
+                      Score
+                    </td>
+                    <td
+                      class="gradient-purple border-2 border-black md:p-4 p-2 text-white"
+                    >
+                      Date
+                    </td>
+                    <td class="p-2 md:p-4"></td>
+                  </tr>
+
+                  @for (game of games.games; track $index) {
+                    <tr class="text-lg md:text-2xl font-semibold">
+                      <td class="border border-black p-4 uppercase">
+                        {{ game.username }}
+                      </td>
+                      <td class="border border-black p-4">
+                        {{ game.quizName }}
+                      </td>
+                      <td class="border border-black p-4">
+                        {{ game.difficulty }}
+                      </td>
+                      <td class="border border-black p-4">{{ game.score }}%</td>
+                      <td class="border border-black p-4">
+                        {{ formatDate(game.date, "dd-MM-yyyy", "en-US") }}
+                      </td>
+                      <td class="border-y border-black">
+                        <button
+                          (click)="openDeleteDialog(game)"
+                          class="btn warning-btn flex items-center justify-center rounded-full border-none"
+                        >
+                          <mat-icon fontIcon="delete" />
+                        </button>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+                <button
+                  (click)="openDeleteAllDialog()"
+                  class="btn warning-btn px-2 md:text-xl md:px-8 text-base"
+                >
+                  Clear History
+                </button>
+              </div>
+              <div class="flex items-center md:gap-6 gap-2">
+                <button (click)="previousPage()" class="paginator-btn">
+                  <mat-icon fontIcon="arrow_left" class="md:scale-150" />
+                </button>
+                <p class="text-lg md:text-2xl font-bold">
+                  {{ currentPage }}/{{ games.total }}
+                </p>
+
+                <button (click)="nextPage(games.total)" class="paginator-btn">
+                  <mat-icon fontIcon="arrow_right" class="md:scale-150" />
+                </button>
+              </div>
+            </div>
+          } @else {
+            <p
+              class="gradient-purple bg-clip-text text-center md:text-4xl text-2xl font-black uppercase text-transparent"
+            >
+              There is no games yet.
+            </p>
+          }
+        }
+      </div>
     </div>
   </div>
 </div>

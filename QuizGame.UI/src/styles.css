@@ -6,19 +6,17 @@
   font-family: "Raleway", sans-serif;
 }
 
-
-
 @layer base {
   body {
     @apply gradient-purple min-h-screen;
   }
 
   ::-webkit-scrollbar {
-    @apply h-2 w-2
+    @apply h-2 w-2;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-purple-300
+    @apply bg-purple-300;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -28,7 +26,7 @@
 
 @layer components {
   .btn {
-    @apply cursor-pointer rounded-full px-10 py-2 text-xl font-bold uppercase;
+    @apply cursor-pointer rounded-full px-10 py-2 text-xl font-bold uppercase md:text-3xl;
   }
 
   .btn:disabled {
@@ -40,7 +38,7 @@
   }
 
   .secondary-btn {
-    @apply gradient-purple text-white transition-all duration-200 enabled:hover:opacity-80;
+    @apply gradient-purple text-white transition-all duration-200 hover:opacity-80 disabled:hover:opacity-100;
   }
 
   .tertiary-btn {
@@ -48,7 +46,7 @@
   }
 
   .paginator-btn {
-    @apply gradient-purple rounded-full flex items-center justify-center h-8 w-8 text-white hover:opacity-80 transition-all duration-200;
+    @apply gradient-purple flex h-8 w-8 items-center justify-center rounded-full text-white transition-all duration-200 hover:opacity-80 md:h-12 md:w-12;
   }
 
   .quiz-btn {
@@ -56,7 +54,7 @@
   }
 
   .question-btn {
-    @apply gradient-purple-reversed cursor-pointer rounded-2xl border-2 border-black p-4 text-center font-bold text-white transition-transform duration-200 hover:opacity-80;
+    @apply gradient-purple-reversed md:text-2xl cursor-pointer rounded-2xl border-2 border-black p-4 text-center font-bold text-white transition-transform duration-200 hover:opacity-80;
   }
 
   .warning-btn {
@@ -76,7 +74,7 @@
   }
 
   .input {
-    @apply rounded-lg border-2 border-purple-800 bg-purple-600/20 px-4 py-1 text-lg font-medium tracking-widest placeholder-purple-400;
+    @apply rounded-lg border-2 border-purple-800 bg-purple-600/20 md:p-4 px-4 md:text-xl text-lg font-medium tracking-widest placeholder-purple-400;
   }
 
   .input-error {

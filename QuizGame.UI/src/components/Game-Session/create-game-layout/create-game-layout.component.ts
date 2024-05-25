@@ -7,7 +7,7 @@ import { NewGameService } from '../../../services/new-game.service';
   selector: 'app-create-game-layout',
   standalone: true,
   imports: [BackButtonComponent, RouterOutlet],
-  templateUrl: './game-session.component.html',
+  templateUrl: './create-game-layout.component.html',
 })
 export class CreateGameLayout {
   constructor(
