@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Quiz } from '../models/Quiz';
 import { QuizzesService } from './quizzes.service';
-import { QuizDetails } from '../models/QuizDetails';
+import { QuizDetailsDTO } from '../models/DTOs/QuizDetailsDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class DataService {
   private quizzesSubject = new BehaviorSubject<Quiz[] | null>(null);
   quizzes$ = this.quizzesSubject.asObservable();
 
-  private quizSubject = new BehaviorSubject<QuizDetails | null>(null);
+  private quizSubject = new BehaviorSubject<QuizDetailsDTO | null>(null);
   quiz$ = this.quizSubject.asObservable();
 
   constructor(private quizzesService: QuizzesService) {

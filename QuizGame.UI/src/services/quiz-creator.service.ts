@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { QuizReqDTO } from '../models/QuizReqDTO';
+import { QuizReqDTO } from '../models/DTOs/QuizReqDTO';
 
 @Injectable({
   providedIn: 'root',

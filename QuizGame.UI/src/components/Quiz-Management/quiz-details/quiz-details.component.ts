@@ -3,7 +3,7 @@ import { AsyncPipe } from '@angular/common';
 import { ErrorComponent } from '../../shared/error/error.component';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { BackButtonComponent } from '../../shared/back-button/back-button.component';
-import { QuizDetails } from '../../../models/QuizDetails';
+import { QuizDetailsDTO } from '../../../models/DTOs/QuizDetailsDTO';
 import { Observable } from 'rxjs';
 import { QuizzesService } from '../../../services/quizzes.service';
 import { ErrorsService } from '../../../services/errors.service';
@@ -28,7 +28,7 @@ import { AnswersListComponent } from '../answers-list/answers-list.component';
 export class QuizDetailsComponent {
   @Input() id: string = '';
 
-  quiz$: Observable<QuizDetails | null> = this.dataService.quiz$;
+  quiz$: Observable<QuizDetailsDTO | null> = this.dataService.quiz$;
   isLoading$: Observable<boolean> = this.quizzesService.isLoading$;
   isError$: Observable<boolean> = this.errorService.isError$;
 

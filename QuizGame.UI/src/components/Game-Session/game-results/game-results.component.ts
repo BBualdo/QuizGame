@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NewGameService } from '../../../services/new-game.service';
-import { GameReqDTO } from '../../../models/GameReqDTO';
+import { GameReqDTO } from '../../../models/DTOs/GameReqDTO';
 import { Router } from '@angular/router';
 
 @Component({

@@ -11,8 +11,8 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { StepperComponent } from '../stepper/stepper.component';
 import { QuizCreatorService } from '../../../../services/quiz-creator.service';
-import { QuestionReqDTO } from '../../../../models/QuestionReqDTO';
-import { AnswerReqDTO } from '../../../../models/AnswerReqDTO';
+import { QuestionReqDTO } from '../../../../models/DTOs/QuestionReqDTO';
+import { AnswerReqDTO } from '../../../../models/DTOs/AnswerReqDTO';
 
 @Component({
   selector: 'app-create-quiz',

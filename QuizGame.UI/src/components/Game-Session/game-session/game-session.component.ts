@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
-import { QuizDetails } from '../../../models/QuizDetails';
+import { QuizDetailsDTO } from '../../../models/DTOs/QuizDetailsDTO';
 import { NewGameService } from '../../../services/new-game.service';
 import { QuizzesService } from '../../../services/quizzes.service';
-import { GameReqDTO } from '../../../models/GameReqDTO';
+import { GameReqDTO } from '../../../models/DTOs/GameReqDTO';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { ErrorsService } from '../../../services/errors.service';
 import { AsyncPipe, NgClass } from '@angular/common';
@@ -28,7 +28,7 @@ import { GamesService } from '../../../services/games.service';
 })
 export class GameSessionComponent {
   game: GameReqDTO | null = null;
-  quiz$: Observable<QuizDetails> | null = null;
+  quiz$: Observable<QuizDetailsDTO> | null = null;
   isLoading$: Observable<boolean> = this.quizzesService.isLoading$;
   isError$: Observable<boolean> = this.errorsService.isError$;
 
@@ -56,7 +56,7 @@ export class GameSessionComponent {
     this.validateGameData();
     if (this.game) {
       this.quiz$ = this.quizzesService.getQuiz(this.game.quizId!).pipe(
-        map((quiz: QuizDetails) => {
+        map((quiz: QuizDetailsDTO) => {
           quiz.questions = this.shuffleQuestionsAndAnswers(quiz.questions);
           return quiz;
         }),

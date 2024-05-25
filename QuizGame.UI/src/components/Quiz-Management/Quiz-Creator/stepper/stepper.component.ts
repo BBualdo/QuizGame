@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizCreatorService } from '../../../../services/quiz-creator.service';
-import { QuizReqDTO } from '../../../../models/QuizReqDTO';
+import { QuizReqDTO } from '../../../../models/DTOs/QuizReqDTO';
 import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
 import {

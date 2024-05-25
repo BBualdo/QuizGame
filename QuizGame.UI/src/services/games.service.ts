@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, finalize, Observable, of } from 'rxjs';
 import { ErrorsService } from './errors.service';
-import { GameReqDTO } from '../models/GameReqDTO';
+import { GameReqDTO } from '../models/DTOs/GameReqDTO';
 import { url } from '../config/config';
+import { Game } from '../models/Game';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,15 @@ export class GamesService {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http.post(url + 'Games', game).pipe(
+      catchError((error) => of(this.handleError(error))),
+      finalize(() => this.isLoadingSubject.next(false)),
+    );
+  }
+
+  getGames(): Observable<Game[]> {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+    return this.http.get<Game[]>(url + 'Games/').pipe(
       catchError((error) => of(this.handleError(error))),
       finalize(() => this.isLoadingSubject.next(false)),
     );

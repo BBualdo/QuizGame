@@ -3,7 +3,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { NewGameService } from '../../../services/new-game.service';
 import { Router } from '@angular/router';
-import { GameReqDTO } from '../../../models/GameReqDTO';
+import { GameReqDTO } from '../../../models/DTOs/GameReqDTO';
 
 @Component({
   selector: 'app-enter-username',

@@ -4,8 +4,8 @@ import { BehaviorSubject, catchError, finalize, Observable, of } from 'rxjs';
 import { Quiz } from '../models/Quiz';
 import { url } from '../config/config';
 import { ErrorsService } from './errors.service';
-import { QuizDetails } from '../models/QuizDetails';
-import { QuizReqDTO } from '../models/QuizReqDTO';
+import { QuizDetailsDTO } from '../models/DTOs/QuizDetailsDTO';
+import { QuizReqDTO } from '../models/DTOs/QuizReqDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -28,10 +28,10 @@ export class QuizzesService {
     );
   }
 
-  getQuiz(id: number): Observable<QuizDetails> {
+  getQuiz(id: number): Observable<QuizDetailsDTO> {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
-    return this.http.get<QuizDetails>(url + 'Quizzes/' + id).pipe(
+    return this.http.get<QuizDetailsDTO>(url + 'Quizzes/' + id).pipe(
       catchError((error) => of(this.handleError(error))),
       finalize(() => this.isLoadingSubject.next(false)),
     );
