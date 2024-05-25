@@ -64,6 +64,9 @@ export class GamesService {
     if (error.status === 500) {
       this.errorsService.add('Something went wrong. Try again later.');
     }
+    if (error.status === 404) {
+      this.errorsService.add('Games not found.');
+    }
     return;
   }
 }

@@ -62,6 +62,9 @@ export class QuizzesService {
     if (error.status === 500) {
       this.errorsService.add('Something went wrong. Try again later.');
     }
+    if (error.status === 404) {
+      this.errorsService.add('Quizzes not found.');
+    }
     return;
   }
 }
