@@ -13,7 +13,7 @@
       {{ quiz.name }}
     </p>
     <div class="flex flex-col gap-4">
-      <p class="text-xl md:text-2xl font-bold">Questions:</p>
+      <p class="text-xl font-bold md:text-2xl">Questions:</p>
       <ul class="flex flex-col gap-2">
         @for (question of quiz.questions; track $index) {
           <li (click)="showAnswers(question)" class="question-btn">

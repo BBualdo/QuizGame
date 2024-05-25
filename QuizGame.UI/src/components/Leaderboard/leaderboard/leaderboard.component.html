@@ -2,9 +2,9 @@
   <div class="h-15 flex w-full items-start">
     <back-button class="white p-2" previousPageName="Main Menu" />
   </div>
-  <div class="flex flex-1 items-center justify-center xs:max-md:w-full">
+  <div class="xs:max-md:w-full flex flex-1 items-center justify-center">
     <div class="container">
-      <h1 class="text-center md:text-4xl text-2xl font-bold">Leaderboard</h1>
+      <h1 class="text-center text-2xl font-bold md:text-4xl">Leaderboard</h1>
 
       <div class="mt-10 flex flex-col gap-10">
         @if (isLoading$ | async) {
@@ -27,27 +27,27 @@
                 <tbody>
                   <tr class="font-bold md:text-xl">
                     <td
-                      class="gradient-purple border-2 border-black md:p-4 p-2 text-white"
+                      class="gradient-purple border-2 border-black p-2 text-white md:p-4"
                     >
                       Username
                     </td>
                     <td
-                      class="gradient-purple border-2 border-black md:p-4 p-2 text-white"
+                      class="gradient-purple border-2 border-black p-2 text-white md:p-4"
                     >
                       Quiz
                     </td>
                     <td
-                      class="gradient-purple border-2 border-black md:p-4 p-2 text-white"
+                      class="gradient-purple border-2 border-black p-2 text-white md:p-4"
                     >
                       Difficulty
                     </td>
                     <td
-                      class="gradient-purple border-2 border-black md:p-4 p-2 text-white"
+                      class="gradient-purple border-2 border-black p-2 text-white md:p-4"
                     >
                       Score
                     </td>
                     <td
-                      class="gradient-purple border-2 border-black md:p-4 p-2 text-white"
+                      class="gradient-purple border-2 border-black p-2 text-white md:p-4"
                     >
                       Date
                     </td>
@@ -55,7 +55,7 @@
                   </tr>
 
                   @for (game of games.games; track $index) {
-                    <tr class="text-lg md:text-2xl font-semibold">
+                    <tr class="text-lg font-semibold md:text-2xl">
                       <td class="border border-black p-4 uppercase">
                         {{ game.username }}
                       </td>
@@ -86,16 +86,16 @@
               <div>
                 <button
                   (click)="openDeleteAllDialog()"
-                  class="btn warning-btn px-2 md:text-xl md:px-8 text-base"
+                  class="btn warning-btn px-2 text-base md:px-8 md:text-xl"
                 >
                   Clear History
                 </button>
               </div>
-              <div class="flex items-center md:gap-6 gap-2">
+              <div class="flex items-center gap-2 md:gap-6">
                 <button (click)="previousPage()" class="paginator-btn">
                   <mat-icon fontIcon="arrow_left" class="md:scale-150" />
                 </button>
-                <p class="text-lg md:text-2xl font-bold">
+                <p class="text-lg font-bold md:text-2xl">
                   {{ currentPage }}/{{ games.total }}
                 </p>
 
@@ -106,7 +106,7 @@
             </div>
           } @else {
             <p
-              class="gradient-purple bg-clip-text text-center md:text-4xl text-2xl font-black uppercase text-transparent"
+              class="gradient-purple bg-clip-text text-center text-2xl font-black uppercase text-transparent md:text-4xl"
             >
               There is no games yet.
             </p>

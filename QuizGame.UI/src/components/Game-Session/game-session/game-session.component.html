@@ -11,9 +11,9 @@
 @if (quiz$ | async; as quiz) {
   <div class="flex flex-col gap-2">
     <div
-      class="gradient-purple-80 relative flex min-h-[200px] md:min-h-[300px] w-full flex-col items-center justify-center text-balance rounded-xl text-center text-xl font-bold text-white"
+      class="gradient-purple-80 relative flex min-h-[200px] w-full flex-col items-center justify-center text-balance rounded-xl text-center text-xl font-bold text-white md:min-h-[300px]"
     >
-      <p class="absolute top-2 md:text-lg text-sm">
+      <p class="absolute top-2 text-sm md:text-lg">
         Question {{ currentQuestion }}/{{ quiz.questions.length }}
       </p>
       <p class="md:text-4xl">{{ quiz.questions[currentQuestion - 1].name }}</p>
@@ -32,7 +32,7 @@
       ) {
         <button
           (click)="checkAnswer(answer)"
-          class="btn tertiary-btn w-full md:text-xl text-base"
+          class="btn tertiary-btn w-full text-base md:text-xl"
           [ngClass]="{
             'gradient-green text-white': answersChecked && answer.isCorrect,
             'gradient-red text-white':

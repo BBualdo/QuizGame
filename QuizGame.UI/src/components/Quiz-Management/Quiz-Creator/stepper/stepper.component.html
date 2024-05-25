@@ -1,5 +1,5 @@
 <form [formGroup]="qAndAFormGroup">
-  <h1 class="text-center text-2xl md:text-4xl font-bold">Questions Creator</h1>
+  <h1 class="text-center text-2xl font-bold md:text-4xl">Questions Creator</h1>
   <p class="text-lg font-bold">Question {{ currentStep }}</p>
   <div class="flex w-full gap-1">
     @for (question of quiz!.questions; track $index) {
@@ -37,13 +37,15 @@
         (qAndAFormGroup.controls["question"].errors?.["maxlength"] ||
           qAndAFormGroup.controls["question"].errors?.["minlength"])
       ) {
-        <p class="text-red-500 md:text-lg">Must be between 6-200 characters long</p>
+        <p class="text-red-500 md:text-lg">
+          Must be between 6-200 characters long
+        </p>
       }
     </div>
   </div>
 
   <div class="flex flex-col items-center gap-8 py-4">
-    <div class="relative flex flex-col md:w-full gap-1">
+    <div class="relative flex flex-col gap-1 md:w-full">
       <label for="answer1" class="md:text-xl">Answer 1</label>
       <div class="flex items-center gap-4">
         <input
@@ -60,7 +62,7 @@
         />
         <button
           (click)="setCorrect(0)"
-          class="btn correct-btn px-4 md:text-2xl md:flex-1 text-base"
+          class="btn correct-btn px-4 text-base md:flex-1 md:text-2xl"
           [ngClass]="{
             'opacity-50': !quiz!.questions[currentStep - 1].answers[0].isCorrect
           }"
@@ -79,7 +81,9 @@
           qAndAFormGroup.controls["answer1"].touched &&
           qAndAFormGroup.controls["answer1"].errors?.["maxlength"]
         ) {
-          <p class="text-red-500 md:text-lg">Can't be longer than 50 characters</p>
+          <p class="text-red-500 md:text-lg">
+            Can't be longer than 50 characters
+          </p>
         }
       </div>
     </div>
@@ -101,7 +105,7 @@
         />
         <button
           (click)="setCorrect(1)"
-          class="btn correct-btn px-4 text-base md:text-2xl md:flex-1"
+          class="btn correct-btn px-4 text-base md:flex-1 md:text-2xl"
           [ngClass]="{
             'opacity-50': !quiz!.questions[currentStep - 1].answers[1].isCorrect
           }"
@@ -120,7 +124,9 @@
           qAndAFormGroup.controls["answer2"].touched &&
           qAndAFormGroup.controls["answer2"].errors?.["maxlength"]
         ) {
-          <p class="text-red-500 md:text-lg">Can't be longer than 50 characters</p>
+          <p class="text-red-500 md:text-lg">
+            Can't be longer than 50 characters
+          </p>
         }
       </div>
     </div>
@@ -142,7 +148,7 @@
         />
         <button
           (click)="setCorrect(2)"
-          class="btn correct-btn px-4 text-base md:text-2xl md:flex-1"
+          class="btn correct-btn px-4 text-base md:flex-1 md:text-2xl"
           [ngClass]="{
             'opacity-50': !quiz!.questions[currentStep - 1].answers[2].isCorrect
           }"
@@ -161,7 +167,9 @@
           qAndAFormGroup.controls["answer3"].touched &&
           qAndAFormGroup.controls["answer3"].errors?.["maxlength"]
         ) {
-          <p class="text-red-500 md:text-lg">Can't be longer than 50 characters</p>
+          <p class="text-red-500 md:text-lg">
+            Can't be longer than 50 characters
+          </p>
         }
       </div>
     </div>
@@ -183,7 +191,7 @@
         />
         <button
           (click)="setCorrect(3)"
-          class="btn correct-btn px-4 text-base md:text-2xl md:flex-1"
+          class="btn correct-btn px-4 text-base md:flex-1 md:text-2xl"
           [ngClass]="{
             'opacity-50': !quiz!.questions[currentStep - 1].answers[3].isCorrect
           }"
@@ -202,7 +210,9 @@
           qAndAFormGroup.controls["answer4"].touched &&
           qAndAFormGroup.controls["answer4"].errors?.["maxlength"]
         ) {
-          <p class="text-red-500 md:text-lg">Can't be longer than 50 characters</p>
+          <p class="text-red-500 md:text-lg">
+            Can't be longer than 50 characters
+          </p>
         }
       </div>
     </div>
