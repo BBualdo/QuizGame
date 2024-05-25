@@ -16,7 +16,7 @@ public class GamesController(IGamesService gamesService) : ControllerBase
         [FromQuery] int pageSize = 5)
     {
         var paginatedGames = await _gamesService.GetGamesAsync(page, pageSize);
-        if (!paginatedGames.Games.Any()) return NotFound("Page doesn't exists.");
+        if (paginatedGames.Games.Any() && page > paginatedGames.Total) return NotFound("Page doesn't exist");
         return Ok(paginatedGames);
     }
 
