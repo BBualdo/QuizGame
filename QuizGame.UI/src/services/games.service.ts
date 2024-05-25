@@ -5,6 +5,7 @@ import { ErrorsService } from './errors.service';
 import { GameReqDTO } from '../models/DTOs/GameReqDTO';
 import { url } from '../config/config';
 import { Game } from '../models/Game';
+import { PaginatedGames } from '../models/DTOs/PaginatedGames';
 
 @Injectable({
   providedIn: 'root',
@@ -27,10 +28,10 @@ export class GamesService {
     );
   }
 
-  getGames(): Observable<Game[]> {
+  getGames(): Observable<PaginatedGames> {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
-    return this.http.get<Game[]>(url + 'Games/').pipe(
+    return this.http.get<PaginatedGames>(url + 'Games/').pipe(
       catchError((error) => of(this.handleError(error))),
       finalize(() => this.isLoadingSubject.next(false)),
     );
