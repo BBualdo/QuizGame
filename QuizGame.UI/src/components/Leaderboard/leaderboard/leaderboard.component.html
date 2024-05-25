@@ -18,28 +18,28 @@
       @if (games$ | async; as games) {
         @if (games.games.length > 0) {
           <div class="overflow-x-auto">
-            <table class="w-max">
+            <table class="w-max border-2 border-black">
               <tbody>
                 <tr class="font-bold">
-                  <td class="border border-black">Username</td>
-                  <td class="border border-black">Quiz</td>
-                  <td class="border border-black">Difficulty</td>
-                  <td class="border border-black">Score</td>
-                  <td class="border border-black">Date</td>
-                  <td class="border border-black"></td>
+                  <td class="border-2 border-black p-2 gradient-purple text-white">Username</td>
+                  <td class="border-2 border-black p-2 gradient-purple text-white">Quiz</td>
+                  <td class="border-2 border-black p-2 gradient-purple text-white">Difficulty</td>
+                  <td class="border-2 border-black p-2 gradient-purple text-white">Score</td>
+                  <td class="border-2 border-black p-2 gradient-purple text-white">Date</td>
+                  <td class="p-2"></td>
                 </tr>
 
                 @for (game of games.games; track $index) {
-                  <tr>
-                    <td class="border border-black">{{ game.username }}</td>
-                    <td class="border border-black">{{ game.quizName }}</td>
-                    <td class="border border-black">{{ game.difficulty }}</td>
-                    <td class="border border-black">{{ game.score }}%</td>
-                    <td class="border border-black">
+                  <tr class="text-lg font-semibold">
+                    <td class="border border-black p-4 uppercase">{{ game.username }}</td>
+                    <td class="border border-black p-4">{{ game.quizName }}</td>
+                    <td class="border border-black p-4">{{ game.difficulty }}</td>
+                    <td class="border border-black p-4">{{ game.score }}%</td>
+                    <td class="border border-black p-4">
                       {{ formatDate(game.date, "dd-MM-yyyy", "en-US") }}
                     </td>
-                    <td class="border border-black">
-                      <button class="btn warning-btn">
+                    <td class="border-y border-black">
+                      <button class="btn warning-btn border-none rounded-full flex items-center justify-center">
                         <mat-icon fontIcon="delete" />
                       </button>
                     </td>
@@ -48,15 +48,24 @@
               </tbody>
             </table>
           </div>
-          <div>
-            <button (click)="previousPage(games.total)" >
-              <mat-icon fontIcon="arrow_left" />
-            </button>
-            {{currentPage}}/{{games.total}}
-            <button (click)="nextPage(games.total)">
-              <mat-icon fontIcon="arrow_right" />
-            </button>
+          <div class="flex items-center justify-between">
+            <div>
+              <button class="btn warning-btn text-base px-2">Clear History</button>
+            </div>
+            <div class="flex items-center gap-2">
+              <button (click)="previousPage()" class="paginator-btn" >
+                <mat-icon fontIcon="arrow_left" />
+              </button>
+              <p class="text-lg font-bold">
+                {{currentPage}}/{{games.total}}
+              </p>
+
+              <button (click)="nextPage(games.total)" class="paginator-btn">
+                <mat-icon fontIcon="arrow_right" />
+              </button>
+            </div>
           </div>
+
         } @else {
           <p
             class="gradient-purple bg-clip-text text-center text-2xl font-black uppercase text-transparent"

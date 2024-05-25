@@ -33,6 +33,10 @@
     @apply border-2 border-purple-800 hover:bg-purple-300;
   }
 
+  .paginator-btn {
+    @apply gradient-purple rounded-full flex items-center justify-center h-8 w-8 text-white hover:opacity-80 transition-all duration-200;
+  }
+
   .quiz-btn {
     @apply gradient-amber hover:gradient-purple-reversed rounded-2xl py-4 text-center transition-transform duration-200 hover:scale-110 hover:text-white;
   }

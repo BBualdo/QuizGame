@@ -3,7 +3,7 @@ import { BackButtonComponent } from '../../shared/back-button/back-button.compon
 import { RouterOutlet } from '@angular/router';
 import { GamesService } from '../../../services/games.service';
 import { ErrorsService } from '../../../services/errors.service';
-import { Observable, retry } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AsyncPipe, formatDate } from '@angular/common';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { ErrorComponent } from '../../shared/error/error.component';
@@ -44,7 +44,7 @@ export class LeaderboardComponent {
     this.dataService.refreshGames(this.currentPage);
   }
 
-  previousPage(total: number) {
+  previousPage() {
     if (this.currentPage === 1) {
       return;
     }
