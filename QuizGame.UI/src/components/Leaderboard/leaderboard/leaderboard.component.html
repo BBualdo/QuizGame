@@ -50,7 +50,7 @@
           </div>
           <div class="flex items-center justify-between">
             <div>
-              <button class="btn warning-btn text-base px-2">Clear History</button>
+              <button (click)="openDeleteAllDialog()" class="btn warning-btn text-base px-2">Clear History</button>
             </div>
             <div class="flex items-center gap-2">
               <button (click)="previousPage()" class="paginator-btn" >

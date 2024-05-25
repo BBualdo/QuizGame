@@ -48,6 +48,15 @@ export class GamesService {
     );
   }
 
+  deleteAllGames(): Observable<Game[]> {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+    return this.http.delete<Game[]>(url + 'Games/').pipe(
+      catchError((error) => of(this.handleError(error))),
+      finalize(() => this.isLoadingSubject.next(false)),
+    );
+  }
+
   private handleError(error: HttpErrorResponse): any {
     if (error.status === 0) {
       this.errorsService.add("Couldn't connect to Quizzes API.");

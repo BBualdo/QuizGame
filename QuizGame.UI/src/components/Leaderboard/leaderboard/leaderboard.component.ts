@@ -54,6 +54,20 @@ export class LeaderboardComponent {
     });
   }
 
+  openDeleteAllDialog() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { title: 'Clear History', itemName: 'All Games' },
+    });
+
+    dialogRef.closed.subscribe((value) => {
+      if (value === true) {
+        this.gamesService.deleteAllGames().subscribe(() => {
+          this.dataService.refreshGames();
+        });
+      }
+    });
+  }
+
   nextPage(total: number) {
     if (this.currentPage === total) {
       return;
