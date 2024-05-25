@@ -29,10 +29,16 @@ public class GamesService(IGamesRepository gamesRepository) : IGamesService
         return true;
     }
 
-    public async Task<IEnumerable<GameResponse>> GetGamesAsync(int page, int pageSize)
+    public async Task<PaginatedGames> GetGamesAsync(int page, int pageSize)
     {
         IEnumerable<Game> games = await _gamesRepository.GetGamesWithQuizzesAsync();
+        int totalPages = (int)Math.Ceiling((decimal)games.Count() / pageSize);
         List<Game> paginatedGames = games.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-        return paginatedGames.Select(game => game.ToGameResponse());
+
+        return new PaginatedGames
+        {
+            Total = totalPages,
+            Games = paginatedGames.Select(game => game.ToGameResponse())
+        };
     }
 }
