@@ -11,9 +11,12 @@ public class GamesController(IGamesService gamesService) : ControllerBase
     private readonly IGamesService _gamesService = gamesService;
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<GameResponse>>> GetGames()
+    public async Task<ActionResult<IEnumerable<GameResponse>>> GetGames(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 5)
     {
-        var games = await _gamesService.GetGamesAsync();
+        var games = await _gamesService.GetGamesAsync(page, pageSize);
+        if (!games.Any()) return NotFound("Page doesn't exists.");
         return Ok(games);
     }
 
