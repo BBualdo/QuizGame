@@ -70,11 +70,11 @@ export class GameSessionComponent {
     }
   }
 
-  checkAnswer(answer: Answer) {
+  checkAnswer(answer: Answer | null) {
     if (this.selectedAnswer !== null) return;
     this.selectedAnswer = answer;
     this.answersChecked = true;
-    if (this.selectedAnswer.isCorrect) {
+    if (this.selectedAnswer?.isCorrect) {
       this.correctAnswersCount++;
     }
   }
@@ -92,6 +92,7 @@ export class GameSessionComponent {
       this.calculateScorePercentage(this.correctAnswersCount),
     );
     this.newGameService.setDate();
+    console.log(this.game);
     this.gamesService.addGame(this.game!).subscribe();
     this.router.navigate(['play/results']);
   }

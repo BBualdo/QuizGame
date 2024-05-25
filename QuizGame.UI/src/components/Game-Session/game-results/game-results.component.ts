@@ -49,7 +49,7 @@ export class GameResultsComponent {
   }
 
   private validateResults() {
-    if (!this.game?.score) {
+    if (!this.game?.date) {
       this.router.navigate(['play']);
     }
   }

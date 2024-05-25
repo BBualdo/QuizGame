@@ -1,7 +1,14 @@
-import { Component, Input, numberAttribute, OnChanges, OnInit } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { TimerService } from '../../../services/timer.service';
-import { Answer } from "../../../models/Answer";
 
 @Component({
   selector: 'countdown-timer',
@@ -9,28 +16,38 @@ import { Answer } from "../../../models/Answer";
   imports: [NgStyle],
   templateUrl: './timer.component.html',
 })
-export class TimerComponent implements OnInit, OnChanges{
+export class TimerComponent implements OnInit, OnChanges, OnDestroy {
   @Input() time: number | null = null;
   timeLeft: number | null = null;
 
-  @Input() selectedAnswer : Answer | null = null;
+  @Input() answersChecked: boolean = false;
+
+  @Output() timeUpEmitter = new EventEmitter();
 
   constructor(private timerService: TimerService) {}
 
   ngOnInit() {
-    this.start()
+    this.start();
 
-    this.timerService.timeLeft$.subscribe(
-      (timeLeft) => (this.timeLeft = timeLeft),
-    );
+    this.timerService.timeLeft$.subscribe((timeLeft) => {
+      this.timeLeft = timeLeft;
+      console.log(timeLeft);
+      if (timeLeft === 0) {
+        setTimeout(() => this.timeUpEmitter.emit('timesUp'), 1000);
+      }
+    });
   }
 
   ngOnChanges() {
-    if (this.selectedAnswer) {
-      this.stop()
+    if (this.answersChecked) {
+      this.stop();
     } else {
-      this.start()
+      this.start();
     }
+  }
+
+  ngOnDestroy() {
+    this.stop();
   }
 
   start() {

@@ -12,6 +12,7 @@ export class TimerService {
 
   start(time: number) {
     this.stop();
+    this.timeLeftSubject.next(time);
     this.timerSubscription = timer(0, 1000)
       .pipe(
         map((elapsed) => time - elapsed),
