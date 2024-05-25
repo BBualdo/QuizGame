@@ -54,7 +54,7 @@ export class QuizDetailsComponent {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Delete Quiz',
-        quizName: quizName,
+        itemName: quizName,
       },
     });
 

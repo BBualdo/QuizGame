@@ -9,6 +9,9 @@ import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-sp
 import { ErrorComponent } from '../../shared/error/error.component';
 import { DataService } from '../../../services/data.service';
 import { MatIcon } from '@angular/material/icon';
+import { Dialog } from '@angular/cdk/dialog';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { Game } from '../../../models/Game';
 
 @Component({
   selector: 'app-leaderboard',
@@ -34,7 +37,22 @@ export class LeaderboardComponent {
     private gamesService: GamesService,
     private errorsService: ErrorsService,
     private dataService: DataService,
+    private dialog: Dialog,
   ) {}
+
+  openDeleteDialog(game: Game) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { title: 'Delete Game', itemName: 'Game' },
+    });
+
+    dialogRef.closed.subscribe((value) => {
+      if (value === true) {
+        this.gamesService.deleteGame(game.id).subscribe(() => {
+          this.dataService.refreshGames();
+        });
+      }
+    });
+  }
 
   nextPage(total: number) {
     if (this.currentPage === total) {

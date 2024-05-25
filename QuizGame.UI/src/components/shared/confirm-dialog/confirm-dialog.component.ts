@@ -10,7 +10,7 @@ import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 })
 export class ConfirmDialogComponent {
   title: string = this.data.title;
-  quizName: string = this.data.quizName;
+  itemName: string = this.data.itemName;
 
   constructor(
     private dialogRef: DialogRef,

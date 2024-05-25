@@ -39,7 +39,7 @@
                       {{ formatDate(game.date, "dd-MM-yyyy", "en-US") }}
                     </td>
                     <td class="border-y border-black">
-                      <button class="btn warning-btn border-none rounded-full flex items-center justify-center">
+                      <button (click)="openDeleteDialog(game)" class="btn warning-btn border-none rounded-full flex items-center justify-center">
                         <mat-icon fontIcon="delete" />
                       </button>
                     </td>
