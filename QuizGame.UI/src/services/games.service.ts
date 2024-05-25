@@ -59,7 +59,7 @@ export class GamesService {
 
   private handleError(error: HttpErrorResponse): any {
     if (error.status === 0) {
-      this.errorsService.add("Couldn't connect to Quizzes API.");
+      this.errorsService.add("Couldn't connect to Games API.");
     }
     if (error.status === 500) {
       this.errorsService.add('Something went wrong. Try again later.');

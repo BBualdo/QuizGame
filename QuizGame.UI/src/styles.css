@@ -6,9 +6,23 @@
   font-family: "Raleway", sans-serif;
 }
 
+
+
 @layer base {
   body {
     @apply gradient-purple min-h-screen;
+  }
+
+  ::-webkit-scrollbar {
+    @apply h-2 w-2
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-purple-300
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply gradient-purple;
   }
 }
 

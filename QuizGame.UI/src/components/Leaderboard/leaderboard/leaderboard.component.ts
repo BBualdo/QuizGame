@@ -85,7 +85,7 @@ export class LeaderboardComponent {
   }
 
   retry() {
-    this.games$.subscribe();
+    this.dataService.refreshGames();
   }
 
   protected readonly formatDate = formatDate;
