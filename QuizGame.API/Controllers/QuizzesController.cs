@@ -33,13 +33,6 @@ public class QuizzesController(IQuizzesService quizzesService) : ControllerBase
         return CreatedAtAction(nameof(AddQuiz), quizRequest);
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult> UpdateQuiz(int id, QuizRequest quizRequest)
-    {
-        if (id != quizRequest.QuizId) return NotFound();
-        await _quizzesService.UpdateQuizAsync(quizRequest);
-        return NoContent();
-    }
 
     [HttpDelete("{id:int}")]
     public async Task<ActionResult> DeleteQuiz(int id)

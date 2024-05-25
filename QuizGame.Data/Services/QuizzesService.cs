@@ -25,11 +25,6 @@ public class QuizzesService(IQuizzesRepository quizzesRepository) : IQuizzesServ
         await _quizzesRepository.AddAsync(quizRequest.ToQuiz());
     }
 
-    public async Task UpdateQuizAsync(QuizRequest quizRequest)
-    {
-        await _quizzesRepository.UpdateAsync(quizRequest.ToQuiz());
-    }
-
     public async Task<bool> DeleteQuizAsync(int id)
     {
         Quiz? quiz = await _quizzesRepository.GetByIdAsync(id);
