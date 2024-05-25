@@ -33,7 +33,10 @@ public class GamesService(IGamesRepository gamesRepository) : IGamesService
     {
         IEnumerable<Game> games = await _gamesRepository.GetGamesWithQuizzesAsync();
         int totalPages = (int)Math.Ceiling((decimal)games.Count() / pageSize);
-        List<Game> paginatedGames = games.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        List<Game> paginatedGames = games
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .OrderByDescending(game => game.Score).ToList();
 
         return new PaginatedGames
         {

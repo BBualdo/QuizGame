@@ -4,7 +4,6 @@ import { BehaviorSubject, catchError, finalize, Observable, of } from 'rxjs';
 import { ErrorsService } from './errors.service';
 import { GameReqDTO } from '../models/DTOs/GameReqDTO';
 import { url } from '../config/config';
-import { Game } from '../models/Game';
 import { PaginatedGames } from '../models/DTOs/PaginatedGames';
 
 @Injectable({
@@ -28,13 +27,15 @@ export class GamesService {
     );
   }
 
-  getGames(): Observable<PaginatedGames> {
+  getGames(page: number = 1, pageSize: number = 5): Observable<PaginatedGames> {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
-    return this.http.get<PaginatedGames>(url + 'Games/').pipe(
-      catchError((error) => of(this.handleError(error))),
-      finalize(() => this.isLoadingSubject.next(false)),
-    );
+    return this.http
+      .get<PaginatedGames>(url + `Games/?page=${page}&pageSize=${pageSize}`)
+      .pipe(
+        catchError((error) => of(this.handleError(error))),
+        finalize(() => this.isLoadingSubject.next(false)),
+      );
   }
 
   private handleError(error: HttpErrorResponse): any {

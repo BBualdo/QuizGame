@@ -1,0 +1,70 @@
+<div class="flex h-full w-full flex-col items-start">
+  <back-button class="white p-2" previousPageName="Main Menu" />
+  <div class="container">
+    <h1 class="text-center text-2xl font-bold">Leaderboard</h1>
+
+    <div class="mt-10 flex flex-col gap-10">
+      @if (isLoading$ | async) {
+        <div class="flex w-full justify-center">
+          <loading-spinner />
+        </div>
+      }
+      @if (isError$ | async) {
+        <div class="flex w-full justify-center">
+          <app-error (retryEmitter)="retry()" />
+        </div>
+      }
+
+      @if (games$ | async; as games) {
+        @if (games.games.length > 0) {
+          <div class="overflow-x-auto">
+            <table class="w-max">
+              <tbody>
+                <tr class="font-bold">
+                  <td class="border border-black">Username</td>
+                  <td class="border border-black">Quiz</td>
+                  <td class="border border-black">Difficulty</td>
+                  <td class="border border-black">Score</td>
+                  <td class="border border-black">Date</td>
+                  <td class="border border-black"></td>
+                </tr>
+
+                @for (game of games.games; track $index) {
+                  <tr>
+                    <td class="border border-black">{{ game.username }}</td>
+                    <td class="border border-black">{{ game.quizName }}</td>
+                    <td class="border border-black">{{ game.difficulty }}</td>
+                    <td class="border border-black">{{ game.score }}%</td>
+                    <td class="border border-black">
+                      {{ formatDate(game.date, "dd-MM-yyyy", "en-US") }}
+                    </td>
+                    <td class="border border-black">
+                      <button class="btn warning-btn">
+                        <mat-icon fontIcon="delete" />
+                      </button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <button (click)="previousPage(games.total)" >
+              <mat-icon fontIcon="arrow_left" />
+            </button>
+            {{currentPage}}/{{games.total}}
+            <button (click)="nextPage(games.total)">
+              <mat-icon fontIcon="arrow_right" />
+            </button>
+          </div>
+        } @else {
+          <p
+            class="gradient-purple bg-clip-text text-center text-2xl font-black uppercase text-transparent"
+          >
+            There is no games yet.
+          </p>
+        }
+      }
+    </div>
+  </div>
+</div>

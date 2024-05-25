@@ -11,6 +11,7 @@ import { SelectDifficultyComponent } from '../components/Game-Session/select-dif
 import { EnterUsernameComponent } from '../components/Game-Session/enter-username/enter-username.component';
 import { GameSessionComponent } from '../components/Game-Session/game-session/game-session.component';
 import { GameResultsComponent } from '../components/Game-Session/game-results/game-results.component';
+import { LeaderboardComponent } from '../components/Leaderboard/leaderboard/leaderboard.component';
 
 export const routes: Routes = [
   { path: '', component: MainMenuComponent },
@@ -39,5 +40,9 @@ export const routes: Routes = [
       },
       { path: ':id', component: QuizDetailsComponent },
     ],
+  },
+  {
+    path: 'leaderboard',
+    component: LeaderboardComponent,
   },
 ];
