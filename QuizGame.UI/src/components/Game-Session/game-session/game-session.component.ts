@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { Question } from '../../../models/Question';
 import { Answer } from '../../../models/Answer';
 import { GamesService } from '../../../services/games.service';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-game-session',
@@ -46,6 +47,7 @@ export class GameSessionComponent {
     private errorsService: ErrorsService,
     private router: Router,
     private gamesService: GamesService,
+    private dataService: DataService,
   ) {}
 
   ngOnInit(): void {
@@ -93,7 +95,9 @@ export class GameSessionComponent {
     );
     this.newGameService.setDate();
     console.log(this.game);
-    this.gamesService.addGame(this.game!).subscribe();
+    this.gamesService.addGame(this.game!).subscribe(() => {
+      this.dataService.refreshGames();
+    });
     this.router.navigate(['play/results']);
   }
 
