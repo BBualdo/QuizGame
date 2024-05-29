@@ -82,6 +82,7 @@
   }
 
   .input-error {
+    background-color: rgb(254 202 202) !important;
     @apply border-red-600 bg-red-200 text-red-600 placeholder-red-500;
   }
 
