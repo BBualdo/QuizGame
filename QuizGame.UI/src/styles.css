@@ -45,6 +45,10 @@
     @apply border-2 border-purple-800 hover:bg-purple-300;
   }
 
+  .login-btn {
+    @apply border-2 border-black bg-white text-black hover:bg-black hover:text-white transition-all duration-200
+  }
+
   .paginator-btn {
     @apply gradient-purple flex h-8 w-8 items-center justify-center rounded-full text-white transition-all duration-200 hover:opacity-80 md:h-12 md:w-12;
   }
