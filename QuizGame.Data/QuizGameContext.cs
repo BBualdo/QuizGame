@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using QuizGame.Data.Dummies;
 using QuizGame.Data.Models;
 
 namespace QuizGame.Data;
 
-public class QuizGameContext(DbContextOptions options) : DbContext(options)
+public class QuizGameContext(DbContextOptions options) : IdentityDbContext<IdentityUser>(options)
 {
     public DbSet<Quiz> Quizzes { get; set; }
     public DbSet<Question> Questions { get; set; }
@@ -13,6 +15,7 @@ public class QuizGameContext(DbContextOptions options) : DbContext(options)
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Seed();
     }
 }

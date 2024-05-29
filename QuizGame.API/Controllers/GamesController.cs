@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuizGame.Data.Services;
 using QuizGame.Data.Services.DTO.GameDTOs;
 
@@ -21,6 +22,7 @@ public class GamesController(IGamesService gamesService) : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<ActionResult> AddGame(GameRequest gameRequest)
     {
         await _gamesService.AddGameAsync(gameRequest);
@@ -28,6 +30,7 @@ public class GamesController(IGamesService gamesService) : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize]
     public async Task<ActionResult> DeleteGame(int id)
     {
         var isDeleted = await _gamesService.DeleteGameAsync(id);
@@ -36,6 +39,7 @@ public class GamesController(IGamesService gamesService) : ControllerBase
     }
 
     [HttpDelete]
+    [Authorize]
     public async Task<ActionResult> DeleteAllGames()
     {
         var areDeleted = await _gamesService.DeleteAllGamesAsync();

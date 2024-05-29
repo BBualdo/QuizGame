@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuizGame.Data.Models;
 using QuizGame.Data.Services;
@@ -27,6 +28,7 @@ public class QuizzesController(IQuizzesService quizzesService) : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<ActionResult> AddQuiz(QuizRequest quizRequest)
     {
         await _quizzesService.AddQuizAsync(quizRequest);
@@ -35,6 +37,7 @@ public class QuizzesController(IQuizzesService quizzesService) : ControllerBase
 
 
     [HttpDelete("{id:int}")]
+    [Authorize]
     public async Task<ActionResult> DeleteQuiz(int id)
     {
         await _quizzesService.DeleteQuizAsync(id);
