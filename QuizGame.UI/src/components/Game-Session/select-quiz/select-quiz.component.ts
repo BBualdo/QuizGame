@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BackButtonComponent } from '../../shared/back-button/back-button.component';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { QuizListComponent } from '../../Quiz-Management/quiz-list/quiz-list.component';
@@ -26,7 +26,7 @@ import { NewGameService } from '../../../services/new-game.service';
   ],
   templateUrl: './select-quiz.component.html',
 })
-export class SelectQuizComponent {
+export class SelectQuizComponent implements OnInit {
   quizzes$ = this.dataService.quizzes$;
   isLoading$ = this.quizzesService.isLoading$;
   isError$ = this.errorsService.isError$;

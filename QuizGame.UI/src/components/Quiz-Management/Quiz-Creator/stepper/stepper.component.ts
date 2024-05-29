@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { QuizCreatorService } from '../../../../services/quiz-creator.service';
 import { QuizReqDTO } from '../../../../models/DTOs/QuizReqDTO';
 import { Router } from '@angular/router';
@@ -18,7 +18,7 @@ import { DataService } from '../../../../services/data.service';
   imports: [NgClass, ReactiveFormsModule],
   templateUrl: './stepper.component.html',
 })
-export class StepperComponent {
+export class StepperComponent implements OnInit {
   currentStep: number = 1;
   quiz: QuizReqDTO | null = null;
 

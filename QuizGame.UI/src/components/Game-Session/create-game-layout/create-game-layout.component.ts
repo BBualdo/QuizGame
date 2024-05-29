@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BackButtonComponent } from '../../shared/back-button/back-button.component';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { NewGameService } from '../../../services/new-game.service';
@@ -9,7 +9,7 @@ import { NewGameService } from '../../../services/new-game.service';
   imports: [BackButtonComponent, RouterOutlet],
   templateUrl: './create-game-layout.component.html',
 })
-export class CreateGameLayout {
+export class CreateGameLayout implements OnInit {
   constructor(
     private router: Router,
     private newGameService: NewGameService,

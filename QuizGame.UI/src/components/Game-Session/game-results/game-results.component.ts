@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NewGameService } from '../../../services/new-game.service';
 import { GameReqDTO } from '../../../models/DTOs/GameReqDTO';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   imports: [],
   templateUrl: './game-results.component.html',
 })
-export class GameResultsComponent {
+export class GameResultsComponent implements OnInit {
   game: GameReqDTO | null = null;
   summaryText = '';
 

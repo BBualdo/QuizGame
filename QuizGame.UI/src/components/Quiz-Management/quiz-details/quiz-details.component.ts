@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { ErrorComponent } from '../../shared/error/error.component';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
@@ -25,7 +25,7 @@ import { AnswersListComponent } from '../answers-list/answers-list.component';
   ],
   templateUrl: './quiz-details.component.html',
 })
-export class QuizDetailsComponent {
+export class QuizDetailsComponent implements OnInit {
   @Input() id: string = '';
 
   quiz$: Observable<QuizDetailsDTO | null> = this.dataService.quiz$;

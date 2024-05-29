@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { NewGameService } from '../../../services/new-game.service';
@@ -11,7 +11,7 @@ import { GameReqDTO } from '../../../models/DTOs/GameReqDTO';
   imports: [ReactiveFormsModule, NgClass],
   templateUrl: './enter-username.component.html',
 })
-export class EnterUsernameComponent {
+export class EnterUsernameComponent implements OnInit {
   game: GameReqDTO | null = null;
 
   username = new FormControl<string>('', [

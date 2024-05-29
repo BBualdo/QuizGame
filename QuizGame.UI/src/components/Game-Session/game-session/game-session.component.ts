@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
 import { QuizDetailsDTO } from '../../../models/DTOs/QuizDetailsDTO';
 import { NewGameService } from '../../../services/new-game.service';
@@ -27,7 +27,7 @@ import { DataService } from '../../../services/data.service';
   ],
   templateUrl: './game-session.component.html',
 })
-export class GameSessionComponent {
+export class GameSessionComponent implements OnInit {
   game: GameReqDTO | null = null;
   quiz$: Observable<QuizDetailsDTO> | null = null;
   isLoading$: Observable<boolean> = this.quizzesService.isLoading$;
