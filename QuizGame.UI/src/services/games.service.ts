@@ -6,6 +6,8 @@ import { GameReqDTO } from '../models/DTOs/GameReqDTO';
 import { url } from '../config/config';
 import { PaginatedGames } from '../models/DTOs/PaginatedGames';
 import { Game } from '../models/Game';
+import { UnauthorizedDialogComponent } from "../components/shared/unauthorized-dialog/unauthorized-dialog.component";
+import { Dialog } from "@angular/cdk/dialog";
 
 @Injectable({
   providedIn: 'root',
@@ -17,13 +19,14 @@ export class GamesService {
   constructor(
     private http: HttpClient,
     private errorsService: ErrorsService,
+    private dialog:Dialog
   ) {}
 
   addGame(game: GameReqDTO): Observable<GameReqDTO> {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http.post(url + 'Games', game).pipe(
-      catchError((error) => of(this.handleError(error))),
+      catchError((error) => of(this.handleError(error, "add"))),
       finalize(() => this.isLoadingSubject.next(false)),
     );
   }
@@ -34,7 +37,7 @@ export class GamesService {
     return this.http
       .get<PaginatedGames>(url + `Games/?page=${page}&pageSize=${pageSize}`)
       .pipe(
-        catchError((error) => of(this.handleError(error))),
+        catchError((error) => of(this.handleError(error, "get"))),
         finalize(() => this.isLoadingSubject.next(false)),
       );
   }
@@ -43,7 +46,7 @@ export class GamesService {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http.delete(url + 'Games/' + id).pipe(
-      catchError((error) => of(this.handleError(error))),
+      catchError((error) => of(this.handleError(error, "delete"))),
       finalize(() => this.isLoadingSubject.next(false)),
     );
   }
@@ -52,12 +55,12 @@ export class GamesService {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http.delete<Game[]>(url + 'Games/').pipe(
-      catchError((error) => of(this.handleError(error))),
+      catchError((error) => of(this.handleError(error, "delete"))),
       finalize(() => this.isLoadingSubject.next(false)),
     );
   }
 
-  private handleError(error: HttpErrorResponse): any {
+  private handleError(error: HttpErrorResponse, operation:string): any {
     if (error.status === 0) {
       this.errorsService.add("Couldn't connect to Games API.");
     }
@@ -66,6 +69,11 @@ export class GamesService {
     }
     if (error.status === 404) {
       this.errorsService.add('Games not found.');
+    }
+    if (error.status === 401) {
+      this.dialog.open(UnauthorizedDialogComponent, {data: {
+        message: `You must be logged in to ${operation} Games.`
+        }})
     }
     return;
   }

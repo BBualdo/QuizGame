@@ -6,6 +6,8 @@ import { url } from '../config/config';
 import { ErrorsService } from './errors.service';
 import { QuizDetailsDTO } from '../models/DTOs/QuizDetailsDTO';
 import { QuizReqDTO } from '../models/DTOs/QuizReqDTO';
+import { Dialog } from "@angular/cdk/dialog";
+import { UnauthorizedDialogComponent } from "../components/shared/unauthorized-dialog/unauthorized-dialog.component";
 
 @Injectable({
   providedIn: 'root',
@@ -17,13 +19,14 @@ export class QuizzesService {
   constructor(
     private http: HttpClient,
     private errorsService: ErrorsService,
+    private dialog:Dialog
   ) {}
 
   getQuizzes(): Observable<Quiz[]> {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http.get<Quiz[]>(url + 'Quizzes').pipe(
-      catchError((error) => of(this.handleError(error))),
+      catchError((error) => of(this.handleError(error, "get"))),
       finalize(() => this.isLoadingSubject.next(false)),
     );
   }
@@ -32,7 +35,7 @@ export class QuizzesService {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http.get<QuizDetailsDTO>(url + 'Quizzes/' + id).pipe(
-      catchError((error) => of(this.handleError(error))),
+      catchError((error) => of(this.handleError(error, "get"))),
       finalize(() => this.isLoadingSubject.next(false)),
     );
   }
@@ -41,7 +44,7 @@ export class QuizzesService {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http.post<QuizReqDTO>(url + 'Quizzes', quiz).pipe(
-      catchError((error) => of(this.handleError(error))),
+      catchError((error) => of(this.handleError(error, "add"))),
       finalize(() => this.isLoadingSubject.next(false)),
     );
   }
@@ -50,12 +53,12 @@ export class QuizzesService {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http.delete<Quiz>(url + 'Quizzes/' + id).pipe(
-      catchError((error) => of(this.handleError(error))),
+      catchError((error) => of(this.handleError(error, "delete"))),
       finalize(() => this.isLoadingSubject.next(false)),
     );
   }
 
-  private handleError(error: HttpErrorResponse): any {
+  private handleError(error: HttpErrorResponse, operation:string): any {
     if (error.status === 0) {
       this.errorsService.add("Couldn't connect to Quizzes API.");
     }
@@ -64,6 +67,11 @@ export class QuizzesService {
     }
     if (error.status === 404) {
       this.errorsService.add('Quizzes not found.');
+    }
+    if (error.status === 401) {
+      this.dialog.open(UnauthorizedDialogComponent, {data: {
+        message: `You must be logged in to ${operation} Quizzes.`
+        }})
     }
     return;
   }
