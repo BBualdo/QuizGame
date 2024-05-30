@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using QuizGame.Data.Dummies;
 using QuizGame.Data.Models;
 
 namespace QuizGame.Data;
 
-public class QuizGameContext(DbContextOptions options) : IdentityDbContext<IdentityUser>(options)
+public class QuizGameContext(DbContextOptions options) : IdentityDbContext<User>(options)
 {
     public DbSet<Quiz> Quizzes { get; set; }
     public DbSet<Question> Questions { get; set; }

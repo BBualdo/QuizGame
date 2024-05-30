@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using QuizGame.Data;
 using QuizGame.Data.Models;
@@ -14,7 +13,7 @@ builder.Services.AddDbContext<QuizGameContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
 });
-builder.Services.AddIdentityCore<IdentityUser>()
+builder.Services.AddIdentityCore<User>()
                 .AddEntityFrameworkStores<QuizGameContext>();
 
 builder.Services.AddScoped<IQuizzesRepository, QuizzesRepository>();
@@ -25,7 +24,7 @@ builder.Services.AddScoped<IGamesRepository, GamesRepository>();
 builder.Services.AddScoped<IGamesService, GamesService>();
 builder.Services.AddScoped<IQuizzesService, QuizzesService>();
 
-builder.Services.AddIdentityApiEndpoints<IdentityUser>();
+builder.Services.AddIdentityApiEndpoints<User>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -41,7 +40,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapIdentityApi<IdentityUser>();
+app.MapIdentityApi<User>();
 
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
