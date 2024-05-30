@@ -8,15 +8,17 @@ import { ErrorDetails } from '../models/ErrorDetails';
 import { Dialog } from '@angular/cdk/dialog';
 import { ErrorDialogComponent } from '../components/shared/error-dialog/error-dialog.component';
 import { UserLogin } from '../models/DTOs/UserLogin';
+import { UserDTO } from '../models/DTOs/UserDTO';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  isLoadingSubject = new BehaviorSubject<boolean>(false);
+  private userSubject = new BehaviorSubject<UserDTO | null>(null);
+  user$ = this.userSubject.asObservable();
+  private isLoadingSubject = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoadingSubject.asObservable();
-
-  isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   constructor(
@@ -32,6 +34,7 @@ export class UserService {
       catchError((error) => of(this.handleErrors(error))),
       finalize(() => {
         this.isLoadingSubject.next(false);
+        this.userSubject.next({ username: user.username });
         this.checkLoginStatus();
       }),
     );
@@ -44,6 +47,7 @@ export class UserService {
       catchError((error) => of(this.handleErrors(error))),
       finalize(() => {
         this.isLoadingSubject.next(false);
+        this.userSubject.next({ username: user.username });
         this.checkLoginStatus();
       }),
     );
@@ -56,6 +60,7 @@ export class UserService {
       catchError((error) => of(this.handleErrors(error))),
       finalize(() => {
         this.isLoadingSubject.next(false);
+        this.userSubject.next(null);
         this.checkLoginStatus();
       }),
     );

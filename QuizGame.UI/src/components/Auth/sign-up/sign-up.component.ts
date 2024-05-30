@@ -63,7 +63,15 @@ export class SignUpComponent {
         password: formValues.password,
       };
 
-      this.userService.registerUser(user).subscribe();
+      this.userService
+        .registerUser(user)
+        .subscribe(() => this.backAfterLogin());
     }
+  }
+
+  private backAfterLogin() {
+    this.userService.isLoggedIn$.subscribe((isLoggedIn) => {
+      if (isLoggedIn) this.router.navigate(['']);
+    });
   }
 }

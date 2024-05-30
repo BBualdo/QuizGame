@@ -39,7 +39,7 @@ export class SelectDifficultyComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['play/quiz'], { skipLocationChange: true });
+    this.router.navigate(['play'], { skipLocationChange: true });
   }
 
   play() {

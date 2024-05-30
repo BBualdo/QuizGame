@@ -14,6 +14,7 @@ import { Question } from '../../../models/Question';
 import { Answer } from '../../../models/Answer';
 import { GamesService } from '../../../services/games.service';
 import { DataService } from '../../../services/data.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-game-session',
@@ -48,6 +49,7 @@ export class GameSessionComponent implements OnInit {
     private router: Router,
     private gamesService: GamesService,
     private dataService: DataService,
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {
@@ -90,9 +92,13 @@ export class GameSessionComponent implements OnInit {
   }
 
   showResults() {
+    this.userService.user$.subscribe((user) => {
+      if (user) this.newGameService.updateUsername(user.username);
+    });
     this.newGameService.setScore(
       this.calculateScorePercentage(this.correctAnswersCount),
     );
+
     this.newGameService.setDate();
     this.gamesService.addGame(this.game!).subscribe(() => {
       this.dataService.refreshGames();

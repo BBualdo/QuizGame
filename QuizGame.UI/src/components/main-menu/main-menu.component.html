@@ -9,7 +9,14 @@
     <a class="btn primary-btn" routerLink="/quiz-management">Manage Quizzes</a>
     <a class="btn primary-btn" routerLink="/leaderboard">Leaderboard</a>
     @if (isLoggedIn$ | async) {
-      <button class="btn login-btn mt-10" (click)="logout()">Logout</button>
+      <div class="flex flex-col gap-2 mt-10 items-center">
+        @if (user$ | async; as user) {
+          <p class="text-white md:text-xl">Logged in as <span
+            class="font-bold text-amber-300">{{ user.username }}</span>
+          </p>
+        }
+        <button class="btn login-btn" (click)="logout()">Logout</button>
+      </div>
     } @else {
       <a class="btn login-btn mt-10" routerLink="/login">Login</a>
     }

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { GameReqDTO } from '../../../models/DTOs/GameReqDTO';
 
 @Component({
-  selector: 'app-enter-username',
+  selector: 'app-enter-username (deprecated)',
   standalone: true,
   imports: [ReactiveFormsModule, NgClass],
   templateUrl: './enter-username.component.html',

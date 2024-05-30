@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BackButtonComponent } from '../../shared/back-button/back-button.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   FormControl,
   FormGroup,
@@ -32,7 +32,10 @@ export class LoginComponent {
     ]),
   });
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) {}
 
   submit() {
     this.loginForm.markAllAsTouched();
@@ -44,7 +47,13 @@ export class LoginComponent {
         password: formValues.password,
       };
 
-      this.userService.loginUser(user).subscribe();
+      this.userService.loginUser(user).subscribe(() => this.backAfterLogin());
     }
+  }
+
+  private backAfterLogin() {
+    this.userService.isLoggedIn$.subscribe((isLoggedIn) => {
+      if (isLoggedIn) this.router.navigate(['']);
+    });
   }
 }

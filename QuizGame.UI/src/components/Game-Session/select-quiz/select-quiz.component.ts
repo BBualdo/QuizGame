@@ -52,7 +52,7 @@ export class SelectQuizComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['play']);
+    this.router.navigate(['']);
   }
 
   next() {

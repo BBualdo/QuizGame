@@ -12,6 +12,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class MainMenuComponent {
   isLoggedIn$: Observable<boolean>;
+  user$ = this.userService.user$;
 
   constructor(private userService: UserService) {
     this.isLoggedIn$ = this.userService.isLoggedIn$;
