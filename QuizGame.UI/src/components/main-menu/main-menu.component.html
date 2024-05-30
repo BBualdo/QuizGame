@@ -8,6 +8,10 @@
     <a class="btn primary-btn" routerLink="/play">Start Game</a>
     <a class="btn primary-btn" routerLink="/quiz-management">Manage Quizzes</a>
     <a class="btn primary-btn" routerLink="/leaderboard">Leaderboard</a>
-    <a class="btn login-btn mt-10" routerLink="/login">Login</a>
+    @if (isLoggedIn$ | async) {
+      <a class="btn login-btn mt-10">Logout</a>
+    } @else {
+      <a class="btn login-btn mt-10" routerLink="/login">Login</a>
+    }
   </div>
 </div>

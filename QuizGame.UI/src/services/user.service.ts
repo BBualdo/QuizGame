@@ -15,6 +15,9 @@ export class UserService {
   isLoadingSubject = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoadingSubject.asObservable();
 
+  isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
   constructor(
     private http: HttpClient,
     private errorsService: ErrorsService,
@@ -33,6 +36,7 @@ export class UserService {
   private handleErrors(error: HttpErrorResponse): any {
     console.log(error);
     if (error.status === 200) {
+      this.isLoggedInSubject.next(true);
       return;
     }
 
