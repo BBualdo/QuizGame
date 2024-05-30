@@ -8,9 +8,10 @@ namespace QuizGame.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class QuizzesController(IQuizzesService quizzesService) : ControllerBase
+public class QuizzesController(IQuizzesService quizzesService, ILogger logger) : ControllerBase
 {
     private readonly IQuizzesService _quizzesService = quizzesService;
+    private readonly ILogger _logger = logger;
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<QuizResponse>>> GetQuizzes()
@@ -23,7 +24,11 @@ public class QuizzesController(IQuizzesService quizzesService) : ControllerBase
     public async Task<ActionResult<QuizDetailsResponse>> GetQuizById(int id)
     {
         QuizDetailsResponse? quiz = await _quizzesService.GetQuizByIdAsync(id);
-        if (quiz == null) return NotFound("Quiz not found.");
+        if (quiz == null)
+        {
+            _logger.LogError($"Tried to get quiz (ID = {id}) which doesn't exist.");
+            return NotFound("Quiz not found.");
+        }
         return Ok(quiz);
     }
 

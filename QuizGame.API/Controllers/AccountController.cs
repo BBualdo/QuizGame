@@ -7,10 +7,11 @@ namespace QuizGame.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController(SignInManager<User> signInManager, UserManager<User> userManager) : ControllerBase
+    public class AccountController(SignInManager<User> signInManager, UserManager<User> userManager, ILogger logger) : ControllerBase
     {
         private readonly SignInManager<User> _signInManager = signInManager;
         private readonly UserManager<User> _userManager = userManager;
+        private readonly ILogger _logger = logger;
 
         [HttpPost("register")]
         public async Task<ActionResult> Register(RegisterModel model)
@@ -28,6 +29,7 @@ namespace QuizGame.API.Controllers
                 return Ok("Registration successful");
             }
 
+            _logger.LogError($"{user.UserName} failed at registering attempt.");
             return BadRequest(result.Errors);
         }
 
@@ -35,7 +37,11 @@ namespace QuizGame.API.Controllers
         public async Task<ActionResult> Login(LoginModel model)
         {
             var user = await _userManager.FindByNameAsync(model.UserName);
-            if (user == null) return Unauthorized("Invalid Username.");
+            if (user == null)
+            {
+                _logger.LogError($"{model.UserName} failed at logging in attempt.");
+                return Unauthorized("Invalid Username.");
+            }
 
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false,
                 lockoutOnFailure: false);
@@ -44,7 +50,7 @@ namespace QuizGame.API.Controllers
             {
                 return Ok("Login successful.");
             }
-
+            _logger.LogError($"{user.UserName} tried to log in with invalid password.");
             return Unauthorized("Invalid password.");
         }
 
