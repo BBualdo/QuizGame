@@ -11,6 +11,8 @@ import { matchPasswordValidator } from '../../../validators/match-password.valid
 import { NgClass } from '@angular/common';
 import { emailValidator } from '../../../validators/email.validator';
 import { passwordValidator } from '../../../validators/password.validator';
+import { UserRegister } from '../../../models/UserRegister';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -39,13 +41,20 @@ export class SignUpComponent {
     },
   );
 
+  constructor(private userService: UserService) {}
+
   submit() {
     this.registerForm.markAllAsTouched();
+    const formValues = this.registerForm.value;
 
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
-    }
+      const user: UserRegister = {
+        username: formValues.username,
+        email: formValues.email,
+        password: formValues.password,
+      };
 
-    console.log(this.registerForm.errors);
+      this.userService.registerUser(user).subscribe();
+    }
   }
 }

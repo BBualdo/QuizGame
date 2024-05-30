@@ -13,7 +13,10 @@ builder.Services.AddDbContext<QuizGameContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
 });
-builder.Services.AddIdentityCore<User>()
+builder.Services.AddIdentityCore<User>(options =>
+    {
+        options.User.RequireUniqueEmail = true;
+    })
                 .AddEntityFrameworkStores<QuizGameContext>();
 
 builder.Services.AddScoped<IQuizzesRepository, QuizzesRepository>();
