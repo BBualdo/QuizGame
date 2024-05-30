@@ -12,7 +12,7 @@ using QuizGame.Data;
 namespace QuizGame.Data.Migrations
 {
     [DbContext(typeof(QuizGameContext))]
-    [Migration("20240530183954_ErrorsTable")]
+    [Migration("20240530193801_ErrorsTable")]
     partial class ErrorsTable
     {
         /// <inheritdoc />
@@ -893,12 +893,12 @@ namespace QuizGame.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 

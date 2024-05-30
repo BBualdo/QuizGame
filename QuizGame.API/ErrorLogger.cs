@@ -18,7 +18,7 @@ public class ErrorLogger(IErrorsService errorsService) : ILogger
         var error = new Error
         {
             Message = $"{logLevel.ToString()}: {formatter(state, exception)}",
-            Date = DateTime.Now
+            Time = DateTime.Now.ToUniversalTime()
         };
 
         await _errorsService.AddErrorAsync(error);
