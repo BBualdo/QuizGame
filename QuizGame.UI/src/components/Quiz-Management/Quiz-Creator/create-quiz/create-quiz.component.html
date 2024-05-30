@@ -23,13 +23,13 @@
       @if (quizInfoFormGroup.controls["name"].touched &&
       quizInfoFormGroup.controls["name"].errors) {
         <div class="absolute -bottom-7 left-0 flex flex-col gap-1">
-          @if (quizInfoFormGroup.controls["name"].errors?.["minlength"] ||
-          quizInfoFormGroup.controls["name"].errors?.["maxlength"]) {
+          @if (quizInfoFormGroup.controls["name"].errors!["minlength"] ||
+          quizInfoFormGroup.controls["name"].errors!["maxlength"]) {
             <p class="text-red-500 md:text-lg">
               Must be between 3 and 50 characters
             </p>
           }
-          @if (quizInfoFormGroup.controls["name"].errors?.["required"]) {
+          @if (quizInfoFormGroup.controls["name"].errors!["required"]) {
             <p class="text-red-500 md:text-lg">Required field</p>
           }
         </div>
@@ -53,11 +53,11 @@
       @if (quizInfoFormGroup.controls["questionsAmount"].touched &&
       quizInfoFormGroup.controls["questionsAmount"].errors) {
         <div class="absolute -bottom-7 left-0 flex flex-col gap-1">
-          @if (quizInfoFormGroup.controls["questionsAmount"].errors?.["min"] ||
-          quizInfoFormGroup.controls["questionsAmount"].errors?.["max"]) {
+          @if (quizInfoFormGroup.controls["questionsAmount"].errors!["min"] ||
+          quizInfoFormGroup.controls["questionsAmount"].errors!["max"]) {
             <p class="text-red-500 md:text-lg">Must be between 5 and 10</p>
           }
-          @if (quizInfoFormGroup.controls["questionsAmount"].errors?.["required"]) {
+          @if (quizInfoFormGroup.controls["questionsAmount"].errors!["required"]) {
             <p class="text-red-500 md:text-lg">Required field</p>
           }
         </div>

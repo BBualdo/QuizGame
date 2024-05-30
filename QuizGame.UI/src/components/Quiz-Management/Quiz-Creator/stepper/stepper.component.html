@@ -28,11 +28,11 @@
     @if (qAndAFormGroup.controls["question"].touched &&
     qAndAFormGroup.controls["question"].errors) {
       <div class="absolute bottom-1">
-        @if (qAndAFormGroup.controls["question"].errors?.["required"]) {
+        @if (qAndAFormGroup.controls["question"].errors!["required"]) {
           <p class="text-red-500 md:text-lg">Required field</p>
         }
-        @if (qAndAFormGroup.controls["question"].errors?.["maxlength"] ||
-        qAndAFormGroup.controls["question"].errors?.["minlength"]) {
+        @if (qAndAFormGroup.controls["question"].errors!["maxlength"] ||
+        qAndAFormGroup.controls["question"].errors!["minlength"]) {
           <p class="text-red-500 md:text-lg">
             Must be between 6-200 characters long
           </p>
@@ -69,11 +69,11 @@
       </div>
       <div class="absolute -bottom-7">
         @if (qAndAFormGroup.controls["answer1"].touched &&
-        qAndAFormGroup.controls["answer1"].errors?.["required"]) {
+        qAndAFormGroup.controls["answer1"].errors!["required"]) {
           <p class="text-red-500 md:text-lg">Required field</p>
         }
         @if (qAndAFormGroup.controls["answer1"].touched &&
-        qAndAFormGroup.controls["answer1"].errors?.["maxlength"]) {
+        qAndAFormGroup.controls["answer1"].errors!["maxlength"]) {
           <p class="text-red-500 md:text-lg">
             Can't be longer than 50 characters
           </p>

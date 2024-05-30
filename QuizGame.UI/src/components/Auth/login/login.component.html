@@ -7,7 +7,7 @@
     [formGroup]="loginForm"
     class="flex flex-1 flex-grow flex-col items-center justify-center gap-10"
   >
-    <div class="flex flex-col gap-4 w-1/2">
+    <div class="flex w-1/2 flex-col gap-4">
       <div class="relative flex flex-col gap-1">
         <label class="text-white md:text-xl" for="username">Username</label>
         <input
@@ -23,13 +23,17 @@
           minlength="6"
           type="text"
         />
-        @if (loginForm.controls['username'].touched && loginForm.controls['username'].errors) {
-          <div class="w-full left-0 flex-col gap-1">
-            @if (loginForm.controls["username"].errors?.["required"]) {
+        @if (loginForm.controls["username"].touched &&
+        loginForm.controls["username"].errors) {
+          <div class="left-0 w-full flex-col gap-1">
+            @if (loginForm.controls["username"].errors!["required"]) {
               <p class="font-bold text-red-500 md:text-lg">Required field</p>
             }
-            @if (loginForm.controls['username'].errors?.['minlength'] || loginForm.controls['username'].errors?.['maxlength']) {
-              <p class="font-bold text-red-500 md:text-lg">Must be between 6 and 40 characters</p>
+            @if (loginForm.controls["username"].errors!["minlength"] ||
+            loginForm.controls["username"].errors!["maxlength"]) {
+              <p class="font-bold text-red-500 md:text-lg">
+                Must be between 6 and 40 characters
+              </p>
             }
           </div>
         }
@@ -44,19 +48,25 @@
           }"
           class="input bg-white/50"
           formControlName="password"
-          id="password" type="password"
+          id="password"
+          type="password"
         />
-        @if (loginForm.controls["password"].touched && loginForm.controls['password'].errors) {
-          <div class="w-full left-0 flex-col gap-1">
-            @if (loginForm.controls["password"].errors?.["required"]) {
+        @if (loginForm.controls["password"].touched &&
+        loginForm.controls["password"].errors) {
+          <div class="left-0 w-full flex-col gap-1">
+            @if (loginForm.controls["password"].errors!["required"]) {
               <p class="font-bold text-red-500 md:text-lg">Required field</p>
             }
-            @if (loginForm.controls['password'].errors?.['minlength']) {
-              <p class="font-bold text-red-500 md:text-lg">Password must be at least 6 characters long.</p>
+            @if (loginForm.controls["password"].errors!["minlength"]) {
+              <p class="font-bold text-red-500 md:text-lg">
+                Password must be at least 6 characters long.
+              </p>
             }
-            @if (loginForm.controls['password'].errors?.['invalidPassword']) {
-              <p class="font-bold text-red-500 md:text-lg">Password must have at least: 1 lowercase, 1 special
-                character, 1 digit</p>
+            @if (loginForm.controls["password"].errors!["invalidPassword"]) {
+              <p class="font-bold text-red-500 md:text-lg">
+                Password must have at least: 1 lowercase, 1 special character, 1
+                digit
+              </p>
             }
           </div>
         }
