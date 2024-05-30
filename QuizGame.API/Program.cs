@@ -7,6 +7,13 @@ using QuizGame.Data.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("policy", policyBuilder =>
+    {
+        policyBuilder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200");
+    });
+});
 builder.Services.AddAuthentication();
 
 builder.Services.AddDbContext<QuizGameContext>(options =>
@@ -16,8 +23,20 @@ builder.Services.AddDbContext<QuizGameContext>(options =>
 builder.Services.AddIdentityCore<User>(options =>
     {
         options.User.RequireUniqueEmail = true;
-    })
-                .AddEntityFrameworkStores<QuizGameContext>();
+    }).AddEntityFrameworkStores<QuizGameContext>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.None;
+    options.Cookie.SameSite = SameSiteMode.None;
+    options.Cookie.Name = "QuizGameToken";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.SlidingExpiration = true;
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
 
 builder.Services.AddScoped<IQuizzesRepository, QuizzesRepository>();
 builder.Services.AddScoped<IRepository<Question>, Repository<Question>>();
@@ -45,7 +64,9 @@ app.UseHttpsRedirection();
 
 app.MapIdentityApi<User>();
 
-app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+app.UseCors(policyName:"policy");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

@@ -31,7 +31,6 @@ export class TimerComponent implements OnInit, OnChanges, OnDestroy {
 
     this.timerService.timeLeft$.subscribe((timeLeft) => {
       this.timeLeft = timeLeft;
-      console.log(timeLeft);
       if (timeLeft === 0) {
         setTimeout(() => this.timeUpEmitter.emit('timesUp'), 1000);
       }

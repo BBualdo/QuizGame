@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol;
 using QuizGame.Data.Models;
 
 namespace QuizGame.API.Controllers
@@ -23,6 +24,7 @@ namespace QuizGame.API.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                await _signInManager.SignInAsync(user, isPersistent: false);
                 return Ok("Registration successful");
             }
 

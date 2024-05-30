@@ -94,7 +94,6 @@ export class GameSessionComponent implements OnInit {
       this.calculateScorePercentage(this.correctAnswersCount),
     );
     this.newGameService.setDate();
-    console.log(this.game);
     this.gamesService.addGame(this.game!).subscribe(() => {
       this.dataService.refreshGames();
     });

@@ -15,7 +15,7 @@ export class UserService {
   isLoadingSubject = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoadingSubject.asObservable();
 
-  isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   constructor(
@@ -33,10 +33,13 @@ export class UserService {
     );
   }
 
+  checkLoginStatus() {
+    const isLoggedIn = this.hasToken();
+    this.isLoggedInSubject.next(isLoggedIn);
+  }
+
   private handleErrors(error: HttpErrorResponse): any {
-    console.log(error);
     if (error.status === 200) {
-      this.isLoggedInSubject.next(true);
       return;
     }
 
@@ -51,5 +54,9 @@ export class UserService {
     }
     this.dialog.open(ErrorDialogComponent);
     return;
+  }
+
+  private hasToken(): boolean {
+    return document.cookie.includes('QuizGameToken');
   }
 }
