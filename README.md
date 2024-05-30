@@ -8,12 +8,14 @@ Application where user can create his own Quizzes play them and track scores in 
 <img src="./screenshots/main-menu-desktop.png" width="500" />
 <img src="./screenshots/create-quiz-desktop.png" width="500" />
 <img src="./screenshots/leaderboard-desktop.png" width="500" />
+<img src="./screenshots/register-desktop.png" width="500"/>
 </div>
 <div>
 <h3>Mobile</h3>
 <img src="./screenshots/main-menu-mobile.png" width="200" />
 <img src="./screenshots/create-quiz-mobile.png" width="200" />
 <img src="./screenshots/leaderboard-mobile.png" width="200" />
+<img src="./screenshots/register-mobile.png" width="200" />
 </div>
 
 
@@ -27,6 +29,8 @@ Here're some of the project's best features:
 *   Saving records in leaderboards
 *   Ability to delete Quiz or Game(s)
 *   User-Friendly error and loading handling
+*   Authentication and Authorization
+*   Authenticated users can delete and create Quizzes/Games
 
 ## 🛠️ Installation Steps:
 
@@ -76,6 +80,8 @@ npm install
 *   PostgreSQL
 *   Angular Material
 *   TailwindCSS
+*   ASP.NET Identity
+*   Logger
 
 ## 🧠 What I've learned
 
@@ -85,3 +91,6 @@ npm install
 * Mapping through related tables using Entity Framework
 * Server-Side Pagination
 * Handling loading state and potential errors
+* Handling Authentication and Authorization using ASP.NET Core Identity
+* Logging errors in Database using ILogger
+* Storing token in cookies on Authentication
