@@ -10,6 +10,7 @@ import {
 import { passwordValidator } from '../../../validators/password.validator';
 import { UserLogin } from '../../../models/DTOs/UserLogin';
 import { NgClass } from '@angular/common';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +32,8 @@ export class LoginComponent {
     ]),
   });
 
+  constructor(private userService: UserService) {}
+
   submit() {
     this.loginForm.markAllAsTouched();
     const formValues = this.loginForm.value;
@@ -41,7 +44,7 @@ export class LoginComponent {
         password: formValues.password,
       };
 
-      console.log(user);
+      this.userService.loginUser(user).subscribe();
     }
   }
 }

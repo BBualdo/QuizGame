@@ -7,6 +7,7 @@ import { ErrorsService } from './errors.service';
 import { ErrorDetails } from '../models/ErrorDetails';
 import { Dialog } from '@angular/cdk/dialog';
 import { ErrorDialogComponent } from '../components/shared/error-dialog/error-dialog.component';
+import { UserLogin } from '../models/DTOs/UserLogin';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,18 @@ export class UserService {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http.post(url + 'Account/register', user).pipe(
+      catchError((error) => of(this.handleErrors(error))),
+      finalize(() => {
+        this.isLoadingSubject.next(false);
+        this.checkLoginStatus();
+      }),
+    );
+  }
+
+  loginUser(user: UserLogin): Observable<UserLogin> {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+    return this.http.post(url + 'Account/login', user).pipe(
       catchError((error) => of(this.handleErrors(error))),
       finalize(() => {
         this.isLoadingSubject.next(false);
@@ -60,6 +73,10 @@ export class UserService {
 
     if (error.status === 500) {
       this.errorsService.add('Something bad happened. Try again later.');
+    }
+
+    if (error.status === 401) {
+      this.errorsService.add(error.error);
     }
 
     if (error.status === 400) {

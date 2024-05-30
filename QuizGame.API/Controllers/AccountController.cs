@@ -45,7 +45,7 @@ namespace QuizGame.API.Controllers
                 return Ok("Login successful.");
             }
 
-            return Unauthorized("Login attempt failed.");
+            return Unauthorized("Invalid password.");
         }
 
         [HttpPost("logout")]
