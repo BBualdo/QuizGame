@@ -27,8 +27,8 @@ builder.Services.AddIdentityCore<User>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.Cookie.HttpOnly = true;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.None;
+    options.Cookie.HttpOnly = false;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.Cookie.SameSite = SameSiteMode.None;
     options.Cookie.Name = "QuizGameToken";
     options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
