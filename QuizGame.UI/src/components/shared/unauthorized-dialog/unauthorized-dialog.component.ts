@@ -22,6 +22,6 @@ export class UnauthorizedDialogComponent {
   }
 
   close() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 }

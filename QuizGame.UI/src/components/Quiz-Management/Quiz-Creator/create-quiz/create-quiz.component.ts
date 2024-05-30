@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BackButtonComponent } from '../../../shared/back-button/back-button.component';
 import { NgClass } from '@angular/common';
 import {
@@ -13,6 +13,9 @@ import { StepperComponent } from '../stepper/stepper.component';
 import { QuizCreatorService } from '../../../../services/quiz-creator.service';
 import { QuestionReqDTO } from '../../../../models/DTOs/QuestionReqDTO';
 import { AnswerReqDTO } from '../../../../models/DTOs/AnswerReqDTO';
+import { UnauthorizedDialogComponent } from '../../../shared/unauthorized-dialog/unauthorized-dialog.component';
+import { UserService } from '../../../../services/user.service';
+import { Dialog } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-create-quiz',
@@ -27,7 +30,7 @@ import { AnswerReqDTO } from '../../../../models/DTOs/AnswerReqDTO';
   ],
   templateUrl: './create-quiz.component.html',
 })
-export class CreateQuizComponent {
+export class CreateQuizComponent implements OnInit {
   quizInfoFormGroup = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -44,7 +47,25 @@ export class CreateQuizComponent {
   constructor(
     private quizCreatorService: QuizCreatorService,
     private router: Router,
+    private userService: UserService,
+    private dialog: Dialog,
   ) {}
+
+  ngOnInit() {
+    this.userService.isLoggedIn$.subscribe((isLoggedIn) => {
+      if (!isLoggedIn) {
+        this.dialog
+          .open(UnauthorizedDialogComponent, {
+            data: {
+              message: `You must be logged in to create Quizzes.`,
+            },
+          })
+          .closed.subscribe((result) => {
+            if (result === false) this.router.navigate(['']);
+          });
+      }
+    });
+  }
 
   proceed() {
     this.quizInfoFormGroup.markAllAsTouched();
