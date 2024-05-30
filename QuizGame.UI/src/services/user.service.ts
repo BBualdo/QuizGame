@@ -29,7 +29,22 @@ export class UserService {
     this.isLoadingSubject.next(true);
     return this.http.post(url + 'Account/register', user).pipe(
       catchError((error) => of(this.handleErrors(error))),
-      finalize(() => this.isLoadingSubject.next(false)),
+      finalize(() => {
+        this.isLoadingSubject.next(false);
+        this.checkLoginStatus();
+      }),
+    );
+  }
+
+  logout() {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+    return this.http.post(url + 'Account/logout', {}).pipe(
+      catchError((error) => of(this.handleErrors(error))),
+      finalize(() => {
+        this.isLoadingSubject.next(false);
+        this.checkLoginStatus();
+      }),
     );
   }
 

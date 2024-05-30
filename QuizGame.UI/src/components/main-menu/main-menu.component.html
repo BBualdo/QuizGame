@@ -9,7 +9,7 @@
     <a class="btn primary-btn" routerLink="/quiz-management">Manage Quizzes</a>
     <a class="btn primary-btn" routerLink="/leaderboard">Leaderboard</a>
     @if (isLoggedIn$ | async) {
-      <a class="btn login-btn mt-10">Logout</a>
+      <button class="btn login-btn mt-10" (click)="logout()">Logout</button>
     } @else {
       <a class="btn login-btn mt-10" routerLink="/login">Login</a>
     }

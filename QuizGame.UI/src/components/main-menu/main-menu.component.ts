@@ -16,4 +16,8 @@ export class MainMenuComponent {
   constructor(private userService: UserService) {
     this.isLoggedIn$ = this.userService.isLoggedIn$;
   }
+
+  logout() {
+    this.userService.logout().subscribe();
+  }
 }
