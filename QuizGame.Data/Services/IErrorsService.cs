@@ -4,5 +4,5 @@ namespace QuizGame.Data.Services;
 
 public interface IErrorsService
 {
-    public Task AddErrorAsync(Error error);
+    public void AddError(Error error);
 }

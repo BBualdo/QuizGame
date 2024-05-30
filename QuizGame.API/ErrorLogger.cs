@@ -11,7 +11,7 @@ public class ErrorLogger(IErrorsService errorsService) : ILogger
 
     public bool IsEnabled(LogLevel logLevel) => true;
 
-    public async void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
     {
         if (logLevel == LogLevel.None) return;
 
@@ -21,6 +21,6 @@ public class ErrorLogger(IErrorsService errorsService) : ILogger
             Time = DateTime.Now.ToUniversalTime()
         };
 
-        await _errorsService.AddErrorAsync(error);
+        _errorsService.AddError(error);
     }
 }
