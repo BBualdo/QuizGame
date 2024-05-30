@@ -11,6 +11,7 @@ public class QuizGameContext(DbContextOptions options) : IdentityDbContext<User>
     public DbSet<Question> Questions { get; set; }
     public DbSet<Answer> Answers { get; set; }
     public DbSet<Game> Games { get; set; }
+    public DbSet<Error> Errors { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

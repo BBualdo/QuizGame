@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using QuizGame.API;
 using QuizGame.Data;
 using QuizGame.Data.Models;
 using QuizGame.Data.Repositories;
@@ -45,6 +46,8 @@ builder.Services.AddScoped<IGamesRepository, GamesRepository>();
 
 builder.Services.AddScoped<IGamesService, GamesService>();
 builder.Services.AddScoped<IQuizzesService, QuizzesService>();
+builder.Services.AddScoped<IErrorsService, ErrorsService>();
+builder.Services.AddScoped<ILogger, ErrorLogger>();
 
 builder.Services.AddIdentityApiEndpoints<User>();
 
