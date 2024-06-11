@@ -13,9 +13,11 @@ import { GameResultsComponent } from '../components/Game-Session/game-results/ga
 import { LeaderboardComponent } from '../components/Leaderboard/leaderboard/leaderboard.component';
 import { LoginComponent } from '../components/Auth/login/login.component';
 import { SignUpComponent } from '../components/Auth/sign-up/sign-up.component';
+import { AuthLayoutComponent } from '../components/Auth/auth-layout/auth-layout.component';
 
 export const routes: Routes = [
   { path: '', component: MainMenuComponent },
+  // Session Routes
   {
     path: 'play',
     component: CreateGameLayout,
@@ -26,6 +28,7 @@ export const routes: Routes = [
       { path: 'results', component: GameResultsComponent },
     ],
   },
+  // Quiz Management Routes
   {
     path: 'quiz-management',
     component: QuizManagerLayout,
@@ -41,16 +44,18 @@ export const routes: Routes = [
       { path: ':id', component: QuizDetailsComponent },
     ],
   },
+  // Leaderboard route
   {
     path: 'leaderboard',
     component: LeaderboardComponent,
   },
+  // Auth Routes
   {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'register',
-    component: SignUpComponent,
+    path: 'auth',
+    component: AuthLayoutComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: SignUpComponent },
+    ],
   },
 ];

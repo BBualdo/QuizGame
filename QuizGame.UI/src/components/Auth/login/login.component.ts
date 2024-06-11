@@ -17,6 +17,7 @@ import { UserService } from '../../../services/user.service';
   standalone: true,
   imports: [BackButtonComponent, RouterLink, ReactiveFormsModule, NgClass],
   templateUrl: './login.component.html',
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   loginForm: FormGroup = new FormGroup({
