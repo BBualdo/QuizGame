@@ -21,6 +21,7 @@ import { UserDTO } from '../models/DTOs/UserDTO';
   providedIn: 'root',
 })
 export class UserService {
+  // TODO: Make it don't disappear after reload
   private userSubject = new BehaviorSubject<UserDTO | null>(null);
   user$ = this.userSubject.asObservable();
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
@@ -54,7 +55,7 @@ export class UserService {
       finalize(() => {
         this.isLoadingSubject.next(false);
         this.checkLoginStatus();
-        this.getCurrentUser().subscribe((user) => console.log(user));
+        this.getCurrentUser().subscribe();
       }),
     );
   }
@@ -67,7 +68,7 @@ export class UserService {
       finalize(() => {
         this.isLoadingSubject.next(false);
         this.checkLoginStatus();
-        this.getCurrentUser().subscribe((user) => console.log(user));
+        this.getCurrentUser().subscribe();
       }),
     );
   }

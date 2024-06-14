@@ -13,6 +13,20 @@ namespace QuizGame.API.Controllers
         private readonly UserManager<User> _userManager = userManager;
         private readonly ILogger _logger = logger;
 
+        [HttpGet("currentUser")]
+        public async Task<ActionResult> GetCurrentUser()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NoContent();
+            return Ok(new
+            {
+                userId = user.Id,
+                username = user.UserName,
+                email = user.Email
+            });
+        }
+
         [HttpPost("register")]
         public async Task<ActionResult> Register(RegisterModel model)
         {

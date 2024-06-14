@@ -48,9 +48,7 @@ export class AuthService {
         catchError((error) => of(this.handleErrors(error))),
         finalize(() => {
           this.isLoadingSubject.next(false);
-          this.userService
-            .getCurrentUser()
-            .subscribe((user) => console.log(user));
+          this.userService.getCurrentUser().subscribe();
         }),
       );
   }
