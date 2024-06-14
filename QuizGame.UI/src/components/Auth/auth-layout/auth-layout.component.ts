@@ -16,4 +16,8 @@ export class AuthLayoutComponent {
   loginWithGoogle() {
     this.authService.loginWithGoogle();
   }
+
+  loginWithFacebook() {
+    this.authService.loginWithFacebook();
+  }
 }

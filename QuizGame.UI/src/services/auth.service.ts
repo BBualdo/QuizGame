@@ -53,6 +53,31 @@ export class AuthService {
       );
   }
 
+  loginWithFacebook() {
+    const params = new HttpParams()
+      .set('client_id', environment.facebook.appId)
+      .set('redirect_uri', environment.facebook.redirectUri)
+      .set('response_type', 'code')
+      .set('scope', 'email')
+      .set('auth_type', 'reauthenticate');
+
+    window.location.href = `https://www.facebook.com/v20.0/dialog/oauth?${params.toString()}`;
+  }
+
+  handleFacebookCallback(code: string) {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+    return this.http
+      .post<{ token: string }>(url + 'facebook/sign-in', { code })
+      .pipe(
+        catchError((error) => of(this.handleErrors(error))),
+        finalize(() => {
+          this.isLoadingSubject.next(false);
+          this.userService.getCurrentUser().subscribe();
+        }),
+      );
+  }
+
   private handleErrors(error: HttpErrorResponse): any {
     // TODO:Error handling
     console.log(error);
