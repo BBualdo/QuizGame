@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UserRegister } from '../models/UserRegister';
-import { BehaviorSubject, catchError, finalize, Observable, of } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  finalize,
+  Observable,
+  of,
+  tap,
+} from 'rxjs';
 import { url } from '../config/config';
 import { ErrorsService } from './errors.service';
 import { ErrorDetails } from '../models/ErrorDetails';
@@ -27,6 +34,18 @@ export class UserService {
     private dialog: Dialog,
   ) {}
 
+  getCurrentUser(): Observable<UserDTO | null> {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+    return this.http.get<UserDTO | null>(url + 'Account/currentUser').pipe(
+      tap((user) => this.userSubject.next(user)),
+      catchError((error) => of(this.handleErrors(error))),
+      finalize(() => {
+        this.isLoadingSubject.next(true);
+      }),
+    );
+  }
+
   registerUser(user: UserRegister): Observable<UserRegister> {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
@@ -34,8 +53,8 @@ export class UserService {
       catchError((error) => of(this.handleErrors(error))),
       finalize(() => {
         this.isLoadingSubject.next(false);
-        this.userSubject.next({ username: user.username });
         this.checkLoginStatus();
+        this.getCurrentUser().subscribe((user) => console.log(user));
       }),
     );
   }
@@ -47,8 +66,8 @@ export class UserService {
       catchError((error) => of(this.handleErrors(error))),
       finalize(() => {
         this.isLoadingSubject.next(false);
-        this.userSubject.next({ username: user.username });
         this.checkLoginStatus();
+        this.getCurrentUser().subscribe((user) => console.log(user));
       }),
     );
   }

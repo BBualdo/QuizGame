@@ -10,6 +10,7 @@ import { ErrorDialogComponent } from '../components/shared/error-dialog/error-di
 import { ErrorsService } from './errors.service';
 import { BehaviorSubject, catchError, finalize, of } from 'rxjs';
 import { Dialog } from '@angular/cdk/dialog';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,7 @@ export class AuthService {
     private http: HttpClient,
     private errorsService: ErrorsService,
     private dialog: Dialog,
+    private userService: UserService,
   ) {}
 
   loginWithGoogle() {
@@ -43,8 +45,13 @@ export class AuthService {
         code,
       })
       .pipe(
-        catchError((error) => of(this.handleErrors)),
-        finalize(() => this.isLoadingSubject.next(false)),
+        catchError((error) => of(this.handleErrors(error))),
+        finalize(() => {
+          this.isLoadingSubject.next(false);
+          this.userService
+            .getCurrentUser()
+            .subscribe((user) => console.log(user));
+        }),
       );
   }
 
