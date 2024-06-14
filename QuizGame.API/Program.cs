@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using QuizGame.API;
 using QuizGame.Data;
@@ -10,21 +11,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("policy", policyBuilder =>
-    {
-        policyBuilder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200");
-    });
+    options.AddPolicy("policy",
+        policyBuilder =>
+        {
+            policyBuilder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200");
+        });
 });
-builder.Services.AddAuthentication();
+
+builder.Services.AddHttpClient();
 
 builder.Services.AddDbContext<QuizGameContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
 });
-builder.Services.AddIdentityCore<User>(options =>
-    {
-        options.User.RequireUniqueEmail = true;
-    }).AddEntityFrameworkStores<QuizGameContext>();
+builder.Services.AddIdentityCore<User>(options => { options.User.RequireUniqueEmail = true; })
+    .AddEntityFrameworkStores<QuizGameContext>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -38,6 +39,18 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = "/Account/Logout";
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
+
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    })
+    .AddCookie()
+    .AddGoogle(options =>
+    {
+        options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+        options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+    });
 
 builder.Services.AddScoped<IQuizzesRepository, QuizzesRepository>();
 builder.Services.AddScoped<IRepository<Question>, Repository<Question>>();
@@ -65,9 +78,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapIdentityApi<User>();
-
-app.UseCors(policyName:"policy");
+app.UseCors("policy");
 
 app.UseAuthentication();
 

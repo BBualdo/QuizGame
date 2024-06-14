@@ -14,6 +14,7 @@ import { LeaderboardComponent } from '../components/Leaderboard/leaderboard/lead
 import { LoginComponent } from '../components/Auth/login/login.component';
 import { SignUpComponent } from '../components/Auth/sign-up/sign-up.component';
 import { AuthLayoutComponent } from '../components/Auth/auth-layout/auth-layout.component';
+import { GoogleCallbackComponent } from '../components/ExternalAuth/google-callback/google-callback.component';
 
 export const routes: Routes = [
   { path: '', component: MainMenuComponent },
@@ -56,6 +57,7 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: SignUpComponent },
+      { path: 'signin-google', component: GoogleCallbackComponent },
     ],
   },
 ];
