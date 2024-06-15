@@ -3,11 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
 import { ErrorsService } from '../../../services/errors.service';
+import { AsyncPipe } from '@angular/common';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-microsoft-callback',
   standalone: true,
-  imports: [],
+  imports: [AsyncPipe, LoadingSpinnerComponent],
   templateUrl: './microsoft-callback.component.html',
 })
 export class MicrosoftCallbackComponent implements OnInit {
@@ -37,7 +39,7 @@ export class MicrosoftCallbackComponent implements OnInit {
           this.router.navigate(['/']);
         });
       } else {
-        // this.router.navigate(['auth/login']);
+        this.router.navigate(['auth/login']);
       }
     });
   }

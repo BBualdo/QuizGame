@@ -83,9 +83,10 @@ export class AuthService {
       .set('client_id', environment.microsoft.clientId)
       .set('response_type', 'code')
       .set('redirect_uri', environment.microsoft.redirectUri)
-      .set('scope', 'openid profile email');
+      .set('scope', 'openid profile email')
+      .set('prompt', 'login');
 
-    window.location.href = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?${params.toString()}`;
+    window.location.href = `https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize?${params.toString()}`;
   }
 
   handleMicrosoftCallback(code: string): Observable<any> {

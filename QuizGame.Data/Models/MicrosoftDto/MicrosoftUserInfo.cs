@@ -4,6 +4,6 @@ namespace QuizGame.Data.Models.MicrosoftDto;
 
 public class MicrosoftUserInfo
 {
-    [JsonProperty("mail")]
+    [JsonProperty("email")]
     public string? Email { get; set; }
 }

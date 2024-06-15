@@ -46,16 +46,16 @@ namespace QuizGame.API.Controllers
         {
             var client = _httpClientFactory.CreateClient();
 
-            var basePath = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
-            var queryParams = new Dictionary<string, string>()
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://login.microsoftonline.com/consumers/oauth2/v2.0/token");
+            request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
             {
-                {"client_id", _configuration["Authorization:Microsoft:ClientId"]},
-                {"scope", "openid email offline_access"},
-                {"code", code},
-                {"redirect_uri", "http://localhost:4200/auth/signin-microsoft"},
-                {"grant_type", "authorization_code"},
-            };
-            var request = new HttpRequestMessage(HttpMethod.Get, QueryHelpers.AddQueryString(basePath, queryParams));
+                { "client_id", _configuration["Authentication:Microsoft:ClientId"] },
+                { "scope", "openid email profile" },
+                { "code", code },
+                { "redirect_uri", "http://localhost:4200/auth/signin-microsoft" },
+                { "grant_type", "authorization_code" },
+                { "client_secret", _configuration["Authentication:Microsoft:ClientSecret"] }
+            });
 
             var response = await client.SendAsync(request);
 
@@ -74,14 +74,18 @@ namespace QuizGame.API.Controllers
         {
             var client = _httpClientFactory.CreateClient();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/me");
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/oidc/userinfo");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
             var response = await client.SendAsync(request);
 
-            response.EnsureSuccessStatusCode();
-
             var content = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                Console.WriteLine($"Response: {content}");
+            }
 
             return JsonConvert.DeserializeObject<MicrosoftUserInfo>(content);
         }
