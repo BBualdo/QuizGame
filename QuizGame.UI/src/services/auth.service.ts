@@ -8,7 +8,7 @@ import { environment } from '../environment';
 import { url } from '../config/config';
 import { ErrorDialogComponent } from '../components/shared/error-dialog/error-dialog.component';
 import { ErrorsService } from './errors.service';
-import { BehaviorSubject, catchError, finalize, of } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, Observable, of } from 'rxjs';
 import { Dialog } from '@angular/cdk/dialog';
 import { UserService } from './user.service';
 
@@ -37,7 +37,7 @@ export class AuthService {
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
   }
 
-  handleGoogleCallback(code: string) {
+  handleGoogleCallback(code: string): Observable<any> {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http
@@ -64,11 +64,35 @@ export class AuthService {
     window.location.href = `https://www.facebook.com/v20.0/dialog/oauth?${params.toString()}`;
   }
 
-  handleFacebookCallback(code: string) {
+  handleFacebookCallback(code: string): Observable<any> {
     this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http
       .post<{ token: string }>(url + 'facebook/sign-in', { code })
+      .pipe(
+        catchError((error) => of(this.handleErrors(error))),
+        finalize(() => {
+          this.isLoadingSubject.next(false);
+          this.userService.getCurrentUser().subscribe();
+        }),
+      );
+  }
+
+  loginWithMicrosoft() {
+    const params = new HttpParams()
+      .set('client_id', environment.microsoft.clientId)
+      .set('response_type', 'code')
+      .set('redirect_uri', environment.microsoft.redirectUri)
+      .set('scope', 'openid profile email');
+
+    window.location.href = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?${params.toString()}`;
+  }
+
+  handleMicrosoftCallback(code: string): Observable<any> {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+    return this.http
+      .post<{ token: string }>(url + 'microsoft/sign-in', { code })
       .pipe(
         catchError((error) => of(this.handleErrors(error))),
         finalize(() => {

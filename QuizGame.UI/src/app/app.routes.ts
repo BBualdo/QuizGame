@@ -16,6 +16,7 @@ import { SignUpComponent } from '../components/Auth/sign-up/sign-up.component';
 import { AuthLayoutComponent } from '../components/Auth/auth-layout/auth-layout.component';
 import { GoogleCallbackComponent } from '../components/ExternalAuth/google-callback/google-callback.component';
 import { FacebookCallbackComponent } from '../components/ExternalAuth/facebook-callback/facebook-callback.component';
+import { MicrosoftCallbackComponent } from '../components/ExternalAuth/microsoft-callback/microsoft-callback.component';
 
 export const routes: Routes = [
   { path: '', component: MainMenuComponent },
@@ -60,6 +61,7 @@ export const routes: Routes = [
       { path: 'register', component: SignUpComponent },
       { path: 'signin-google', component: GoogleCallbackComponent },
       { path: 'signin-facebook', component: FacebookCallbackComponent },
+      { path: 'signin-microsoft', component: MicrosoftCallbackComponent },
     ],
   },
 ];

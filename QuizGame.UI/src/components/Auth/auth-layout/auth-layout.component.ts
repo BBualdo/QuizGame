@@ -20,4 +20,8 @@ export class AuthLayoutComponent {
   loginWithFacebook() {
     this.authService.loginWithFacebook();
   }
+
+  loginWithMicrosoft() {
+    this.authService.loginWithMicrosoft();
+  }
 }

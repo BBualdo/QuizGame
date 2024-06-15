@@ -46,15 +46,14 @@ namespace QuizGame.API.Controllers
             var request = new HttpRequestMessage(HttpMethod.Get, $"https://graph.facebook.com/v20.0/oauth/access_token?client_id={clientId}&client_secret={clientSecret}&redirect_uri={redirectUri}&code={code}");
 
             var response = await client.SendAsync(request);
+            var content = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
             {
-                var context = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"Error: {response.StatusCode}, {response.ReasonPhrase}");
-                Console.WriteLine($"Response: {context}");
+                Console.WriteLine($"Response: {content}");
             }
 
-            var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<FacebookTokenResponse>(content);
         }
 
