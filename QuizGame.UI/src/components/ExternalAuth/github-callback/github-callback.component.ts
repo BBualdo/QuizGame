@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
+import { AsyncPipe } from '@angular/common';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-github-callback',
   standalone: true,
-  imports: [],
+  imports: [AsyncPipe, LoadingSpinnerComponent],
   templateUrl: './github-callback.component.html',
 })
 export class GithubCallbackComponent implements OnInit {
