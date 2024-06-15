@@ -24,4 +24,8 @@ export class AuthLayoutComponent {
   loginWithMicrosoft() {
     this.authService.loginWithMicrosoft();
   }
+
+  loginWithGithub() {
+    this.authService.loginWithGithub();
+  }
 }

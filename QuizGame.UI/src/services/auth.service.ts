@@ -103,6 +103,29 @@ export class AuthService {
       );
   }
 
+  loginWithGithub() {
+    const params = new HttpParams()
+      .set('client_id', environment.github.clientId)
+      .set('redirect_uri', environment.github.redirectUri)
+      .set('scope', 'user user:email')
+      .set('prompt', 'select_account');
+    window.location.href = `https://github.com/login/oauth/authorize?${params.toString()}`;
+  }
+
+  handleGithubCallback(code: string): Observable<any> {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+    return this.http
+      .post<{ token: string }>(url + 'github/sign-in', { code })
+      .pipe(
+        catchError((error) => of(this.handleErrors(error))),
+        finalize(() => {
+          this.isLoadingSubject.next(false);
+          this.userService.getCurrentUser().subscribe();
+        }),
+      );
+  }
+
   private handleErrors(error: HttpErrorResponse): any {
     // TODO:Error handling
     console.log(error);
