@@ -2,7 +2,7 @@
 
 namespace QuizGame.Data.Models;
 
-public class GoogleTokenResponse
+public class TokenResponse
 {
     [JsonProperty("access_token")]
     public string? AccessToken { get; set; }

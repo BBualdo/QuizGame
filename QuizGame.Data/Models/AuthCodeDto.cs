@@ -1,6 +1,6 @@
 ﻿namespace QuizGame.Data.Models;
 
-public class FacebookAuthCodeDto
+public class AuthCodeDto
 {
     public string? Code { get; set; }
 }

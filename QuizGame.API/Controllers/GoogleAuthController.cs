@@ -16,7 +16,7 @@ public class GoogleAuthController(IHttpClientFactory httpClientFactory, IConfigu
     private readonly SignInManager<User> _signInManager = signInManager;
 
     [HttpPost("sign-in")]
-    public async Task<ActionResult> SignIn(GoogleAuthCodeDto authCodeDto)
+    public async Task<ActionResult> SignIn(AuthCodeDto authCodeDto)
     {
         // Exchanging code from Google auth callback for access token
         var tokenResponse = await ExchangeCodeForToken(authCodeDto.Code);
@@ -40,7 +40,7 @@ public class GoogleAuthController(IHttpClientFactory httpClientFactory, IConfigu
         return Ok(new { token = authToken });
     }
 
-    private async Task<GoogleTokenResponse> ExchangeCodeForToken(string code)
+    private async Task<TokenResponse> ExchangeCodeForToken(string code)
     {
         var client = _httpClientFactory.CreateClient();
 
@@ -59,7 +59,7 @@ public class GoogleAuthController(IHttpClientFactory httpClientFactory, IConfigu
         response.EnsureSuccessStatusCode();
 
         var content = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<GoogleTokenResponse>(content);
+        return JsonConvert.DeserializeObject<TokenResponse>(content);
     }
 
     private async Task<GoogleUserInfo> GetUserInfo(string accessToken)

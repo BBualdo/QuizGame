@@ -18,7 +18,7 @@ public class MicrosoftAuthController(IHttpClientFactory httpClientFactory, IConf
     private readonly SignInManager<User> _signInManager = signInManager;
 
     [HttpPost("sign-in")]
-    public async Task<ActionResult> SignIn(MicrosoftAuthCodeDto authCodeDto)
+    public async Task<ActionResult> SignIn(AuthCodeDto authCodeDto)
     {
         var tokenResponse = await ExchangeCodeForToken(authCodeDto.Code);
         var userInfo = await GetUserInfo(tokenResponse.AccessToken);
@@ -42,7 +42,7 @@ public class MicrosoftAuthController(IHttpClientFactory httpClientFactory, IConf
         return Ok(new { token = authToken });
     }
 
-    private async Task<MicrosoftTokenResponse> ExchangeCodeForToken(string code)
+    private async Task<TokenResponse> ExchangeCodeForToken(string code)
     {
         var client = _httpClientFactory.CreateClient();
 
@@ -67,7 +67,7 @@ public class MicrosoftAuthController(IHttpClientFactory httpClientFactory, IConf
             Console.WriteLine($"Response: {content}");
         }
 
-        return JsonConvert.DeserializeObject<MicrosoftTokenResponse>(content);
+        return JsonConvert.DeserializeObject<TokenResponse>(content);
     }
 
     private async Task<MicrosoftUserInfo> GetUserInfo(string accessToken)

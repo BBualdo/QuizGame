@@ -18,7 +18,7 @@ public class GithubAuthController(IHttpClientFactory httpClientFactory, IConfigu
     private readonly SignInManager<User> _signInManager = signInManager;
 
     [HttpPost("sign-in")]
-    public async Task<ActionResult> SignIn(GithubAuthCodeDto authCodeDto)
+    public async Task<ActionResult> SignIn(AuthCodeDto authCodeDto)
     {
         var tokenResponse = await ExchangeCodeForToken(authCodeDto.Code);
         var userInfo = await GetUserInfo(tokenResponse.AccessToken);
@@ -49,7 +49,7 @@ public class GithubAuthController(IHttpClientFactory httpClientFactory, IConfigu
         return Ok(new { token = authToken });
     }
 
-    private async Task<GithubTokenResponse> ExchangeCodeForToken(string code)
+    private async Task<TokenResponse> ExchangeCodeForToken(string code)
     {
         var client = _httpClientFactory.CreateClient();
 
@@ -72,7 +72,7 @@ public class GithubAuthController(IHttpClientFactory httpClientFactory, IConfigu
             Console.WriteLine($"Response: {content}");
         }
 
-        return JsonConvert.DeserializeObject<GithubTokenResponse>(content);
+        return JsonConvert.DeserializeObject<TokenResponse>(content);
     }
 
     private async Task<GithubUserInfo> GetUserInfo(string accessToken)

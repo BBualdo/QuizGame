@@ -46,7 +46,7 @@ public class TwitterAuthController(
         return Ok(new { token = authToken });
     }
 
-    private async Task<TwitterTokenResponse> ExchangeCodeForToken(string code, string? codeVerifier)
+    private async Task<TokenResponse> ExchangeCodeForToken(string code, string? codeVerifier)
     {
         var client = _httpClientFactory.CreateClient();
 
@@ -76,7 +76,7 @@ public class TwitterAuthController(
             Console.WriteLine($"Response: {content}");
         }
 
-        return JsonConvert.DeserializeObject<TwitterTokenResponse>(content);
+        return JsonConvert.DeserializeObject<TokenResponse>(content);
     }
 
     private async Task<TwitterUserInfo> GetUserInfo(string accessToken)

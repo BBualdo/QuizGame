@@ -15,7 +15,7 @@ public class FacebookAuthController(IHttpClientFactory httpClientFactory, IConfi
     private readonly SignInManager<User> _signInManager = signInManager;
 
     [HttpPost("sign-in")]
-    public async Task<ActionResult> SignIn(FacebookAuthCodeDto authCodeDto)
+    public async Task<ActionResult> SignIn(AuthCodeDto authCodeDto)
     {
         // Get token from code
         var tokenResponse = await ExchangeCodeForToken(authCodeDto.Code);
@@ -37,7 +37,7 @@ public class FacebookAuthController(IHttpClientFactory httpClientFactory, IConfi
         return Ok(new { token = authToken });
     }
 
-    private async Task<FacebookTokenResponse> ExchangeCodeForToken(string code)
+    private async Task<TokenResponse> ExchangeCodeForToken(string code)
     {
         var client = _httpClientFactory.CreateClient();
         var clientId = _configuration["Authentication:Facebook:AppId"];
@@ -54,7 +54,7 @@ public class FacebookAuthController(IHttpClientFactory httpClientFactory, IConfi
             Console.WriteLine($"Response: {content}");
         }
 
-        return JsonConvert.DeserializeObject<FacebookTokenResponse>(content);
+        return JsonConvert.DeserializeObject<TokenResponse>(content);
     }
 
     private async Task<FacebookUserInfo> GetUserInfo(string accessToken)
