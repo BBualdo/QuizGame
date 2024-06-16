@@ -28,4 +28,8 @@ export class AuthLayoutComponent {
   loginWithGithub() {
     this.authService.loginWithGithub();
   }
+
+  loginWithTwitter() {
+    this.authService.loginWithTwitter();
+  }
 }

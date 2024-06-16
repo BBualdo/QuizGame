@@ -6,12 +6,12 @@ import { AsyncPipe } from '@angular/common';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 
 @Component({
-  selector: 'app-github-callback',
+  selector: 'app-twitter-callback',
   standalone: true,
   imports: [AsyncPipe, LoadingSpinnerComponent],
-  templateUrl: './github-callback.component.html',
+  templateUrl: './twitter-callback.component.html',
 })
-export class GithubCallbackComponent implements OnInit {
+export class TwitterCallbackComponent implements OnInit {
   isLoading$ = this.authService.isLoading$;
 
   constructor(
@@ -24,13 +24,16 @@ export class GithubCallbackComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       const code = params['code'];
-      if (code) {
-        this.authService.handleGithubCallback(code).subscribe((token) => {
-          if (token) {
-            this.userService.checkLoginStatus();
-          }
-          this.router.navigate(['/']);
-        });
+      const codeVerifier = sessionStorage.getItem('codeVerifier');
+      if (code && codeVerifier) {
+        this.authService
+          .handleTwitterCallback(code, codeVerifier)
+          .subscribe((token) => {
+            if (token) {
+              this.userService.checkLoginStatus();
+            }
+            this.router.navigate(['/']);
+          });
       } else {
         this.router.navigate(['auth/login']);
       }

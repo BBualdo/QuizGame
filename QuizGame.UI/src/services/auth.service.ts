@@ -11,6 +11,7 @@ import { ErrorsService } from './errors.service';
 import { BehaviorSubject, catchError, finalize, Observable, of } from 'rxjs';
 import { Dialog } from '@angular/cdk/dialog';
 import { UserService } from './user.service';
+import { PkceService } from './pkce.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,7 @@ export class AuthService {
     private errorsService: ErrorsService,
     private dialog: Dialog,
     private userService: UserService,
+    private pkceService: PkceService,
   ) {}
 
   loginWithGoogle() {
@@ -117,6 +119,39 @@ export class AuthService {
     this.isLoadingSubject.next(true);
     return this.http
       .post<{ token: string }>(url + 'github/sign-in', { code })
+      .pipe(
+        catchError((error) => of(this.handleErrors(error))),
+        finalize(() => {
+          this.isLoadingSubject.next(false);
+          this.userService.getCurrentUser().subscribe();
+        }),
+      );
+  }
+
+  async loginWithTwitter() {
+    const codeChallenge =
+      await this.pkceService.generateCodeVerifierAndChallenge();
+    const params = new HttpParams()
+      .set('client_id', environment.twitter.clientId)
+      .set('response_type', 'code')
+      .set('redirect_uri', environment.twitter.redirectUri)
+      .set('state', 'random-state')
+      .set('scope', 'users.read tweet.read')
+      .set('code_challenge', codeChallenge)
+      .set('code_challenge_method', 'plain');
+
+    window.location.href = `https://twitter.com/i/oauth2/authorize?${params.toString()}`;
+  }
+
+  handleTwitterCallback(code: string, codeVerifier: string): Observable<any> {
+    this.errorsService.clear();
+    this.isLoadingSubject.next(true);
+
+    return this.http
+      .post<{
+        token: string;
+        codeVerifier: string;
+      }>(url + 'twitter/sign-in', { code, codeVerifier })
       .pipe(
         catchError((error) => of(this.handleErrors(error))),
         finalize(() => {
