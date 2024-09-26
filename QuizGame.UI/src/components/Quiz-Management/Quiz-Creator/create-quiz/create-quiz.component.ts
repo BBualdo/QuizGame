@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BackButtonComponent } from '../../../shared/back-button/back-button.component';
 import { NgClass } from '@angular/common';
 import {
@@ -16,6 +16,7 @@ import { AnswerReqDTO } from '../../../../models/DTOs/AnswerReqDTO';
 import { UnauthorizedDialogComponent } from '../../../shared/unauthorized-dialog/unauthorized-dialog.component';
 import { UserService } from '../../../../services/user.service';
 import { Dialog } from '@angular/cdk/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-quiz',
@@ -30,7 +31,7 @@ import { Dialog } from '@angular/cdk/dialog';
   ],
   templateUrl: './create-quiz.component.html',
 })
-export class CreateQuizComponent implements OnInit {
+export class CreateQuizComponent implements OnInit, OnDestroy {
   quizInfoFormGroup = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -44,6 +45,8 @@ export class CreateQuizComponent implements OnInit {
     ]),
   });
 
+  private subscription: Subscription = Subscription.EMPTY;
+
   constructor(
     private quizCreatorService: QuizCreatorService,
     private router: Router,
@@ -51,8 +54,12 @@ export class CreateQuizComponent implements OnInit {
     private dialog: Dialog,
   ) {}
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   ngOnInit() {
-    this.userService.isLoggedIn$.subscribe((isLoggedIn) => {
+    this.subscription = this.userService.isLoggedIn$.subscribe((isLoggedIn) => {
       if (!isLoggedIn) {
         this.dialog
           .open(UnauthorizedDialogComponent, {

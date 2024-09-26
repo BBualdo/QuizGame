@@ -90,8 +90,6 @@ export class UserService {
   }
 
   private handleErrors(error: HttpErrorResponse): any {
-    console.log(error);
-
     if (error.status === 200) {
       return;
     }
