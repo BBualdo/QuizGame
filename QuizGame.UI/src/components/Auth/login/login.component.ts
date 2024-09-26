@@ -50,7 +50,7 @@ export class LoginComponent {
 
       this.userService
         .loginUser(user)
-        .subscribe((user) => this.backAfterLogin());
+        .subscribe(() => this.backAfterLogin());
     }
   }
 

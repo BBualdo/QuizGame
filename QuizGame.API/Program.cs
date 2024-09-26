@@ -42,6 +42,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddAuthentication();
 
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddScoped<IQuizzesRepository, QuizzesRepository>();
 builder.Services.AddScoped<IRepository<Question>, Repository<Question>>();
 builder.Services.AddScoped<IRepository<Answer>, Repository<Answer>>();
