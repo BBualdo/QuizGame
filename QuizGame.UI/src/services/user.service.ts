@@ -11,7 +11,6 @@ import {
 } from 'rxjs';
 import { url } from '../config/config';
 import { ErrorsService } from './errors.service';
-import { ErrorDetails } from '../models/ErrorDetails';
 import { Dialog } from '@angular/cdk/dialog';
 import { ErrorDialogComponent } from '../components/shared/error-dialog/error-dialog.component';
 import { UserLogin } from '../models/DTOs/UserLogin';
@@ -36,7 +35,6 @@ export class UserService {
   ) {}
 
   getCurrentUser(): Observable<UserDTO | null> {
-    this.errorsService.clear();
     this.isLoadingSubject.next(true);
     return this.http.get<UserDTO | null>(url + 'Account/currentUser').pipe(
       tap((user) => this.userSubject.next(user)),
@@ -92,6 +90,8 @@ export class UserService {
   }
 
   private handleErrors(error: HttpErrorResponse): any {
+    console.log(error);
+
     if (error.status === 200) {
       return;
     }
@@ -100,16 +100,10 @@ export class UserService {
       this.errorsService.add('Something bad happened. Try again later.');
     }
 
-    if (error.status === 401) {
-      this.errorsService.add(error.error);
-    }
-
     if (error.status === 400) {
-      error.error.forEach((err: ErrorDetails) =>
-        this.errorsService.add(err.description),
-      );
+      error.error.errors.forEach((err: string) => this.errorsService.add(err));
+      this.dialog.open(ErrorDialogComponent);
     }
-    this.dialog.open(ErrorDialogComponent);
     return;
   }
 
