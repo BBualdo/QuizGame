@@ -61,7 +61,7 @@ export class CreateQuizComponent implements OnInit {
             },
           })
           .closed.subscribe((result) => {
-            if (result === false) this.router.navigate(['']);
+            if (result === false) this.router.navigate(['quiz-management']);
           });
       }
     });

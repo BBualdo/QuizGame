@@ -48,7 +48,9 @@ export class LoginComponent {
         password: formValues.password,
       };
 
-      this.userService.loginUser(user).subscribe(() => this.backAfterLogin());
+      this.userService
+        .loginUser(user)
+        .subscribe((user) => this.backAfterLogin());
     }
   }
 

@@ -16,6 +16,7 @@ export class ErrorDialogComponent {
   ) {}
 
   close() {
+    this.errorsService.clear();
     this.dialogRef.close();
   }
 }
