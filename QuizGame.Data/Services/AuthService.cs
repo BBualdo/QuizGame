@@ -1,27 +1,75 @@
-﻿using QuizGame.Data.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using QuizGame.Data.Models;
 using QuizGame.Data.Services.DTO;
 
 namespace QuizGame.Data.Services;
 
-public class AuthService : IAuthService
+public class AuthService(UserManager<User> userManager, SignInManager<User> signInManager, ILogger logger) : IAuthService
 {
-    public Task<AuthOperationResult> GetCurrentUser()
+    private readonly UserManager<User> _userManager = userManager;
+    private readonly SignInManager<User> _signInManager = signInManager;
+    private readonly ILogger _logger = logger;
+    
+    public async Task<AuthOperationResult> Register(RegisterModel registerModel)
     {
-        throw new NotImplementedException();
+        var user = new User
+        {
+            UserName = registerModel.UserName,
+            Email = registerModel.Email,
+        };
+
+        var result = await _userManager.CreateAsync(user, registerModel.Password);
+        if (result.Succeeded)
+        {
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            return new AuthOperationResult
+            {
+                IsSuccess = true,
+                Message = "Registration successful"
+            };
+        }
+        
+        _logger.LogError($"{user.UserName} failed at registering attempt.");
+        return new AuthOperationResult
+        {
+            IsSuccess = false,
+            Message = "Register attempt failed.",
+            Errors = result.Errors.Select(e => e.Description).ToArray()
+        };
     }
 
-    public Task<AuthOperationResult> Register(RegisterModel registerModel)
+    public async Task<AuthOperationResult> Login(LoginModel loginModel)
     {
-        throw new NotImplementedException();
-    }
+        var user = await _userManager.FindByNameAsync(loginModel.UserName);
+        if (user == null)
+        {
+            _logger.LogError($"{loginModel.UserName} failed at logging in attempt.");
+            return new AuthOperationResult
+            {
+                IsSuccess = false,
+                Message = "Login attempt failed.",
+                Errors = ["User doesn't exist."]
+            };
+        }
 
-    public Task<AuthOperationResult> Login(LoginModel loginModel)
-    {
-        throw new NotImplementedException();
-    }
+        var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, isPersistent: false,
+            lockoutOnFailure: false);
 
-    public Task<AuthOperationResult> Logout()
-    {
-        throw new NotImplementedException();
+        if (result.Succeeded)
+        {
+            return new AuthOperationResult
+            {
+                IsSuccess = true,
+                Message = "Login successful."
+            };
+        }
+        _logger.LogError($"{user.UserName} tried to log in with invalid password.");
+        return new AuthOperationResult
+        {
+            IsSuccess = false,
+            Message = "Login attempt failed.",
+            Errors = ["Invalid password."]
+        };
     }
 }

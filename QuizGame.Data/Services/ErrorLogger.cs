@@ -1,4 +1,5 @@
-﻿using QuizGame.Data.Models;
+﻿using Microsoft.Extensions.Logging;
+using QuizGame.Data.Models;
 using QuizGame.Data.Services;
 
 namespace QuizGame.API;

@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Protocol;
 using QuizGame.Data.Models;
+using QuizGame.Data.Services;
 
 namespace QuizGame.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController(SignInManager<User> signInManager, UserManager<User> userManager, ILogger logger) : ControllerBase
+    public class AccountController(SignInManager<User> signInManager, UserManager<User> userManager, IAuthService authService) : ControllerBase
     {
         private readonly SignInManager<User> _signInManager = signInManager;
         private readonly UserManager<User> _userManager = userManager;
-        private readonly ILogger _logger = logger;
+        private readonly IAuthService _authService = authService;
 
         [HttpGet("currentUser")]
         public async Task<ActionResult> GetCurrentUser()
@@ -30,42 +30,17 @@ namespace QuizGame.API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register(RegisterModel model)
         {
-            var user = new User
-            {
-                UserName = model.UserName,
-                Email = model.Email,
-            };
-
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
-            {
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return Ok("Registration successful");
-            }
-
-            _logger.LogError($"{user.UserName} failed at registering attempt.");
-            return BadRequest(result.Errors);
+            var result = await _authService.Register(model);
+            if (!result.IsSuccess) return BadRequest(new {message = result.Message, errors = result.Errors});
+            return Ok(new { message = result.Message });
         }
 
         [HttpPost("login")]
         public async Task<ActionResult> Login(LoginModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.UserName);
-            if (user == null)
-            {
-                _logger.LogError($"{model.UserName} failed at logging in attempt.");
-                return Unauthorized("Invalid Username.");
-            }
-
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false,
-                lockoutOnFailure: false);
-
-            if (result.Succeeded)
-            {
-                return Ok("Login successful.");
-            }
-            _logger.LogError($"{user.UserName} tried to log in with invalid password.");
-            return Unauthorized("Invalid password.");
+            var result = await _authService.Login(model);
+            if (!result.IsSuccess) return BadRequest(new { message = result.Message, errors = result.Errors });
+            return Ok(new { message = result.Message });
         }
 
         [HttpPost("logout")]
